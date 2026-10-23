@@ -8,6 +8,7 @@ The qualitylivin.com homepage as clean HTML/CSS, kept in git and pasted into GoH
 - `src/styles.css`: styles (edit this; brand colors + hero image are at the top)
 - `dist/ghl-paste.html`: **the file you paste into GHL** (generated)
 - `dist/preview.html`: open in a browser to preview (generated)
+- `original/`: snapshot of the original GHL site (reference only)
 
 ## Update workflow
 
@@ -33,11 +34,17 @@ Tip: duplicate the page in GHL first and test there before replacing the live ho
 
 ## Hero background photo
 
-The live site's hero photo is set inside GHL, so it isn't in this repo yet. Copy its URL from GHL Media Library and set it in `src/styles.css`:
+Set at the top of `src/styles.css` (`--ql-hero-img`). It's the same photo the original GHL site uses. To change it, upload a new image to GHL Media Library and paste its URL there.
 
-```css
---ql-hero-img: url("https://...your-image.jpg");
-```
+## `original/` folder
+
+A snapshot of the live qualitylivin.com as GHL built it (October 2026), kept for reference:
+
+- `qualitylivin-screenshot.png`: full-page screenshot
+- `qualitylivin-clean.html`: page markup with scripts stripped (easier to read)
+- `qualitylivin-raw.html`: exactly what GHL serves, including its CSS
+
+These are reference only. GHL can't re-import them, and they're not used by the build.
 
 ## Notes
 

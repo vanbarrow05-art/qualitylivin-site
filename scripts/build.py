@@ -4,6 +4,7 @@
 dist/ghl-paste.html  -> paste this into a GHL "Custom JS/HTML" (Code) element
 dist/preview.html    -> open in a browser to preview locally
 dist/magazine-feature-paste.html -> just the magazine section, to paste into another GHL page
+dist/directory-paste.html -> just the provider map/directory, to paste into another GHL page
 """
 import re
 from pathlib import Path
@@ -45,4 +46,6 @@ dist.mkdir(exist_ok=True)
 (dist / "preview.html").write_text(preview, encoding="utf-8")
 # The magazine feature on its own, for pasting into any GHL page (e.g. the builder page)
 (dist / "magazine-feature-paste.html").write_text(read("magazine-feature.html"), encoding="utf-8")
-print("Built dist/ghl-paste.html, dist/preview.html and dist/magazine-feature-paste.html")
+# The provider directory/map on its own (e.g. to replace the builder page's directory element)
+(dist / "directory-paste.html").write_text(read("directory.html"), encoding="utf-8")
+print("Built dist/ghl-paste.html, dist/preview.html, dist/magazine-feature-paste.html and dist/directory-paste.html")

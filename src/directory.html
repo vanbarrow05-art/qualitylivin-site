@@ -1,0 +1,491 @@
+<!-- ===== Provider directory: live map + list =====
+     Self-contained (styles scoped under .qld + script). Included in src/page.html by
+     scripts/build.py, and also written to dist/directory-paste.html for any GHL page.
+
+     Provider data comes from data/providers.csv in the GitHub repo (edit it there, or
+     point data-src at a Google Sheet published as CSV). Only rows with status "joined"
+     are shown as partners: list a provider only after they've agreed to be in the network.
+     Rows with status "example" show as clearly labeled sample listings (no contact buttons)
+     so the map isn't empty at launch; delete them as real partners join. -->
+<style>
+.qld {
+  --qld-green: #1e3a34;
+  --qld-gold: #c5a059;
+  --qld-cream: #faf8f2;
+  --qld-sand: #ece9e1;
+  --qld-text: #1a1a1a;
+  --qld-muted: #5f5f5f;
+  --qld-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --qld-sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: var(--qld-sans);
+  color: var(--qld-text);
+  line-height: 1.5;
+}
+.qld *, .qld *::before, .qld *::after { box-sizing: border-box; }
+.qld h3, .qld h4, .qld p, .qld ul { margin: 0; padding: 0; }
+.qld ul { list-style: none; }
+.qld a { text-decoration: none; color: inherit; }
+
+.qld .qld-controls {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr auto;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.qld .qld-controls input,
+.qld .qld-controls select {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #ddd6c8;
+  border-radius: 6px;
+  background: #fff;
+  font: 500 14px var(--qld-sans);
+  color: var(--qld-text);
+}
+
+.qld .qld-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 6px;
+  border: 1px solid var(--qld-green);
+  background: var(--qld-green);
+  color: #fff;
+  font: 600 14px var(--qld-sans);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.qld .qld-btn-sm { height: 38px; padding: 0 14px; font-size: 13px; }
+.qld .qld-btn-ghost { background: transparent; color: var(--qld-green); }
+.qld .qld-btn-gold { background: var(--qld-gold); border-color: var(--qld-gold); color: var(--qld-green); }
+
+.qld .qld-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.qld .qld-list {
+  max-height: 560px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+}
+
+.qld .qld-status { font-size: 13px; color: var(--qld-muted); margin-bottom: 2px; }
+
+.qld .qld-card {
+  background: #fff;
+  border: 1px solid #e6e0d3;
+  border-radius: 8px;
+  padding: 18px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.qld .qld-card:hover,
+.qld .qld-card.is-active {
+  border-color: var(--qld-gold);
+  box-shadow: 0 10px 24px rgba(30, 58, 52, 0.1);
+}
+
+.qld .qld-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+
+.qld .qld-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--qld-sand);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.qld .qld-tag i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.qld .qld-tag-partner { background: var(--qld-green); color: #fff; }
+.qld .qld-tag-featured { background: #f3ead6; color: #7a5d23; }
+.qld .qld-tag-example { background: #fff; color: var(--qld-muted); border: 1px dashed #b9b2a3; }
+.qld .qld-card.is-example { border-style: dashed; background: #fcfbf8; }
+
+.qld .qld-card h4 {
+  font-family: var(--qld-serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--qld-green);
+  margin-bottom: 4px;
+}
+
+.qld .qld-meta { font-size: 13px; color: var(--qld-muted); }
+.qld .qld-rating { font-size: 13px; margin-top: 4px; }
+.qld .qld-rating a { color: var(--qld-green); border-bottom: 1px solid #d9cfb8; }
+.qld .qld-rating b { color: #b8860b; }
+.qld .qld-blurb { font-size: 14px; margin-top: 8px; }
+.qld .qld-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+.qld .qld-empty {
+  background: var(--qld-sand);
+  border: 1px dashed var(--qld-gold);
+  border-radius: 8px;
+  padding: 24px 20px;
+}
+
+.qld .qld-empty h4 {
+  font-family: var(--qld-serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.qld .qld-empty p { font-size: 14px; color: var(--qld-muted); margin-bottom: 14px; }
+
+.qld .qld-map-wrap {
+  border: 1px solid var(--qld-green);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #e7ece8;
+  display: flex;
+  flex-direction: column;
+  min-height: 460px;
+}
+
+.qld .qld-map-head {
+  background: var(--qld-green);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+}
+
+.qld .qld-map-head strong { font-family: var(--qld-serif); font-size: 17px; font-weight: 500; }
+.qld .qld-map-head a { color: var(--qld-gold); font-weight: 600; }
+
+.qld .qld-map { flex: 1; min-height: 420px; position: relative; z-index: 0; }
+
+.qld .qld-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding: 10px 14px;
+  background: var(--qld-sand);
+  font-size: 12px;
+}
+
+.qld .qld-legend li { display: flex; align-items: center; gap: 6px; }
+.qld .qld-legend i { width: 9px; height: 9px; border-radius: 50%; }
+.qld .qld-legend .is-planned { opacity: 0.55; }
+
+.qld .leaflet-popup-content { font-family: var(--qld-sans); font-size: 13px; }
+.qld .leaflet-popup-content strong { font-family: var(--qld-serif); font-size: 17px; color: var(--qld-green); }
+
+@media (max-width: 900px) {
+  .qld .qld-controls { grid-template-columns: 1fr 1fr; }
+  .qld .qld-controls .qld-btn { grid-column: 1 / -1; }
+  .qld .qld-layout { grid-template-columns: 1fr; }
+  .qld .qld-map-wrap { order: -1; min-height: 360px; }
+  .qld .qld-map { min-height: 320px; }
+  .qld .qld-list { max-height: none; }
+}
+
+@media (max-width: 520px) {
+  .qld .qld-controls { grid-template-columns: 1fr; }
+  .qld .qld-map-head { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<div class="qld" data-qld
+     data-src="https://raw.githubusercontent.com/vanbarrow05-art/qualitylivin-site/main/data/providers.csv"
+     data-estimate-link="#section-virtual-estimate-flow"
+     data-join-link="#section-service-provider-portal">
+
+  <form class="qld-controls" onsubmit="return false;">
+    <input type="text" class="qld-q" placeholder="City, state, or ZIP" aria-label="City, state, or ZIP">
+    <select class="qld-cat" aria-label="Service category"></select>
+    <button type="submit" class="qld-btn qld-go">Search</button>
+  </form>
+
+  <div class="qld-layout">
+    <div class="qld-list" aria-live="polite">
+      <p class="qld-status">Loading providers…</p>
+    </div>
+
+    <div class="qld-map-wrap">
+      <div class="qld-map-head">
+        <strong>Quality Living network map</strong>
+        <a data-qld-join href="#section-service-provider-portal">Top-rated pro? Join the network →</a>
+      </div>
+      <div class="qld-map" role="region" aria-label="Map of network providers"></div>
+      <ul class="qld-legend"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Quality Living provider directory. Plain JS + Leaflet (OpenStreetMap), no API key.
+   CSV columns: status,name,categories,city,state,lat,lng,service_areas,phone,website,
+   booking_url,rating,review_count,rating_source,rating_url,rating_checked,featured,blurb
+   - status: joined (shown as partner) | example (shown, labeled "Example listing",
+     no contact buttons) | invited | pending | declined (hidden)
+   - categories / service_areas: separate multiple values with ;  (service areas can be
+     cities, ZIPs, or 3-digit ZIP prefixes like 837) */
+(function () {
+  var CATEGORIES = [
+    ["residential-cleaning", "Residential house cleaning", "#14b8a6"],
+    ["commercial-janitorial", "Commercial janitorial", "#3b82f6"],
+    ["str-turnovers", "Airbnb / STR turnovers", "#c5a059"],
+    ["move-in-out", "Move-in / move-out cleaning", "#f97316"],
+    ["deep-cleaning", "Deep cleaning", "#0f766e"],
+    ["construction", "Construction / remodeling", "#e07a4f", true],
+    ["plumbing", "Plumbing", "#38bdf8", true],
+    ["electrical", "Electrical", "#eab308", true],
+    ["hvac", "HVAC", "#a855f7", true],
+    ["landscaping", "Landscaping", "#22a559", true],
+    ["handyman", "Handyman / maintenance", "#64748b", true],
+    ["interior-design", "Interior design", "#db2777", true],
+    ["massage", "Massage & wellness", "#8b5cf6", true]
+  ];
+  var CAT = {};
+  CATEGORIES.forEach(function (c) { CAT[c[0]] = { label: c[1], color: c[2], planned: !!c[3] }; });
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+    });
+  }
+
+  function safeUrl(u) { return /^(https?:|tel:|mailto:|#)/i.test(u || "") ? u : ""; }
+
+  // Minimal CSV parser (handles quoted fields with commas, quotes, and newlines)
+  function parseCSV(text) {
+    var rows = [], row = [], field = "", q = false;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (q) {
+        if (ch === '"' && text[i + 1] === '"') { field += '"'; i++; }
+        else if (ch === '"') q = false;
+        else field += ch;
+      } else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(field); field = ""; }
+      else if (ch === "\n" || ch === "\r") {
+        if (ch === "\r" && text[i + 1] === "\n") i++;
+        row.push(field); rows.push(row); row = []; field = "";
+      } else field += ch;
+    }
+    if (field || row.length) { row.push(field); rows.push(row); }
+    var head = (rows.shift() || []).map(function (h) { return h.trim().toLowerCase(); });
+    return rows.filter(function (r) { return r.join("").trim(); }).map(function (r) {
+      var o = {};
+      head.forEach(function (h, k) { o[h] = (r[k] || "").trim(); });
+      return o;
+    });
+  }
+
+  function list(s) { return (s || "").split(";").map(function (x) { return x.trim(); }).filter(Boolean); }
+  function norm(s) { return (s || "").toLowerCase().replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim(); }
+
+  function loadLeaflet(cb) {
+    if (window.L) return cb();
+    var css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.appendChild(css);
+    var js = document.createElement("script");
+    js.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    js.onload = cb;
+    js.onerror = cb; // list still works without the map
+    document.head.appendChild(js);
+  }
+
+  function init(root) {
+    if (root.dataset.qldReady) return;
+    root.dataset.qldReady = "1";
+
+    var listEl = root.querySelector(".qld-list");
+    var mapEl = root.querySelector(".qld-map");
+    var qEl = root.querySelector(".qld-q");
+    var catEl = root.querySelector(".qld-cat");
+    var estimateLink = root.getAttribute("data-estimate-link") || "#";
+    var joinLink = root.getAttribute("data-join-link") || "#";
+    root.querySelector("[data-qld-join]").setAttribute("href", joinLink);
+
+    // Category dropdown + legend
+    catEl.innerHTML = '<option value="">All services</option>' + CATEGORIES.filter(function (c) { return !c[3]; })
+      .map(function (c) { return '<option value="' + c[0] + '">' + esc(c[1]) + "</option>"; }).join("");
+    root.querySelector(".qld-legend").innerHTML = CATEGORIES.map(function (c) {
+      return '<li class="' + (c[3] ? "is-planned" : "") + '"><i style="background:' + c[2] + '"></i>' + esc(c[1]) + (c[3] ? " (coming)" : "") + "</li>";
+    }).join("");
+
+    // Pick up a search typed into the hero search card
+    try {
+      qEl.value = sessionStorage.getItem("ql_search_location") || "";
+      var savedCat = sessionStorage.getItem("ql_search_category") || "";
+      if (CAT[savedCat]) catEl.value = savedCat;
+    } catch (e) {}
+
+    var providers = [];
+    var map = null, layer = null, markers = {};
+
+    function matches(p, q, cat) {
+      if (cat && p.cats.indexOf(cat) < 0) return false;
+      if (!q) return true;
+      var nq = norm(q);
+      if (/^\d{3,5}$/.test(nq)) {
+        return p.areas.some(function (a) { var z = a.replace(/\D/g, ""); return z && (z === nq || nq.indexOf(z) === 0 || z.indexOf(nq) === 0); });
+      }
+      var hay = norm([p.city, p.state, p.areas.join(" ")].join(" "));
+      return nq.split(" ").every(function (w) { return hay.indexOf(w) >= 0; });
+    }
+
+    function ratingHtml(p) {
+      if (!p.rating || !p.rating_source) return "";
+      var txt = "<b>★ " + esc(p.rating) + "</b> · " + esc(p.review_count || "") + " reviews on " + esc(p.rating_source);
+      var u = safeUrl(p.rating_url);
+      var checked = p.rating_checked ? " (checked " + esc(p.rating_checked) + ")" : "";
+      return '<p class="qld-rating">' + (u ? '<a href="' + u + '" target="_blank" rel="noopener">' + txt + "</a>" : txt) + checked + "</p>";
+    }
+
+    function cardHtml(p) {
+      if (p.example) {
+        var etags = '<span class="qld-tag qld-tag-example">Example listing</span>';
+        p.cats.forEach(function (c) { if (CAT[c]) etags += '<span class="qld-tag"><i style="background:' + CAT[c].color + '"></i>' + esc(CAT[c].label) + "</span>"; });
+        return '<div class="qld-tags">' + etags + "</div><h4>" + esc(p.name) + '</h4><p class="qld-meta">' +
+          esc([p.city, p.state].filter(Boolean).join(", ")) + '</p><p class="qld-blurb">' + esc(p.blurb || "Sample listing showing how network partners appear.") +
+          '</p><div class="qld-actions"><a class="qld-btn qld-btn-sm qld-btn-ghost" href="' + esc(joinLink) + '">Your business here? Join the network</a></div>';
+      }
+      var tags = '<span class="qld-tag qld-tag-partner">Network partner</span>';
+      if (p.featured) tags += '<span class="qld-tag qld-tag-featured">Featured in Quality Living Magazine</span>';
+      p.cats.forEach(function (c) { if (CAT[c]) tags += '<span class="qld-tag"><i style="background:' + CAT[c].color + '"></i>' + esc(CAT[c].label) + "</span>"; });
+      var actions = '<a class="qld-btn qld-btn-sm" data-qld-request href="' + esc(estimateLink) + '">Request estimate</a>';
+      var book = safeUrl(p.booking_url);
+      if (book) actions += '<a class="qld-btn qld-btn-sm qld-btn-gold" href="' + esc(book) + '" target="_blank" rel="noopener">Book online</a>';
+      if (p.phone) actions += '<a class="qld-btn qld-btn-sm qld-btn-ghost" href="tel:' + esc(p.phone.replace(/[^\d+]/g, "")) + '">Call</a>';
+      var site = safeUrl(p.website);
+      if (site) actions += '<a class="qld-btn qld-btn-sm qld-btn-ghost" href="' + esc(site) + '" target="_blank" rel="noopener">Website</a>';
+      return '<div class="qld-tags">' + tags + "</div><h4>" + esc(p.name) + '</h4><p class="qld-meta">' +
+        esc([p.city, p.state].filter(Boolean).join(", ")) + (p.areas.length ? " · Serves " + esc(p.areas.slice(0, 4).join(", ")) + (p.areas.length > 4 ? "…" : "") : "") +
+        "</p>" + ratingHtml(p) + (p.blurb ? '<p class="qld-blurb">' + esc(p.blurb) + "</p>" : "") + '<div class="qld-actions">' + actions + "</div>";
+    }
+
+    function emptyHtml(searched) {
+      return '<div class="qld-empty"><h4>' + (searched
+        ? "No network partner covers this search yet."
+        : "Our provider network is launching. Partners appear here as they join.") +
+        "</h4><p>Tell us what you need and where. Our team will check top-rated local options and follow up with next steps.</p>" +
+        '<a class="qld-btn qld-btn-sm" href="' + esc(estimateLink) + '">Help me find a provider</a></div>';
+    }
+
+    function render() {
+      var q = qEl.value.trim(), cat = catEl.value;
+      var shown = providers.filter(function (p) { return matches(p, q, cat); });
+      listEl.innerHTML = "";
+      var status = document.createElement("p");
+      status.className = "qld-status";
+      var real = shown.filter(function (p) { return !p.example; }).length;
+      status.textContent = real ? real + (real > 1 ? " network partners" : " network partner") + (q || cat ? (real > 1 ? " match your search" : " matches your search") : "") : (shown.length ? "Network launching: example listings shown" : "");
+      if (shown.length && !real) listEl.insertAdjacentHTML("beforeend", emptyHtml(false));
+      if (shown.length) listEl.appendChild(status);
+      if (!shown.length) listEl.insertAdjacentHTML("beforeend", emptyHtml(!!(q || cat) && providers.length > 0));
+
+      shown.forEach(function (p) {
+        var card = document.createElement("article");
+        card.className = "qld-card" + (p.example ? " is-example" : "");
+        card.innerHTML = cardHtml(p);
+        card.addEventListener("click", function (e) {
+          var req = e.target.closest("[data-qld-request]");
+          if (req) { try { sessionStorage.setItem("ql_selected_provider", p.name); } catch (x) {} return; }
+          if (e.target.closest("a")) return;
+          focus(p.id);
+        });
+        p.card = card;
+        listEl.appendChild(card);
+      });
+
+      if (map && layer) {
+        layer.clearLayers();
+        markers = {};
+        var pts = [];
+        shown.forEach(function (p) {
+          if (isNaN(p.lat) || isNaN(p.lng)) return;
+          var color = (CAT[p.cats[0]] || { color: "#1e3a34" }).color;
+          var m = L.circleMarker([p.lat, p.lng], { radius: 10, color: "#fff", weight: 2, fillColor: color, fillOpacity: p.example ? 0.45 : 0.95, dashArray: p.example ? "3" : null })
+            .bindPopup("<strong>" + esc(p.name) + "</strong>" + (p.example ? " <em>(example listing)</em>" : "") + "<br>" + esc([p.city, p.state].filter(Boolean).join(", ")) + (p.rating ? "<br>★ " + esc(p.rating) + " · " + esc(p.review_count) + " reviews" : ""));
+          m.on("click", function () { highlight(p.id, true); });
+          m.addTo(layer);
+          markers[p.id] = m;
+          pts.push([p.lat, p.lng]);
+        });
+        if (pts.length === 1) map.setView(pts[0], 10);
+        else if (pts.length) map.fitBounds(pts, { padding: [40, 40], maxZoom: 11 });
+        else map.setView([39.5, -98.35], 4);
+      }
+    }
+
+    function highlight(id, scroll) {
+      providers.forEach(function (p) { if (p.card) p.card.classList.toggle("is-active", p.id === id); });
+      var p = providers.filter(function (x) { return x.id === id; })[0];
+      if (scroll && p && p.card) p.card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function focus(id) {
+      highlight(id, false);
+      var m = markers[id];
+      if (m && map) { map.setView(m.getLatLng(), Math.max(map.getZoom(), 11)); m.openPopup(); }
+    }
+
+    root.querySelector(".qld-controls").addEventListener("submit", render);
+    catEl.addEventListener("change", render);
+
+    loadLeaflet(function () {
+      if (window.L) {
+        map = L.map(mapEl, { scrollWheelZoom: false }).setView([39.5, -98.35], 4);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        layer = L.layerGroup().addTo(map);
+        // Let the page scroll normally; zoom with the +/- buttons or after clicking the map
+        map.on("click", function () { map.scrollWheelZoom.enable(); });
+        mapEl.addEventListener("mouseleave", function () { map.scrollWheelZoom.disable(); });
+      }
+      fetch(root.getAttribute("data-src"), { cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(function (text) {
+          providers = parseCSV(text)
+            .filter(function (p) { return /^(joined|example)$/i.test(p.status || "") && p.name; })
+            .map(function (p, i) {
+              p.id = "p" + i;
+              p.cats = list(p.categories);
+              p.areas = list(p.service_areas);
+              p.lat = parseFloat(p.lat);
+              p.lng = parseFloat(p.lng);
+              p.example = /^example$/i.test(p.status);
+              p.featured = !p.example && /^(yes|true|1)$/i.test(p.featured || "");
+              if (p.example) { p.rating = ""; p.phone = ""; p.website = ""; p.booking_url = ""; }
+              return p;
+            })
+            .sort(function (a, b) { return (a.example - b.example) || (b.featured - a.featured) || (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0); });
+          render();
+        })
+        .catch(function () { providers = []; render(); });
+    });
+  }
+
+  function boot() { document.querySelectorAll("[data-qld]").forEach(init); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script>

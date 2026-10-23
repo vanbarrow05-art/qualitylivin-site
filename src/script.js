@@ -52,52 +52,44 @@
   }
 
   /* ---------- Hero search + category cards feed the directory ---------- */
+  // The directory itself (map, list, search) lives in src/directory.html.
+  // Here the hero search and the category cards feed it and scroll to it.
   function initDirectory(root) {
     var dir = root.querySelector("#ql-directory");
     if (!dir) return;
-    var area = dir.querySelector("[data-ql-dir-area]");
-    var cat = dir.querySelector("[data-ql-dir-category]");
-    var status = dir.querySelector("[data-ql-dir-status]");
-    var label = dir.querySelector("[data-ql-map-label]");
-    var body = dir.querySelector("[data-ql-dir]");
 
-    function update() {
-      var where = (area.value || "").trim();
-      status.textContent = "Showing: " + (where || "all areas") + " · " + cat.value;
-      label.textContent = where || "Your area";
+    function catKey(label) {
+      var l = (label || "").toLowerCase();
+      if (l.indexOf("residential") >= 0) return "residential-cleaning";
+      if (l.indexOf("commercial") >= 0 || l.indexOf("janitorial") >= 0) return "commercial-janitorial";
+      if (l.indexOf("rental") >= 0 || l.indexOf("airbnb") >= 0 || l.indexOf("str") >= 0) return "str-turnovers";
+      if (l.indexOf("move") >= 0) return "move-in-out";
+      if (l.indexOf("deep") >= 0) return "deep-cleaning";
+      return "";
     }
-    function go() { scrollToEl(dir); }
+
+    function search(area, category) {
+      var q = dir.querySelector(".qld-q");
+      var c = dir.querySelector(".qld-cat");
+      var form = dir.querySelector(".qld-controls");
+      if (q && area != null) q.value = area;
+      if (c && category != null) c.value = catKey(category);
+      if (form) form.dispatchEvent(new Event("submit"));
+      scrollToEl(dir);
+    }
 
     var heroForm = root.querySelector("[data-ql-search]");
     if (heroForm) {
       heroForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        area.value = heroForm.elements.area.value;
-        cat.value = heroForm.elements.category.value;
-        update();
-        go();
+        search(heroForm.elements.area.value, heroForm.elements.category.value);
       });
     }
 
     root.querySelectorAll("[data-ql-category]").forEach(function (card) {
       card.addEventListener("click", function (e) {
         e.preventDefault();
-        cat.value = card.getAttribute("data-ql-category");
-        update();
-        go();
-      });
-    });
-
-    dir.querySelector("[data-ql-dir-search]").addEventListener("click", update);
-    area.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); update(); } });
-    cat.addEventListener("change", update);
-
-    // Map / List switch (phones)
-    var tabs = dir.querySelectorAll("[data-ql-view]");
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        body.setAttribute("data-view", tab.getAttribute("data-ql-view"));
-        tabs.forEach(function (t) { t.setAttribute("aria-selected", String(t === tab)); });
+        search(null, card.getAttribute("data-ql-category"));
       });
     });
   }

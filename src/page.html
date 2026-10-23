@@ -104,61 +104,9 @@
         <p><strong>More trades on the way.</strong> Plumbing, electrical, HVAC, landscaping and handyman services will be added as approved local coverage opens.</p>
       </div>
 
-      <!-- Directory: map + results. No providers are published yet, so it shows the honest empty state. -->
-      <div class="ql-directory ql-reveal" id="ql-directory">
-        <div class="ql-dir-bar">
-          <label class="ql-field">
-            <span>City or ZIP code</span>
-            <input type="text" name="area" placeholder="City or ZIP" data-ql-dir-area>
-          </label>
-          <label class="ql-field">
-            <span>Service</span>
-            <select name="category" data-ql-dir-category>
-              <option>Residential house cleaning</option>
-              <option>Commercial janitorial</option>
-              <option>Short-term rental turnovers</option>
-              <option>Move-in / move-out cleaning</option>
-              <option>Deep cleaning</option>
-            </select>
-          </label>
-          <button class="ql-btn ql-btn-primary" type="button" data-ql-dir-search>Search</button>
-        </div>
-
-        <div class="ql-dir-tabs" role="tablist" aria-label="Directory view">
-          <button type="button" role="tab" aria-selected="true" data-ql-view="list">List</button>
-          <button type="button" role="tab" aria-selected="false" data-ql-view="map">Map</button>
-        </div>
-
-        <div class="ql-dir-body" data-ql-dir data-view="list">
-          <div class="ql-dir-list">
-            <p class="ql-dir-status" data-ql-dir-status>Showing: all areas · Residential house cleaning</p>
-            <div class="ql-empty">
-              <span class="ql-empty-icon"><svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
-              <h3>No approved provider is listed here yet</h3>
-              <p>Tell us what you need and our team will check local options for you.</p>
-              <a class="ql-btn ql-btn-primary" href="#section-virtual-estimate-flow">Request an Estimate</a>
-            </div>
-            <p class="ql-dir-note">Each published profile shows the provider's services, confirmed service areas and review sources. Sponsored placements are always labeled.</p>
-          </div>
-
-          <div class="ql-dir-map" aria-hidden="true">
-            <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="320" fill="#e8ece4"/>
-              <path d="M-10 230 C 80 200, 120 260, 210 235 S 330 170, 410 200 L410 330 L-10 330Z" fill="#dfe6dc"/>
-              <path d="M-10 92 C 60 120, 120 70, 190 98 S 300 150, 410 110" fill="none" stroke="#c9d8de" stroke-width="16" stroke-linecap="round"/>
-              <g fill="none" stroke="#fff" stroke-linecap="round">
-                <path d="M0 170 H400" stroke-width="7"/><path d="M150 0 V320" stroke-width="7"/>
-                <path d="M0 40 L400 280" stroke-width="4"/><path d="M290 0 L330 320" stroke-width="4"/>
-                <path d="M40 0 L70 320" stroke-width="3"/><path d="M0 260 H400" stroke-width="3"/>
-              </g>
-              <circle cx="200" cy="160" r="70" fill="#1e3a34" opacity="0.06"/>
-              <circle cx="200" cy="160" r="38" fill="#1e3a34" opacity="0.08"/>
-            </svg>
-            <span class="ql-map-pin"><i></i></span>
-            <span class="ql-map-label" data-ql-map-label>Your area</span>
-            <span class="ql-map-badge">Coverage opening soon</span>
-          </div>
-        </div>
+      <!-- Directory: live map + list fed by data/providers.csv (markup and script in src/directory.html) -->
+      <div class="ql-reveal" id="ql-directory">
+        <!-- @include directory.html -->
       </div>
     </div>
   </section>

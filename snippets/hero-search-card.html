@@ -1,0 +1,314 @@
+<!-- Hero search card for the GHL builder version of the site.
+     Paste into the hero's Custom JS/HTML element, replacing everything in it.
+     "Request a Virtual Estimate" opens the GHL form (House Cleaning Lead Generation) in a popup.
+     If scripts fail, the button still opens the form in a new tab. -->
+<style>
+.hospitality-hero-search-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: rgba(242, 239, 231, 0.97);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  border-radius: 8px;
+  box-shadow: 0 20px 50px -10px rgba(10, 24, 21, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.35);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hospitality-hero-inputs-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.hospitality-hero-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+.hospitality-hero-label {
+  font-family: var(--contentfont);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-text-muted);
+}
+.hospitality-hero-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid rgba(30, 58, 52, 0.15);
+  border-radius: 6px;
+  padding: 0 12px;
+  height: 48px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.hospitality-hero-input-wrap:focus-within {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px rgba(30, 58, 52, 0.12);
+}
+.hospitality-hero-input-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  color: var(--brand-accent);
+  flex-shrink: 0;
+}
+.hospitality-hero-select,
+.hospitality-hero-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--contentfont);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--brand-text-main);
+  outline: none;
+}
+.hospitality-hero-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.hospitality-hero-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding-top: 4px;
+}
+.hospitality-hero-btn-primary {
+  flex: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 24px;
+  background: var(--brand-primary);
+  color: var(--white);
+  border: 1px solid var(--brand-primary);
+  border-radius: 6px;
+  font-family: var(--contentfont);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(30, 58, 52, 0.25);
+}
+.hospitality-hero-btn-primary:hover {
+  background: #152925;
+  border-color: #152925;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(30, 58, 52, 0.35);
+}
+.hospitality-hero-btn-secondary {
+  flex: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 20px;
+  background: transparent;
+  color: var(--brand-primary);
+  border: 1.5px solid var(--brand-primary);
+  border-radius: 6px;
+  font-family: var(--contentfont);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.hospitality-hero-btn-secondary:hover {
+  background: rgba(30, 58, 52, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Estimate form popup */
+.ql-form-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(10, 24, 21, 0.7);
+}
+.ql-form-modal.is-open { display: flex; }
+.ql-form-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: min(88vh, 860px);
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+.ql-form-modal-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.ql-form-modal-scroll iframe {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  border: none;
+}
+.ql-form-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--brand-primary, #1e3a34);
+  color: #fff;
+  font-size: 22px;
+  line-height: 36px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hospitality-hero-search-card {
+    padding: 14px 14px;
+    gap: 14px;
+  }
+  .hospitality-hero-inputs-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hospitality-hero-field {
+    width: 100%;
+  }
+  .hospitality-hero-actions-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hospitality-hero-btn-primary,
+  .hospitality-hero-btn-secondary {
+    width: 100%;
+    flex: none;
+    height: 46px;
+    font-size: 14px;
+  }
+  .ql-form-modal { padding: 0; }
+  .ql-form-modal-box { max-width: none; height: 100%; border-radius: 0; }
+}
+</style>
+
+<div class="hospitality-hero-search-card animate__animated animate__fadeInUp">
+  <div class="hospitality-hero-inputs-row">
+    <div class="hospitality-hero-field">
+      <label class="hospitality-hero-label" for="hero-location">City or ZIP code</label>
+      <div class="hospitality-hero-input-wrap">
+        <svg class="hospitality-hero-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <input id="hero-location" class="hospitality-hero-input" type="text" placeholder="City or ZIP" value="" />
+      </div>
+    </div>
+    <div class="hospitality-hero-field">
+      <label class="hospitality-hero-label" for="hero-category">Service category</label>
+      <div class="hospitality-hero-input-wrap">
+        <svg class="hospitality-hero-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        <select id="hero-category" class="hospitality-hero-select">
+          <option value="residential-cleaning">Residential house cleaning</option>
+          <option value="commercial-janitorial">Commercial janitorial services</option>
+          <option value="str-turnovers">Airbnb / STR turnovers</option>
+          <option value="move-in-out">Move-in / move-out cleaning</option>
+          <option value="deep-cleaning">Deep cleaning</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="hospitality-hero-actions-row">
+    <a href="#section-service-discovery-engine" class="hospitality-hero-btn-primary">Find a Service</a>
+    <a href="https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf" target="_blank" rel="noopener" class="hospitality-hero-btn-secondary" data-ql-open-form>Request a Virtual Estimate</a>
+  </div>
+</div>
+
+<!-- Popup with your GHL form. The iframe only loads when the button is clicked. -->
+<div class="ql-form-modal" id="ql-estimate-modal" role="dialog" aria-modal="true" aria-label="Request a Virtual Estimate">
+  <div class="ql-form-modal-box">
+    <button type="button" class="ql-form-modal-close" aria-label="Close">&times;</button>
+    <div class="ql-form-modal-scroll">
+      <iframe
+        data-src="https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf"
+        id="inline-2CZsk7kdEPJcdbYk33Tf"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="House Cleaning Lead Generation"
+        data-height="undefined"
+        data-layout-iframe-id="inline-2CZsk7kdEPJcdbYk33Tf"
+        data-form-id="2CZsk7kdEPJcdbYk33Tf"
+        data-cookie-consent="true"
+        data-cookie-consent-provider="auto"
+        title="House Cleaning Lead Generation"></iframe>
+    </div>
+  </div>
+</div>
+
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+<script>
+(function () {
+  // Remember the search so the directory section can read it
+  var btnPrimary = document.querySelector('.hospitality-hero-btn-primary');
+  if (btnPrimary) {
+    btnPrimary.addEventListener('click', function () {
+      var loc = document.getElementById('hero-location');
+      var cat = document.getElementById('hero-category');
+      if (loc && cat) {
+        try {
+          sessionStorage.setItem('ql_search_location', loc.value);
+          sessionStorage.setItem('ql_search_category', cat.value);
+        } catch (e) {}
+      }
+    });
+  }
+
+  // Open the estimate form popup
+  var modal = document.getElementById('ql-estimate-modal');
+  if (!modal) return;
+  // Move the popup to <body> so GHL section styles can't clip it
+  document.body.appendChild(modal);
+  var frame = modal.querySelector('iframe');
+
+  function openForm(e) {
+    e.preventDefault();
+    if (!frame.getAttribute('src')) frame.setAttribute('src', frame.getAttribute('data-src'));
+    modal.classList.add('is-open');
+    document.documentElement.style.overflow = 'hidden';
+  }
+
+  function closeForm() {
+    modal.classList.remove('is-open');
+    document.documentElement.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-ql-open-form]').forEach(function (btn) {
+    btn.addEventListener('click', openForm);
+  });
+  modal.querySelector('.ql-form-modal-close').addEventListener('click', closeForm);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeForm(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeForm(); });
+})();
+</script>

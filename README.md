@@ -63,6 +63,8 @@ These are reference only. GHL can't re-import them, and they're not used by the 
 - `builder-screenshot.png`: full-page screenshot
 - `builder-clean.html` / `builder-raw.html`: readable markup / exactly what GHL serves (includes all CSS and JS)
 - `code-elements/`: the HTML of each Custom JS/HTML element, numbered top to bottom. GHL moves each element's `<style>` and `<script>` into the page head when publishing, so those parts are only in `builder-raw.html`.
+- `code-source/`: the exact code inside each Code element, with its `<style>` and `<script>` included. Edit this version and paste it back into GHL.
+- `page-outline.txt`: every section's text, buttons and images in page order. `NOTES.md` lists what to fix before the draft is published.
 
 `snippets/hero-search-card.html` is the fixed hero search card for the builder page ("Request a Virtual Estimate" opens the GHL form in a popup).
 

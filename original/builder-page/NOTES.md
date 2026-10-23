@@ -3,23 +3,23 @@
 What the GHL builder currently holds for the qualitylivin.com homepage. It was pulled from the page's no-login preview link:
 https://sites.leadconnectorhq.com/preview/9T0xbhh5dOkUdztv2lB8?notrack=true
 
-This is the saved **draft**. It is not what qualitylivin.com serves right now (that's `original/`). GHL page ID `9T0xbhh5dOkUdztv2lB8`. `/`, `/home` and `/untitled-page` are all this same page.
+This is the saved **draft**. It is not what qualitylivin.com serves right now (that's `original/qualitylivin-*`). GHL page ID `9T0xbhh5dOkUdztv2lB8`. `/`, `/home` and `/untitled-page` are all this same page.
 
-This folder is for reference only. The build doesn't use it.
+These notes cover `code-source/` and `page-outline.txt`. The rest of this folder is described in the main README.
 
 ## Files
 
 - `page-outline.txt`: every section in order, with the text, buttons, images and where each code element sits
-- `code/`: the contents of each GHL Custom JS/HTML element, numbered in page order
+- `code-source/`: the exact code inside each GHL Custom JS/HTML element (styles and scripts included), numbered in page order. This is the version to edit and paste back into GHL. `code-elements/` holds the rendered HTML only.
 
 | File | Section | Notes |
 | --- | --- | --- |
-| `code/01-hospitality-hero.html` | hero | headline styling |
-| `code/02-hospitality-hero.html` | hero | search card. **Still has the broken form embed** (the stray `});` text). The fix is `snippets/hero-search-card.html` and hasn't been pasted into GHL yet |
+| `code-source/01-hospitality-hero.html` | hero | headline styling |
+| `code-source/02-hospitality-hero.html` | hero | search card. **Still has the broken form embed** (the stray `});` text). The fix is `snippets/hero-search-card.html` and hasn't been pasted into GHL yet |
 | (03, empty) | `section-iaUaahOIvg` | a new section with an **empty** Code element. Whatever was pasted there didn't save |
-| `code/04-service-discovery-engine.html` | directory | coverage radar map |
-| `code/05-virtual-estimate-flow.html` | estimate | 4-step estimate wizard |
-| `code/06-floureshe-editorial.html` | magazine | article ticker |
+| `code-source/04-service-discovery-engine.html` | directory | coverage radar map |
+| `code-source/05-virtual-estimate-flow.html` | estimate | 4-step estimate wizard |
+| `code-source/06-floureshe-editorial.html` | magazine | article ticker |
 
 ## Content to fix before this draft is published
 

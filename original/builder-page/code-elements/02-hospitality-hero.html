@@ -1,0 +1,64 @@
+
+<div class="hospitality-hero-search-card animate__animated animate__fadeInUp">
+<div class="hospitality-hero-inputs-row">
+<div class="hospitality-hero-field">
+<label class="hospitality-hero-label" for="hero-location">City or ZIP code</label>
+<div class="hospitality-hero-input-wrap">
+<svg class="hospitality-hero-input-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<input class="hospitality-hero-input" id="hero-location" placeholder="City or ZIP" type="text" value=""/>
+</div>
+</div>
+<div class="hospitality-hero-field">
+<label class="hospitality-hero-label" for="hero-category">Service category</label>
+<div class="hospitality-hero-input-wrap">
+<svg class="hospitality-hero-input-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+<select class="hospitality-hero-select" id="hero-category">
+<option value="residential-cleaning">Residential house cleaning</option>
+<option value="commercial-janitorial">Commercial janitorial services</option>
+<option value="str-turnovers">Airbnb / STR turnovers</option>
+<option value="move-in-out">Move-in / move-out cleaning</option>
+<option value="deep-cleaning">Deep cleaning</option>
+</select>
+</div>
+</div>
+</div>
+<div class="hospitality-hero-actions-row">
+<a class="hospitality-hero-btn-primary" href="https://sites.leadconnectorhq.com/preview/9T0xbhh5dOkUdztv2lB8?notrack=true#section-service-discovery-engine">Find a Service</a>
+<a class="hospitality-hero-btn-secondary" href="https://sites.leadconnectorhq.com/preview/9T0xbhh5dOkUdztv2lB8?notrack=true#section-virtual-estimate-flow">Request a Virtual Estimate</a>
+</div>
+</div>
+<script>
+(function(){
+  const btnPrimary = document.querySelector('.hospitality-hero-btn-primary');
+  if (btnPrimary) {
+    btnPrimary.addEventListener('click', function() {
+      const loc = document.getElementById('hero-location');
+      const cat = document.getElementById('hero-category');
+      if (loc && cat) {
+        sessionStorage.setItem('ql_search_location', loc.value);
+        sessionStorage.setItem('ql_search_category', cat.value);
+      }<iframe
+    src="https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf"
+    style="width:100%;height:100%;border:none;border-radius:3px"
+    id="inline-2CZsk7kdEPJcdbYk33Tf"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="House Cleaning Lead Generation"
+    data-height="undefined"
+    data-layout-iframe-id="inline-2CZsk7kdEPJcdbYk33Tf"
+    data-form-id="2CZsk7kdEPJcdbYk33Tf"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="House Cleaning Lead Generation"
+    
+        >
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+    });
+  }
+})();

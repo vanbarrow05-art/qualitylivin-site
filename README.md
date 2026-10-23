@@ -58,6 +58,14 @@ A snapshot of the live qualitylivin.com as GHL built it (October 2026), kept for
 
 These are reference only. GHL can't re-import them, and they're not used by the build.
 
+`original/builder-page/` is the GHL builder version ("Discover Verified Professionals", 4-step estimate form, FLOURESHÉ stories), saved from its preview link:
+
+- `builder-screenshot.png`: full-page screenshot
+- `builder-clean.html` / `builder-raw.html`: readable markup / exactly what GHL serves (includes all CSS and JS)
+- `code-elements/`: the HTML of each Custom JS/HTML element, numbered top to bottom. GHL moves each element's `<style>` and `<script>` into the page head when publishing, so those parts are only in `builder-raw.html`.
+
+`snippets/hero-search-card.html` is the fixed hero search card for the builder page ("Request a Virtual Estimate" opens the GHL form in a popup).
+
 ## Notes
 
 - All CSS is scoped under `.ql`, so it won't affect GHL's own elements on the page.

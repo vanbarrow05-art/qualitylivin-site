@@ -501,6 +501,10 @@
 }
 
 /* ---------- Directory ---------- */
+/* Live directory (src/directory.html) under the category cards */
+.ql #ql-directory { margin-top: 64px; scroll-margin-top: 96px; }
+@media (max-width: 640px) { .ql #ql-directory { margin-top: 44px; } }
+
 .ql .ql-directory {
   margin-top: 72px;
   border: 1px solid var(--ql-line);

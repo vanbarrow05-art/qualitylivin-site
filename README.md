@@ -6,7 +6,7 @@ The qualitylivin.com homepage as clean HTML/CSS, kept in git and pasted into GoH
 
 - `src/page.html`: page content (edit this)
 - `src/styles.css`: styles (edit this; brand colors + hero image are at the top)
-- `src/script.js`: page behavior: mobile menu, fade-in on scroll, hero search → directory, Map/List switch, and the magazine card gallery
+- `src/script.js`: page behavior: mobile menu, fade-in on scroll, hero search and category cards → directory, and the magazine card gallery
 - `src/magazine-feature.html`: the magazine / eBook section (3D cover, contents, look-inside pages, partner feature, subscription). The build includes it in the page and also outputs it alone as `dist/magazine-feature-paste.html`
 - `assets/`: magazine cover image, the April 2025 magazine PDF, and page previews (`assets/pages/`)
 - `dist/ghl-paste.html`: **the file you paste into GHL** (generated)
@@ -76,9 +76,11 @@ These are reference only. GHL can't re-import them, and they're not used by the 
 ## Notes
 
 - All CSS is scoped under `.ql`, so it won't affect GHL's own elements on the page.
-- Page order follows the Oct 21, 2026 website brief: hero search → service categories → directory (map + list, Map/List switch on phones) → how it works → estimate form → magazine → standards → for providers → closing call to action → footer.
+- Page order follows the Oct 21, 2026 website brief: hero search → service categories → directory (map + list) → how it works → estimate form → magazine → standards → for providers → closing call to action → footer.
 - The estimate section embeds the live GHL form "House Cleaning Lead Generation" (`2CZsk7kdEPJcdbYk33Tf`), so submissions become GHL contacts. Its look (header image, field colors) is set in GHL's form builder, not here.
-- The hero search fills in the directory, which shows an honest "no approved provider yet" state until real providers are published.
+- The directory (`src/directory.html`) has two layers:
+  - **Partners** from `data/providers.csv`: only `joined` rows show, with ratings (source and date), call, booking and estimate buttons. Add a business only after it agrees in writing.
+  - **Public listings** from `data/map/`: 46,424 real cleaning businesses (Overture Maps + OpenStreetMap). They show after a search by ZIP, "City, ST", state or place name. They're marked "Public listing · not reviewed" and show only name, type, city, website and "Own this business? Claim it", with no estimate button and no rating. Pins sit at ZIP centres, and phone numbers and street addresses are stripped. Licences are in `data/map/LICENSE.md`. Add `data-public="off"` to the `.qld` element to hide the layer.
 - Provider plans use the Oct 21 package names and prices. Delivery limits and the $800 guarantee aren't shown until their terms are final. The provider buttons point to Contact until a provider application form exists. Search `data-ql-provider-apply` in `src/page.html` to repoint them.
 - No email, phone or social links are shown until real ones exist. The footer has a commented-out social block ready to fill in.
 - On Windows, the build works with plain `python scripts/build.py` (it reads and writes UTF-8 explicitly).

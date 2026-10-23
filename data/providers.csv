@@ -1,10 +1,2 @@
 status,name,categories,city,state,lat,lng,service_areas,phone,website,booking_url,rating,review_count,rating_source,rating_url,rating_checked,featured,blurb,founding
 invited,TLG Janitorial Services,commercial-janitorial;residential-cleaning,Preston,ID,42.0963,-111.8766,Preston;Franklin County;Logan;Cache Valley;83263;843,208-705-6729,https://tlgclean.com,,5.0,7,Google,,Oct 2026,yes,"Medical office and commercial cleaning in Preston and Cache Valley, featured in the April 2025 issue. Change status to joined once Troy & Lillie confirm they want to be listed.",
-example,Example Residential Cleaning Co.,residential-cleaning;deep-cleaning,Austin,TX,30.2672,-97.7431,Austin;Round Rock;787,,,,,,,,,,Sample listing showing how a residential cleaning partner appears.,
-example,Example Commercial Janitorial Group,commercial-janitorial,Dallas,TX,32.7767,-96.7970,Dallas;Plano;752,,,,,,,,,,Sample listing showing how a commercial janitorial partner appears.,
-example,Example STR Turnover Team,str-turnovers;residential-cleaning,Nashville,TN,36.1627,-86.7816,Nashville;372,,,,,,,,,,Sample listing showing how an Airbnb / short-term rental turnover partner appears.,
-example,Example Move-Out Cleaning Pros,move-in-out;deep-cleaning,Phoenix,AZ,33.4484,-112.0740,Phoenix;Scottsdale;850,,,,,,,,,,Sample listing showing how a move-in / move-out cleaning partner appears.,
-example,Example Office Cleaning Services,commercial-janitorial,Denver,CO,39.7392,-104.9903,Denver;Aurora;802,,,,,,,,,,Sample listing showing how a commercial janitorial partner appears.,
-example,Example Home & Deep Clean,residential-cleaning;deep-cleaning,Atlanta,GA,33.7490,-84.3880,Atlanta;Decatur;303,,,,,,,,,,Sample listing showing how a residential cleaning partner appears.,
-example,Example Vacation Rental Cleaners,str-turnovers,Tampa,FL,27.9506,-82.4572,Tampa;St. Petersburg;336,,,,,,,,,,Sample listing showing how a short-term rental partner appears.,
-example,Example Janitorial Partners,commercial-janitorial;residential-cleaning,Boise,ID,43.6150,-116.2023,Boise;Meridian;Nampa;837,,,,,,,,,,Sample listing showing how a commercial janitorial partner appears.,

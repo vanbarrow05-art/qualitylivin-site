@@ -5,8 +5,12 @@
      Provider data comes from data/providers.csv in the GitHub repo (edit it there, or
      point data-src at a Google Sheet published as CSV). Only rows with status "joined"
      are shown as partners: list a provider only after they've agreed to be in the network.
-     Rows with status "example" show as clearly labeled sample listings (no contact buttons)
-     so the map isn't empty at launch; delete them as real partners join. -->
+     Rows with status "example" show as clearly labeled sample listings (no contact buttons).
+
+     Public listings: below the partners, searches also show nearby real cleaning businesses
+     from data/map/ (Overture Maps + OpenStreetMap, 46k across the US). They haven't joined or
+     been reviewed, so their cards show only name, type, city, website and "Claim it". No
+     estimate button, no rating, pins at the ZIP centre. Add data-public="off" to hide them. -->
 <style>
 .qld {
   --qld-green: #1e3a34;
@@ -117,6 +121,22 @@
 .qld .qld-tag-example { background: #fff; color: var(--qld-muted); border: 1px dashed #b9b2a3; }
 .qld .qld-card.is-example { border-style: dashed; background: #fcfbf8; }
 
+/* Public listings (not reviewed): quieter cards, no estimate button */
+.qld .qld-tag-public { background: #fff; color: var(--qld-muted); border: 1px solid #d8d1c2; }
+.qld .qld-card.is-public { padding: 14px 16px; background: #fdfcf9; }
+.qld .qld-card.is-public h4 { font-size: 19px; }
+.qld .qld-card.is-public .qld-actions { margin-top: 8px; gap: 16px; font-size: 13px; }
+.qld .qld-card.is-public .qld-actions a { color: var(--qld-green); font-weight: 600; border-bottom: 1px solid #d9cfb8; }
+.qld .qld-pub-head {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--qld-muted);
+}
+.qld .qld-pub-note { font-size: 12.5px; line-height: 1.5; color: var(--qld-muted); }
+
 .qld .qld-card h4 {
   font-family: var(--qld-serif);
   font-size: 22px;
@@ -209,6 +229,7 @@
 
 <div class="qld" data-qld
      data-src="https://raw.githubusercontent.com/vanbarrow05-art/qualitylivin-site/main/data/providers.csv"
+     data-public-src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/data/map/"
      data-estimate-link="#section-virtual-estimate-flow"
      data-join-link="#section-service-provider-portal">
 
@@ -258,6 +279,7 @@
     ["interior-design", "Interior design", "#db2777", true],
     ["massage", "Massage & wellness", "#8b5cf6", true]
   ];
+  var PUB_COLOR = "#2f5d50"; // public (not reviewed) listings
   var CAT = {};
   CATEGORIES.forEach(function (c) { CAT[c[0]] = { label: c[1], color: c[2], planned: !!c[3] }; });
 
@@ -327,7 +349,7 @@
       .map(function (c) { return '<option value="' + c[0] + '">' + esc(c[1]) + "</option>"; }).join("");
     root.querySelector(".qld-legend").innerHTML = CATEGORIES.map(function (c) {
       return '<li class="' + (c[3] ? "is-planned" : "") + '"><i style="background:' + c[2] + '"></i>' + esc(c[1]) + (c[3] ? " (coming)" : "") + "</li>";
-    }).join("");
+    }).join("") + (root.getAttribute("data-public") !== "off" ? '<li><i style="background:' + PUB_COLOR + '"></i>Public listing, not reviewed</li>' : "");
 
     // Pick up a search typed into the hero search card
     try {
@@ -338,6 +360,193 @@
 
     var providers = [];
     var map = null, layer = null, markers = {};
+
+    /* ---- Public listings layer ----
+       data/map/ holds 46k real cleaning businesses from Overture Maps + OpenStreetMap (see
+       data/map/LICENSE.md). They have NOT joined or been reviewed: their cards show name, type,
+       city, their own website and "Claim it" only, never an estimate button or a rating.
+       Pins sit at the ZIP centre, not the street address. data-public="off" hides the layer. */
+    var SHOW_PUBLIC = root.getAttribute("data-public") !== "off";
+    var pubBase = root.getAttribute("data-public-src") || "";
+    var PUB_FALLBACK = "https://raw.githubusercontent.com/vanbarrow05-art/qualitylivin-site/main/data/map/";
+    var PUB_CATS = {
+      "residential-cleaning": ["r"], "commercial-janitorial": ["c"], "str-turnovers": ["r"],
+      "move-in-out": ["r"], "deep-cleaning": ["r", "p"]
+    };
+    var PUB_LIST = 25, PUB_MAP = 300;
+    var summary = null, stateCache = {}, pubLayer = null, pubRenderer = null, pubToken = 0;
+
+    function getJson(path) {
+      function get(base) {
+        return fetch(base + path).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+      }
+      // jsDelivr can lag a few hours on newly pushed files; GitHub raw is the fallback
+      return get(pubBase || PUB_FALLBACK).catch(function () { return get(PUB_FALLBACK); });
+    }
+
+    function loadState(st) {
+      if (!stateCache[st]) {
+        stateCache[st] = getJson("states/" + st + ".json")
+          .then(function (d) { return (d && d.rows) || []; })
+          .catch(function () { delete stateCache[st]; return []; });
+      }
+      return stateCache[st];
+    }
+
+    function km(a, b) {
+      var r = Math.PI / 180;
+      var x = (b[1] - a[1]) * r * Math.cos(((a[0] + b[0]) / 2) * r), y = (b[0] - a[0]) * r;
+      return Math.sqrt(x * x + y * y) * 6371;
+    }
+
+    function avg(rows) {
+      if (!rows.length) return null;
+      var la = 0, lo = 0;
+      rows.forEach(function (r) { la += r[5]; lo += r[6]; });
+      return [la / rows.length, lo / rows.length];
+    }
+
+    function statesAt(pt) {
+      return Object.keys(summary.states).filter(function (st) {
+        var b = summary.states[st].bbox; // [south, west, north, east]
+        return pt[0] >= b[0] - 0.5 && pt[0] <= b[2] + 0.5 && pt[1] >= b[1] - 0.5 && pt[1] <= b[3] + 0.5;
+      });
+    }
+
+    function geocode(text) {
+      // OpenStreetMap's free geocoder, only on an explicit search (never per keystroke)
+      return fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=us&limit=1&q=" + encodeURIComponent(text))
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (d) {
+          if (!d || !d[0]) return null;
+          var c = [parseFloat(d[0].lat), parseFloat(d[0].lon)];
+          var sts = statesAt(c);
+          return sts.length ? { label: text, center: c, states: sts } : null;
+        })
+        .catch(function () { return null; });
+    }
+
+    // ZIP, "City, ST", "ST", or anything else via the geocoder -> { label, center, states }
+    function resolvePlace(text) {
+      var raw = text.trim(), up = raw.toUpperCase();
+      if (/^\d{5}$/.test(raw)) {
+        var st = summary.zip3[raw.slice(0, 3)];
+        if (!st) return Promise.resolve(null);
+        return loadState(st).then(function (rows) {
+          var c = avg(rows.filter(function (r) { return r[2] === raw; })) ||
+            avg(rows.filter(function (r) { return String(r[2]).slice(0, 3) === raw.slice(0, 3); })) ||
+            summary.states[st].center;
+          return { label: raw + " (" + st + ")", center: c, states: [st] };
+        });
+      }
+      if (/^[A-Z]{2}$/.test(up) && summary.states[up]) {
+        return Promise.resolve({ label: up, center: summary.states[up].center, states: [up], wholeState: true });
+      }
+      var m = raw.match(/^(.+?)[,\s]+([A-Za-z]{2})$/);
+      if (m && summary.states[m[2].toUpperCase()]) {
+        var st2 = m[2].toUpperCase(), city = norm(m[1]);
+        return loadState(st2).then(function (rows) {
+          var c = avg(rows.filter(function (r) { return norm(r[1]) === city; }));
+          return c ? { label: m[1].trim() + ", " + st2, center: c, states: [st2] } : geocode(raw);
+        });
+      }
+      return geocode(raw);
+    }
+
+    function publicCardHtml(r, st) {
+      var site = /^https?:\/\/[^\s"'<>]+$/i.test(r[4] || "") ? r[4] : "";
+      var type = (summary.categories && summary.categories[r[3]]) || "Cleaning";
+      var where = [r[1], st].filter(Boolean).join(", ");
+      return '<div class="qld-tags"><span class="qld-tag qld-tag-public">Public listing · not reviewed</span></div>' +
+        "<h4>" + esc(r[0]) + '</h4><p class="qld-meta">' + esc(type) + (where ? " · " + esc(where) : "") + "</p>" +
+        '<div class="qld-actions">' + (site ? '<a href="' + esc(site) + '" target="_blank" rel="nofollow noopener">Website</a>' : "") +
+        '<a href="' + esc(joinLink) + '">Own this business? Claim it</a></div>';
+    }
+
+    function renderPublic(q, cat) {
+      var token = ++pubToken;
+      if (pubLayer) pubLayer.clearLayers();
+      if (!SHOW_PUBLIC || !summary) return;
+
+      if (!q) {
+        // National view: one bubble per state; clicking one searches that state
+        if (pubLayer) {
+          Object.keys(summary.states).forEach(function (st) {
+            var s = summary.states[st];
+            L.circleMarker(s.center, { renderer: pubRenderer, radius: Math.min(22, 4 + Math.sqrt(s.n) / 3), color: "#fff", weight: 1, fillColor: PUB_COLOR, fillOpacity: 0.5 })
+              .bindTooltip(st + " · " + Number(s.n).toLocaleString("en-US") + " public listings")
+              .on("click", function () { qEl.value = st; render(); })
+              .addTo(pubLayer);
+          });
+        }
+        listEl.insertAdjacentHTML("beforeend", '<p class="qld-pub-note">Search a city or ZIP to see local cleaning businesses. The map also shows ' +
+          Number(summary.total).toLocaleString("en-US") + " public listings from Overture Maps and OpenStreetMap. They haven't joined or been reviewed by Quality Living.</p>");
+        return;
+      }
+
+      listEl.insertAdjacentHTML("beforeend", '<p class="qld-pub-note" data-qld-pub-wait>Looking up public listings near ' + esc(q) + "…</p>");
+      resolvePlace(q).then(function (place) {
+        if (token !== pubToken) return;
+        var wait = listEl.querySelector("[data-qld-pub-wait]");
+        if (wait) wait.parentNode.removeChild(wait);
+        if (!place) {
+          listEl.insertAdjacentHTML("beforeend", '<p class="qld-pub-note">We couldn\'t place "' + esc(q) + '". Try a 5-digit ZIP or "City, ST".</p>');
+          return;
+        }
+        return Promise.all(place.states.map(loadState)).then(function (all) {
+          if (token !== pubToken) return;
+          var want = PUB_CATS[cat] || null, rows = [];
+          all.forEach(function (stRows, i) {
+            stRows.forEach(function (r) {
+              if (!want || want.indexOf(r[3]) >= 0) rows.push({ r: r, st: place.states[i], d: km(place.center, [r[5], r[6]]) });
+            });
+          });
+          rows.sort(function (a, b) { return a.d - b.d; });
+          var near = rows.slice(0, PUB_MAP);
+          if (!near.length) {
+            listEl.insertAdjacentHTML("beforeend", '<p class="qld-pub-note">No public listings found near ' + esc(place.label) + ".</p>");
+            return;
+          }
+          var shownN = Math.min(PUB_LIST, near.length);
+          listEl.insertAdjacentHTML("beforeend", '<p class="qld-pub-head">Public listings near ' + esc(place.label) + '</p>' +
+            '<p class="qld-pub-note">Nearest ' + shownN + " of " + Number(rows.length).toLocaleString("en-US") +
+            ". These businesses haven't joined or been reviewed by Quality Living; we show public details only. Listings: Overture Maps and OpenStreetMap.</p>");
+
+          var pinFor = [];
+          near.forEach(function (o, i) {
+            if (!pubLayer) return;
+            var m = L.circleMarker([o.r[5], o.r[6]], { renderer: pubRenderer, radius: 5, color: "#fff", weight: 1, fillColor: PUB_COLOR, fillOpacity: 0.85 })
+              .bindPopup("<strong>" + esc(o.r[0]) + "</strong><br>" + esc([o.r[1], o.st].filter(Boolean).join(", ")) +
+                '<br><em>Public listing, not reviewed</em><br><a href="' + esc(joinLink) + '">Own this business? Claim it</a>')
+              .addTo(pubLayer);
+            pinFor[i] = m;
+          });
+          near.slice(0, PUB_LIST).forEach(function (o, i) {
+            var card = document.createElement("article");
+            card.className = "qld-card is-public";
+            card.innerHTML = publicCardHtml(o.r, o.st);
+            card.addEventListener("click", function (e) {
+              if (e.target.closest("a") || !map || !pinFor[i]) return;
+              map.setView(pinFor[i].getLatLng(), Math.max(map.getZoom(), 12));
+              pinFor[i].openPopup();
+            });
+            listEl.appendChild(card);
+          });
+
+          if (map) {
+            if (place.wholeState) {
+              var b = summary.states[place.states[0]].bbox;
+              map.fitBounds([[b[0], b[1]], [b[2], b[3]]], { padding: [20, 20] });
+            } else {
+              var pts = near.slice(0, PUB_LIST).map(function (o) { return [o.r[5], o.r[6]]; });
+              pts.push(place.center);
+              Object.keys(markers).forEach(function (id) { pts.push(markers[id].getLatLng()); });
+              map.fitBounds(pts, { padding: [30, 30], maxZoom: 12 });
+            }
+          }
+        });
+      });
+    }
 
     function matches(p, q, cat) {
       if (cat && p.cats.indexOf(cat) < 0) return false;
@@ -422,7 +631,7 @@
         shown.forEach(function (p) {
           if (isNaN(p.lat) || isNaN(p.lng)) return;
           var color = (CAT[p.cats[0]] || { color: "#1e3a34" }).color;
-          var m = L.circleMarker([p.lat, p.lng], { radius: 10, color: "#fff", weight: 2, fillColor: color, fillOpacity: p.example ? 0.45 : 0.95, dashArray: p.example ? "3" : null })
+          var m = L.circleMarker([p.lat, p.lng], { pane: "qldPartners", radius: 10, color: "#fff", weight: 2, fillColor: color, fillOpacity: p.example ? 0.45 : 0.95, dashArray: p.example ? "3" : null })
             .bindPopup("<strong>" + esc(p.name) + "</strong>" + (p.example ? " <em>(example listing)</em>" : "") + "<br>" + esc([p.city, p.state].filter(Boolean).join(", ")) + (p.rating ? "<br>★ " + esc(p.rating) + " · " + esc(p.review_count) + " reviews" : ""));
           m.on("click", function () { highlight(p.id, true); });
           m.addTo(layer);
@@ -433,6 +642,7 @@
         else if (pts.length) map.fitBounds(pts, { padding: [40, 40], maxZoom: 11 });
         else map.setView([39.5, -98.35], 4);
       }
+      renderPublic(q, cat);
     }
 
     function highlight(id, scroll) {
@@ -455,13 +665,22 @@
         map = L.map(mapEl, { scrollWheelZoom: false }).setView([39.5, -98.35], 4);
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' +
+            (SHOW_PUBLIC ? ' · Listings: <a href="https://overturemaps.org">Overture Maps</a> &amp; OpenStreetMap' : "")
         }).addTo(map);
+        // Public listings draw on a fast canvas layer; partners sit in their own pane above them
+        pubRenderer = L.canvas({ padding: 0.5 });
+        pubLayer = L.layerGroup().addTo(map);
+        map.createPane("qldPartners").style.zIndex = 450;
         layer = L.layerGroup().addTo(map);
         // Let the page scroll normally; zoom with the +/- buttons or after clicking the map
         map.on("click", function () { map.scrollWheelZoom.enable(); });
         mapEl.addEventListener("mouseleave", function () { map.scrollWheelZoom.disable(); });
       }
+      // Public-listings summary (state counts, ZIP prefixes) loads alongside the partner CSV
+      var summaryReady = SHOW_PUBLIC
+        ? getJson("summary.json").then(function (s) { summary = s; }).catch(function () { summary = null; })
+        : Promise.resolve();
       fetch(root.getAttribute("data-src"), { cache: "no-cache" })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
         .then(function (text) {
@@ -480,9 +699,9 @@
               return p;
             })
             .sort(function (a, b) { return (a.example - b.example) || (b.featured - a.featured) || (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0); });
-          render();
+          summaryReady.then(render);
         })
-        .catch(function () { providers = []; render(); });
+        .catch(function () { providers = []; summaryReady.then(render); });
     });
   }
 

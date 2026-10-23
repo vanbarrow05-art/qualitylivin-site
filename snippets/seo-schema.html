@@ -1,0 +1,65 @@
+<!-- Quality Living structured data (JSON-LD) for search engines.
+     Paste into GHL: Sites -> your website -> Settings -> Tracking Code -> Header.
+     First DELETE the old JSON-LD block there (the one listing concierge@qualityliving.com
+     and +1 (800) 482-9110), so search engines don't get two conflicting versions.
+     Only add a phone, email, address or social profile here once it's real. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://qualitylivin.com/#organization",
+      "name": "Quality Living",
+      "url": "https://qualitylivin.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/328fec49-8a6a-4bed-8d05-8d0703a44445.png"
+      },
+      "description": "Quality Living connects homeowners, short-term rental hosts, and businesses with reviewed local cleaning and property care providers, and publishes the Quality Living magazine."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://qualitylivin.com/#website",
+      "url": "https://qualitylivin.com/",
+      "name": "Quality Living",
+      "publisher": { "@id": "https://qualitylivin.com/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://qualitylivin.com/#webpage",
+      "url": "https://qualitylivin.com/",
+      "name": "Quality Living | Vetted Local Cleaning & Property Services",
+      "description": "Find reviewed local cleaning and property care providers. Share your project and request a virtual estimate for your home, rental, or business.",
+      "isPartOf": { "@id": "https://qualitylivin.com/#website" },
+      "about": { "@id": "https://qualitylivin.com/#organization" },
+      "primaryImageOfPage": "https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/f02fa9cd-e2e5-48f9-b358-73bb9ef592bf.png"
+    },
+    {
+      "@type": "Service",
+      "name": "Cleaning & property care estimate requests",
+      "serviceType": [
+        "Residential house cleaning",
+        "Commercial janitorial services",
+        "Airbnb / short-term rental turnovers",
+        "Move-in / move-out cleaning",
+        "Deep cleaning"
+      ],
+      "provider": { "@id": "https://qualitylivin.com/#organization" },
+      "url": "https://qualitylivin.com/#section-virtual-estimate-flow"
+    },
+    {
+      "@type": "Service",
+      "name": "Service provider membership",
+      "description": "Directory and marketing membership tiers for local service providers.",
+      "provider": { "@id": "https://qualitylivin.com/#organization" },
+      "url": "https://qualitylivin.com/#section-service-provider-portal",
+      "offers": [
+        { "@type": "Offer", "name": "Approved Presence", "price": "400", "priceCurrency": "USD", "description": "Per month" },
+        { "@type": "Offer", "name": "Client Growth", "price": "800", "priceCurrency": "USD", "description": "Per month" },
+        { "@type": "Offer", "name": "Market Leader", "price": "1600", "priceCurrency": "USD", "description": "Per month" }
+      ]
+    }
+  ]
+}
+</script>

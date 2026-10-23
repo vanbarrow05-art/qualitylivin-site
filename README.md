@@ -66,7 +66,11 @@ These are reference only. GHL can't re-import them, and they're not used by the 
 - `code-source/`: the exact code inside each Code element, with its `<style>` and `<script>` included. Edit this version and paste it back into GHL.
 - `page-outline.txt`: every section's text, buttons and images in page order. `NOTES.md` lists what to fix before the draft is published.
 
-`snippets/hero-search-card.html` is the fixed hero search card for the builder page ("Request a Virtual Estimate" opens the GHL form in a popup).
+## `snippets/` (code for the GHL builder page)
+
+- `hero-search-card.html`: hero search card. "Request a Virtual Estimate" scrolls to the inline form, or opens the GHL form in a popup if the inline form isn't on the page.
+- `estimate-form-card.html`: replaces the old 4-step estimate form (which sent nothing) with your GHL form, so submissions become GHL contacts.
+- `seo-schema.html` + `SEO.md`: SEO setup: page titles/descriptions, structured data, and the steps in GHL.
 
 ## Notes
 

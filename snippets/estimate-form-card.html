@@ -1,0 +1,66 @@
+<!-- Estimate form card for the "Request a Virtual Estimate" section (#section-virtual-estimate-flow).
+     Paste into that section's Custom JS/HTML element, replacing the old 4-step form.
+     The old form looked real but sent nothing. This embeds your GHL form
+     "House Cleaning Lead Generation", so every submission becomes a GHL contact
+     and can trigger your workflows. -->
+<style>
+.ql-estimate-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--brand-surface-1, #e8e3d8);
+  box-shadow: 0 10px 30px -10px rgba(30, 58, 52, 0.12), 0 4px 6px -2px rgba(30, 58, 52, 0.05);
+  padding: 28px 28px 20px;
+  font-family: var(--contentfont, "Work Sans"), -apple-system, sans-serif;
+  color: var(--brand-text-main, #1a1a1a);
+}
+.ql-estimate-card-title {
+  margin: 0 0 6px;
+  font-family: var(--headlinefont, "Cormorant Garamond"), Georgia, serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--brand-primary, #1e3a34);
+}
+.ql-estimate-card-desc {
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brand-text-muted, #5c6362);
+}
+.ql-estimate-card iframe {
+  display: block;
+  width: 100%;
+  min-height: 640px;
+  border: none;
+  border-radius: 3px;
+}
+@media (max-width: 768px) {
+  .ql-estimate-card { padding: 22px 16px 14px; }
+}
+</style>
+
+<div class="ql-estimate-card">
+  <h3 class="ql-estimate-card-title">Tell us about your project</h3>
+  <p class="ql-estimate-card-desc">Share what you need and where. Our team reviews every request and follows up with next steps.</p>
+  <iframe
+    src="https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf"
+    id="inline-2CZsk7kdEPJcdbYk33Tf"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="House Cleaning Lead Generation"
+    data-height="undefined"
+    data-layout-iframe-id="inline-2CZsk7kdEPJcdbYk33Tf"
+    data-form-id="2CZsk7kdEPJcdbYk33Tf"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="House Cleaning Lead Generation"></iframe>
+</div>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>

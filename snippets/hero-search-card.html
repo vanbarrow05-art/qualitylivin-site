@@ -1,6 +1,7 @@
 <!-- Hero search card for the GHL builder version of the site.
      Paste into the hero's Custom JS/HTML element, replacing everything in it.
-     "Request a Virtual Estimate" opens the GHL form (House Cleaning Lead Generation) in a popup.
+     "Request a Virtual Estimate" scrolls to the inline form (snippets/estimate-form-card.html) when it is on
+     the page, and otherwise opens the GHL form (House Cleaning Lead Generation) in a popup.
      If scripts fail, the button still opens the form in a new tab. -->
 <style>
 .hospitality-hero-search-card {
@@ -248,7 +249,7 @@
     <div class="ql-form-modal-scroll">
       <iframe
         data-src="https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf"
-        id="inline-2CZsk7kdEPJcdbYk33Tf"
+        id="popup-2CZsk7kdEPJcdbYk33Tf"
         data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
         data-trigger-value=""
@@ -258,7 +259,7 @@
         data-deactivation-value=""
         data-form-name="House Cleaning Lead Generation"
         data-height="undefined"
-        data-layout-iframe-id="inline-2CZsk7kdEPJcdbYk33Tf"
+        data-layout-iframe-id="popup-2CZsk7kdEPJcdbYk33Tf"
         data-form-id="2CZsk7kdEPJcdbYk33Tf"
         data-cookie-consent="true"
         data-cookie-consent-provider="auto"
@@ -294,6 +295,12 @@
 
   function openForm(e) {
     e.preventDefault();
+    // If the estimate section's inline form is on this page, scroll to it instead
+    var inline = document.querySelector('.ql-estimate-card');
+    if (inline) {
+      inline.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     if (!frame.getAttribute('src')) frame.setAttribute('src', frame.getAttribute('data-src'));
     modal.classList.add('is-open');
     document.documentElement.style.overflow = 'hidden';

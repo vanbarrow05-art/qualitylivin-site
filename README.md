@@ -69,7 +69,7 @@ These are reference only. GHL can't re-import them, and they're not used by the 
 
 ## `snippets/` (code for the GHL builder page)
 
-- `hero-search-card.html`: hero search card. "Request a Virtual Estimate" scrolls to the inline form, or opens the GHL form in a popup if the inline form isn't on the page.
+- `hero-search-card.html`: hero search card. "Request an In-Person Estimate" scrolls to the inline form, or opens the GHL form in a popup if the inline form isn't on the page.
 - `estimate-form-card.html`: replaces the old 4-step estimate form (which sent nothing) with your GHL form, so submissions become GHL contacts.
 - `seo-schema.html` + `SEO.md`: SEO setup: page titles/descriptions, structured data, and the steps in GHL.
 
@@ -78,6 +78,7 @@ These are reference only. GHL can't re-import them, and they're not used by the 
 - All CSS is scoped under `.ql`, so it won't affect GHL's own elements on the page.
 - Page order follows the Oct 21, 2026 website brief: hero search → service categories → directory (map + list) → how it works → estimate form → magazine → standards → for providers → closing call to action → footer.
 - The estimate section embeds the live GHL form "House Cleaning Lead Generation" (`2CZsk7kdEPJcdbYk33Tf`), so submissions become GHL contacts. Its look (header image, field colors) is set in GHL's form builder, not here.
+- Commercial walkthrough intake: the local estimate copy asks for the service location, in-house cleaning setup, legal business name, manager details and preferred visit windows through the existing comments field. The owner confirmed that this form routes to the existing Quality Living janitorial pipeline in GHL. Callers submit the form; the janitorial team follows up to confirm the visit. No separate caller booking calendar or new pipeline is needed. See `partners/07-cleaning-walkthrough-intake.md` for the form handoff and optional dedicated fields.
 - The directory (`src/directory.html`) has two layers:
   - **Partners** from `data/providers.csv`: only `joined` rows show, with ratings (source and date), call, booking and estimate buttons. Add a business only after it agrees in writing.
   - **Public listings** from `data/map/`: 46,424 real cleaning businesses (Overture Maps + OpenStreetMap). They show after a search by ZIP, "City, ST", state or place name. They're marked "Public listing · not reviewed" and show only name, type, city, website and "Own this business? Claim it", with no estimate button and no rating. Pins sit at ZIP centres, and phone numbers and street addresses are stripped. Licences are in `data/map/LICENSE.md`. Add `data-public="off"` to the `.qld` element to hide the layer.

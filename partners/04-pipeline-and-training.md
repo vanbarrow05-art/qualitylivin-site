@@ -21,11 +21,21 @@ Create it in GHL → Opportunities → Pipelines. One opportunity per provider c
 ## Lead delivery (how a lead reaches a provider)
 
 1. A customer submits the estimate form on the website (GHL form "House Cleaning Lead Generation").
-2. GHL workflow: match by service + ZIP → pick the provider (rotate fairly between matched partners; send each lead to **one** provider only).
+2. Review the request. For commercial cleaning, collect the location, in-house cleaning setup, legal business name, manager/attendee details and scope using `07-cleaning-walkthrough-intake.md`. Match by actual service + coverage to an eligible provider; a public directory listing alone is not a dispatch agreement. For an in-person estimate, collect the manager's available time slots and submit through the existing janitorial pipeline flow below.
 3. Send the provider an SMS + email with the lead details; mark "free lead #n" until 3.
 4. Text the customer: "Thanks! [Company], a top-rated Quality Living partner, will contact you within [1 business hour]."
 5. 24h later, check in with the provider (Script F); record booked / quoted / no answer / not a fit.
 6. Invalid leads (fake, duplicate, out of area) don't count toward the free 3. Replace them.
+
+## Existing Quality Living janitorial pipeline — customer requests
+
+The owner confirmed that the existing cleaning form routes to this pipeline. **Use that form and preserve the existing routing.** No new customer pipeline or caller booking calendar is needed.
+
+Caller flow: check the prospect website → exact location → in-house/outside cleaning setup → legal business name → manager/attendee details → scope → two available time slots and timezone for an **in-person estimate** → submit the form and verify acknowledgement.
+
+The janitorial team follows up in the existing pipeline, assigns an eligible representative and confirms the visit with the customer's manager. A submitted form is not a confirmed appointment. Keep visit preferences separate from the desired cleaning start date, and record each location/request separately.
+
+The dedicated question list and comments template are in `07-cleaning-walkthrough-intake.md`; the sales and commission scripts are in Script I of `02-call-scripts.md`. Native custom fields can be added later without changing the submission route.
 
 ## Daily routine for a caller
 

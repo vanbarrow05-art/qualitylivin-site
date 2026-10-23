@@ -1,0 +1,316 @@
+QUALITY LIVING — COMPLETE CALLER PLAYBOOK
+Updated October 23, 2026
+
+TWO CALL TYPES
+A. Cleaning customer: a business that needs cleaning. Goal: submit a qualified request for an IN-PERSON ESTIMATE through the existing form. The Quality Living janitorial team confirms the visit through its existing GoHighLevel pipeline.
+B. Cleaning provider: a cleaning company that may accept introductions or buy a directory/marketing package. Goal: establish fit and obtain an agreed next step. The $400/$800/$1,600 prices are marketing-service fees, not customer cleaning prices.
+
+THE SHORT DESCRIPTION
+“Quality Living helps customers request local cleaning services and helps participating service businesses handle inquiries, booking and marketing.”
+Describe a provider as participating only when it has actually agreed. Do not claim nationwide dispatch, a completed magazine launch, verified five-star status or existing customer demand without evidence.
+
+FREEBIES AND INTRODUCTORY OFFERS
+
+1. THREE FREE ELIGIBLE JANITORIAL INTRODUCTIONS
+For an eligible provider: three real customer inquiries matched to its services and coverage. No lead or referral fee on those three, no card and no automatic subscription. They are inquiries, not guaranteed appointments or paying clients. Availability depends on real requests. Duplicates, invalid or out-of-scope deliveries are reviewed and do not consume the valid introductory allowance.
+
+2. COMPLIMENTARY PRIVATE WEBSITE PREVIEW
+A business-specific proposed design, free to review and with no obligation. Say it is already built only when that business's real draft exists, opens and has been reviewed. Otherwise offer to prepare it. Domain registration, publishing, hosting, integrations, continuing edits and management are separate paid scope unless expressly included.
+
+3. OPTIONAL LAUNCH FREEBIE — SHORT WEBSITE / INQUIRY REVIEW
+Recommended additional offer: a brief review with three practical improvement ideas for the business's website, inquiry response or booking flow. Owner/fulfillment team must adopt this offer before the caller promises delivery. No account password or purchase required for an initial public-site review.
+
+IN-PERSON ESTIMATES
+The customer campaign offers an in-person estimate request. The fee, if any, for a specific visit has not been set in this playbook. Do not advertise a free visit, free cleaning, a free month of service or a waived setup charge unless that exact offer has been approved and can be fulfilled.
+
+PACKAGE CARD — PRICES AND PROPOSED DELIVERY SCOPE
+Use the written proposal for exact limits, ownership, usage, cancellation and payment terms. The owner confirmed 3–5 ORIGINAL social posts PER WEEK, adapted across supported connected profiles.
+
+DIRECTORY PRESENCE — $400/MONTH
+- Approved enhanced profile, services, service area, authorized portfolio and review-source links.
+- Inquiry routing and supported booking/contact link.
+- Profile copy/basic directory-page optimization, monthly updates and activity summary.
+- Assigned Partnerships Manager.
+- Does not include a complete managed website, AI front desk, original social production, ad budget or guaranteed customer count.
+One-line pitch: “A managed business presence with a clear route for people to contact you.”
+
+AI AUTOPILOT & GROWTH — $800/MONTH
+- Proposed scope: one business/location, managed website up to five standard pages.
+- One inbound AI receptionist, one inbox and one booking calendar; approved inquiry responses, reminders and follow-up with human escalation.
+- Three original content pieces per week, adapted for up to four supported authorized profiles.
+- One service-page SEO improvement and two small site-content edits per month.
+- Approved campaign management within the written scope; media spend separate.
+- Monthly reporting and manager review.
+One-line pitch: “Your website, inquiry handling, booking follow-up and weekly content managed together.”
+
+SCALE & MEDIA PARTNER — $1,600/MONTH
+- Proposed scope: up to two locations/territories, website up to ten standard pages, up to three calendars and two inboxes.
+- Expanded approved AI/follow-up, repeat-booking and review-request workflows.
+- Five original content pieces per week, adapted for up to six supported authorized profiles.
+- Four short video edits per month from supplied/licensed assets; these may be part of the weekly content allowance.
+- Two service pages/articles per month and one campaign landing page per quarter.
+- Up to two concurrent campaign structures with separate media funding.
+- Dashboard, biweekly review and priority business-hours support.
+- Any magazine listing/placement requires a confirmed issue, size, deadline and publication terms. Do not guarantee editorial endorsement or readership.
+One-line pitch: “More content, locations, automation and campaign support for a business ready to use the extra capacity.”
+
+REFERRAL-ONLY — A FIXED AGREED RATE, NORMALLY 10–20%
+After the free three, the provider must choose and accept the written terms before chargeable referrals. Proposed service levels: 10% introduction/handoff; 15% qualification and estimate scheduling/follow-up; 20% an explicitly defined enhanced acquisition/follow-up scope. These are proposed tiers, not automatic billing rules.
+Base the agreed fee on eligible revenue actually collected for attributed work. Define excluded amounts, refunds/chargebacks, what jobs count, and duration/cap. Do not assume lifetime commission. The pilot recommendation is the first completed paid job unless a different recurring window is expressly agreed.
+Normally choose subscription OR referral-only for new work. Do not silently stack both. Declining a subscription is not agreement to a referral fee.
+
+ADS AND GUARANTEES
+Ad spend is additional and approved before launch. Earlier price direction was from $75/day in optional media; the exact budget and management scope belong in the proposal. Do not describe that as included in $800 or $1,600.
+The earlier $800 “three attributable paying clients / 50% package-fee refund” provision remains a draft pending final definitions, eligibility, measurement and refund terms. It is not an approved caller promise. No premium-tier client guarantee has been specified. Do not promise sales, SEO rank, universal integrations or platform coverage.
+
+
+SCRIPT A — BUSINESS CUSTOMER, IN-PERSON CLEANING ESTIMATE
+
+BEFORE THE CALL
+Check the prospect's official website for the correct location, business name and public manager information. Confirm uncertain details on the call; website opening hours are not proof a manager can meet. Open the existing cleaning form:
+https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf
+No separate caller booking calendar is required. The owner says this form goes to the existing Quality Living janitorial pipeline in GoHighLevel.
+
+GATEKEEPER
+“Hi, I'm [name] with Quality Living. Who handles cleaning arrangements for your [location] property?”
+If asked why: “I'm calling to see whether an in-person cleaning estimate would be useful and, if so, when the manager could meet someone on-site.”
+
+OPENING TO THE MANAGER
+“Hi [manager], I'm [name] with Quality Living. We're helping businesses request in-person cleaning estimates. Are you considering additional cleaning help or a comparison for this location?”
+
+QUALIFY IN THIS ORDER
+1. “Which location needs cleaning? Can I confirm the street address, suite, city, state and ZIP?”
+2. “Do you currently have in-house cleaners? Do you also use an outside cleaning company?”
+3. “What legal business name should we put on the estimate? Is the name on the building different?”
+4. “Who manages cleaning at that location? What are their full name, role and best work contact details? Is anyone else involved in approving the work?”
+5. “Who would meet the representative on-site?”
+6. “What would you like help with, approximately how large is the space, and how often is cleaning needed?”
+
+ASK FOR TIME SLOTS
+“What two dates and time slots would work for [manager] to meet someone at the property for an in-person estimate? What timezone is the property in?”
+Read back date, start/end time and timezone. Record whether the manager personally confirmed availability or somebody else supplied it.
+
+CLOSE
+“I'll submit your details and those time slots to our janitorial team. They'll contact [manager] to confirm who is coming and the exact time. What's the best work phone or email for that confirmation?”
+
+SUBMIT
+Use the customer's actual contact details. In Additional Details or Comments, include the service location; in-house/outside cleaning; legal name/DBA; manager/approver and attendee; scope; both available time slots/timezone; desired cleaning start date if known; preferred confirmation contact; caller and call date.
+Submit once and check acknowledgement. Do not fill missing required fields with fake information. If the submission result is uncertain, check before retrying to avoid duplicates.
+
+AFTER ACKNOWLEDGEMENT
+“Your request has been submitted. Our janitorial team will follow up to confirm the in-person estimate. The visit time isn't confirmed yet.”
+
+CUSTOMER VOICEMAIL
+“Hi [name], this is [rep] with Quality Living. I'm calling about arranging an in-person cleaning estimate for your [location] property, if that would be useful. Please call me at [actual callback number]. Again, [rep] with Quality Living.”
+
+
+CUSTOMER REBUTTALS
+
+1. “We already have in-house cleaners.”
+“Understood. Is there work your team would like help with—deep cleaning, floors or occasional coverage? If everything is covered, that's fine.”
+
+2. “We already use a cleaning company.”
+“Are you happy with the coverage, or would a comparison or backup option be useful?”
+
+3. “We're under contract.”
+“When is your next review or renewal? If you'd like, I can record a follow-up for that time.”
+Do not encourage breaking an existing agreement or schedule a callback they declined.
+
+4. “Just give me a price over the phone.”
+“The provider needs to see the space and confirm the scope and frequency to prepare the cleaning estimate. What times could your manager meet on-site?”
+
+5. “Is the estimate free?”
+“Let me have the team confirm whether there's any visit charge before you agree to the appointment.”
+If a specific approved no-charge estimate offer exists, state its actual conditions instead.
+
+6. “What is your commission?”
+“Quality Living may be paid by the cleaning provider through a marketing agreement or an agreed referral fee. The provider supplies your cleaning quote. Our team will explain any charge to you for the estimate or the work before you agree.”
+
+7. “What percentage?”
+“Our referral-only arrangements can be 10% to 20% of eligible revenue the provider collects, depending on the agreed service. I'll have the team confirm the terms for the provider handling your request.”
+
+8. “Does that make my cleaning more expensive?”
+“I can't promise that our arrangement has no effect on a provider's pricing. You'll receive a quote you can review and compare before approving the work.”
+
+9. “Are you the cleaning company?”
+“Quality Living coordinates the request. The team will identify the provider and representative before confirming the visit. That provider quotes and performs the cleaning under its agreement with you.”
+
+10. “Who exactly is coming? Are they insured?”
+“The janitorial team will confirm the representative, company and any required insurance details before the visit. I don't want to give you an unconfirmed name.”
+
+11. “The manager isn't here.”
+“Who should I speak with, and when is a good time to reach them? I can submit a request for the team to follow up; I won't mark a visit confirmed.”
+
+12. “Can you guarantee Tuesday at 10?”
+“I'll include Tuesday at 10, with your timezone, as your preferred slot. The janitorial team will confirm whether they can attend.”
+
+13. “We don't have time for a visit.”
+“Is there a better week or a short window when the manager is available? If now isn't suitable, we can leave it for a time you choose.”
+
+14. “Why do you need our legal business name?”
+“So the estimate is addressed to the right business. If you need to confirm it, I can mark it for follow-up.”
+
+15. “Just send information.”
+“Of course. Is your main need routine cleaning, a deep clean or occasional coverage? Where would you like the requested information sent?”
+
+16. “Does submitting this commit us to anything?”
+“It's a request for an estimate. Cleaning service isn't authorized by submitting the form. Any visit charge or service terms should be explained before you agree.”
+
+17. “How did you get my number?”
+“I found your published business contact on [actual source].”
+Use the real source. If it came from a referral or another permitted source, say that accurately.
+
+18. “Not interested / stop calling.”
+“Understood. I'll mark that. Thank you.”
+Stop the pitch and record the opt-out.
+
+
+SCRIPT B — RECRUIT A CLEANING PROVIDER / SELL PACKAGES
+
+BEFORE THE CALL
+Check the actual business, services, coverage and published contact. Review any claimed rating at its real source. Know whether a business-specific website preview exists. Don't say there are waiting customers unless there is an actual suitable request.
+
+GATEKEEPER
+“Hi, I'm [name] with Quality Living. Who handles new customer opportunities or marketing for [business]?”
+
+OPENING
+“Hi [name], I'm with Quality Living. We're inviting cleaning companies in [area] to try three matched customer inquiries at no charge—no card and no automatic subscription. Are you taking on new accounts?”
+
+QUALIFY
+“What type of work would you like more of?”
+“Which cities or ZIP codes can you actually cover?”
+“How much new work could you take on?”
+“Who handles estimates, and how do new inquiries reach them?”
+
+EXPLAIN THE FREE THREE
+“We match real inquiries to your services and area as suitable requests come in. The first three eligible introductions have no lead or referral fee. You quote the work and choose what to accept; an inquiry isn't a guaranteed job. After those three, you can stop or choose an ongoing arrangement.”
+
+WEBSITE PREVIEW — ALREADY BUILT AND CHECKED
+“We put together a complimentary private website preview for [business]. It hasn't been published and there's no obligation. Could I show you?”
+
+WEBSITE PREVIEW — NOT BUILT YET
+“We can put together a complimentary website preview showing your services and a clear estimate-request flow. Would that be useful?”
+
+MATCH ONE PACKAGE TO THEIR NEED
+“If you mainly want a managed directory presence, that's $400 a month. If you need your website, AI inquiry handling, follow-up and three original posts a week managed together, the $800 option is the starting point. The $1,600 option expands the locations, content and automation, with five original posts a week. Advertising spend is separate.”
+Do not read every feature unless asked. Ask: “Which matters most right now—getting found, missed inquiries, follow-up, booking or content?”
+
+REFERRAL-ONLY ALTERNATIVE
+“If you'd prefer referrals without a monthly marketing package, we can discuss a fixed rate, normally 10% to 20% of eligible revenue actually collected from additional referred work. We agree the rate, covered work and time period before any chargeable referral.”
+
+CLOSE
+“Would a short demonstration with our Partnerships Manager be useful? We can show the preview or workflow and the exact written scope.”
+If the approved manager calendar is available, offer its actual times. Otherwise record the requested callback windows for the manager to confirm. The cleaning-customer janitorial form is not automatically a provider-package application; use the provider process designated by the manager.
+
+PROVIDER VOICEMAIL
+“Hi [name], this is [rep] with Quality Living. I'm calling about a three-free-introduction program for cleaning companies in [area]. I'd like to check whether you're taking on new accounts. Please call me at [actual callback number].”
+
+
+PROVIDER / PACKAGE REBUTTALS
+
+1. “What's the catch with the free leads?”
+“The first three eligible introductions have no fee, no card and no automatic subscription. We hope they're useful enough that you'll consider an ongoing arrangement, but that choice is yours.”
+
+2. “Are these actual inquiries or just a list of businesses?”
+“An introductory lead is a real customer request matched to your services and area. A directory prospect list doesn't count as customer leads.”
+
+3. “Are the leads exclusive?”
+“We'll confirm the sharing or exclusivity terms before you accept the arrangement. I won't promise exclusivity unless it's included in writing.”
+
+4. “Are they guaranteed appointments?”
+“No. An inquiry is different from a confirmed appointment and a paying client. We'll state exactly which of those is being provided.”
+
+5. “What happens with duplicates or bad leads?”
+“We review duplicates, invalid contacts and out-of-scope requests against the agreed criteria. Invalid deliveries don't consume your three valid introductions.”
+
+6. “When will I receive them?”
+“As suitable customer requests become available in your service area. We aren't promising a date without actual demand.”
+
+7. “What commission do you charge?”
+“Nothing on the first three eligible introductions. After that, referral-only terms use a fixed agreed rate, normally 10% to 20% of eligible collected revenue, defined in writing before chargeable referrals.”
+
+8. “Twenty percent is too much.”
+“Let's compare the services included and your margins. We can discuss a different scope or the fixed monthly option. You choose the terms before accepting chargeable referrals.”
+
+9. “Is that on every job forever?”
+“No lifetime fee is assumed. The agreement must say which jobs count and for how long. We can start with the first completed paid job and define any recurring arrangement separately.”
+
+10. “Do I pay both commission and the monthly package?”
+“The starting proposal is a monthly package or referral-only for new work. Any separate or earlier referral obligation must be disclosed; we don't silently add both.”
+
+11. “Why $400 when Google lists me for free?”
+“Google is still useful. Our paid scope is the managed profile, service details, inquiry route, updates and reporting. We should show you how those fit your business before asking you to pay.”
+
+12. “I already have a website.”
+“Then let's check whether anything needs improvement—missed inquiries, booking, follow-up or content. If your current setup covers the need, we won't pretend you need a replacement.”
+
+13. “Why pay $800?”
+“It's a managed service combining the website, approved AI inquiry handling, follow-up, booking and three original posts each week. The demonstration should show exactly what work we'd take on for you.”
+
+14. “Why is $1,600 twice the price?”
+“It covers a broader scope: additional location support, more workflows, five weekly original pieces, video edits and more campaign/content work. It's useful only if your business needs and can use that extra delivery.”
+
+15. “Why would posting bring me cleaning jobs?”
+“Posting supports visibility and credibility; it doesn't guarantee jobs. We look at inquiries, estimates and paid outcomes as well as content activity.”
+
+16. “Does that include advertising?”
+“The media budget is separate. The proposal specifies the management work and the amount, if any, you approve for ads.”
+
+17. “Is the website really free?”
+“The preview is free to review. Publishing, hosting and ongoing management follow the selected written offer. We'll show those costs before you choose.”
+
+18. “You said you already built it—where is it?”
+If ready: “Here's the actual private preview.”
+If not: “I need to correct that: we can prepare a preview, but this business's draft isn't ready yet.”
+The caller must never use the already-built opening without a reviewed preview URL.
+
+19. “Who owns the website if I leave?”
+“We'll specify domain ownership, content rights, export/handover and ongoing hosting in writing before you enroll. I won't guess the transfer terms.”
+
+20. “Can I cancel whenever I want?”
+“The written offer will state the term, notice, cancellation and any setup or usage charges. I won't promise month-to-month cancellation unless that's the actual agreement.”
+
+21. “Do you guarantee customers or refunds?”
+“Only an expressly stated written performance commitment applies. I can't promise a fixed number of paying customers from the introductory leads.”
+The draft $800 guarantee is not for live use until finalized.
+
+22. “Will your AI quote wrong prices or make promises?”
+“We scope approved responses and escalation with you. It should gather details and assist with booking, while pricing and unusual requests follow your rules and human approval.”
+
+23. “Can it work with our booking system?”
+“We'll check your specific system and access before promising an integration. A supported booking link may be the right option if a direct connection isn't available.”
+
+24. “Do you post on every platform?”
+“We adapt the agreed number of original pieces for supported profiles you authorize. We'll list the actual platforms and formats in the proposal.”
+
+25. “We're happy with our agency.”
+“Is there a gap you'd still like solved? If not, there's no reason to replace something that works.”
+
+26. “You don't have results or reviews yet.”
+“We should show only real examples and documented results. The free introductions and private preview let you evaluate the work without pretending we have evidence we don't.”
+
+27. “Does paying mean I'm a verified five-star partner?”
+“No. Payment, partnership acceptance and review verification are separate. Any published rating must have a real source and accurate status.”
+
+28. “Send me something / I need to think.”
+“Of course. Which option should I summarize, and would you like a follow-up at a time you choose?”
+
+29. “We're too busy.”
+“Should we pause introductions or focus only on a service and area where you have capacity?”
+
+30. “Not interested / don't call.”
+“Understood. I'll mark that. Thank you.”
+Do not turn refusal into referral enrollment.
+
+
+NATIONAL / FRANCHISE ROUTING
+“I'm [name] with Quality Living. We're developing a cleaning introduction program in selected markets. Who handles channel partnerships or approved introductions to local operators?”
+If local offices decide: “Is there an approved way to approach the relevant branch or franchise owner?”
+Do not represent a corporate contact as a signed national partnership.
+
+TLG / APPOINTMENT-SUPPLIER ROUTING
+“We're evaluating a small janitorial appointment pilot. How do you qualify appointments, document the customer's request, define territory/exclusivity, handle cancellations and authorize introductions to our participating providers?”
+Request written scope and permission before any volume commitment or resale assumption.
+
+REP RULES FOR DAY ONE
+Listen after each question. Sell one relevant next step. Separate customer cleaning quotes from provider marketing fees. Check claims before saying them. Treat requested time slots as preferences until the janitorial team confirms. Record refusals accurately. Ask the manager to resolve unknown terms instead of improvising. No real or test form submission, call, email, charge or appointment was created by this playbook.

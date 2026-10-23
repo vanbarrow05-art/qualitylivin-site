@@ -89,3 +89,17 @@ We now serve [city, state]. Add it to the SEO title/description in snippets/SEO.
 ```
 On the live site [url], [describe what's wrong, attach a screenshot]. Compare with dist/preview.html, find the cause (GHL wrapper styles, sticky/overflow, script order) and fix it in src/. Tell me exactly what to re-paste in GHL.
 ```
+
+CLEANING CUSTOMER FORM AND IN-PERSON ESTIMATE UPDATE — OCTOBER 23
+
+The owner clarified the existing workflow: callers submit the House Cleaning Lead Generation form (2CZsk7kdEPJcdbYk33Tf); it routes to the existing Quality Living janitorial pipeline in GoHighLevel. The janitorial team confirms the representative and appointment. Preserve that form and routing. Do not create a second pipeline or require a separate caller booking calendar.
+
+Before calling, check the prospect's official website and confirm uncertain information. Ask in this order: exact service location; in-house cleaners and any outside company; legal business name and DBA; manager/approver names and work contact details; who can meet on-site; cleaning scope; two dates/time slots and timezone when that manager is available for an IN-PERSON ESTIMATE. These are customer availability windows, not promises that our representative is booked.
+
+Use partners/07-cleaning-walkthrough-intake.md and Script I in partners/02-call-scripts.md. Until native fields exist, put the complete structured summary in the existing Additional Details or Comments field. Use the customer's actual contact details, submit once and check acknowledgement. Do not describe form submission as appointment confirmation or make up test leads to trigger the live pipeline.
+
+If adding dedicated native fields in the correct GHL account, inspect and preserve current field IDs, contact mappings, assignments, workflow triggers and the existing janitorial pipeline. Show business fields conditionally and keep preferred cleaning date separate from estimate visit slots. Keep different site requests separate. No new calendar configuration is required for this change.
+
+Commission rebuttal: the customer may be told Quality Living can be paid by providers through agreed marketing or referral arrangements; confirm the actual provider terms and any charge to the customer before agreement. For provider recruitment, the first three eligible introductions are fee-free; later referral-only rates are fixed by written agreement, normally 10–20% of eligible collected revenue, with scope/duration defined. Declining a package is not consent to commission. Do not promise a free visit or that commission cannot affect price without supporting terms.
+
+Verify the form still submits to the existing janitorial pipeline and retains the full notes/time slots. Check residential/business branching, unknown legal name, unavailable manager, timezone and duplicate handling when native fields change. Rebuild the local site; report separately what is local, changed in GHL and published. Remove the temporary comments instruction only when dedicated fields are live.

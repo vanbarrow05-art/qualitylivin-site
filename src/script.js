@@ -23,9 +23,17 @@
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     }
-    toggle.addEventListener("click", function () { set(!nav.classList.contains("is-open")); });
+    toggle.addEventListener("click", function () {
+      var open = !nav.classList.contains("is-open");
+      set(open);
+      if (open) { var first = nav.querySelector(".ql-nav-links a"); if (first) first.focus(); }
+    });
     nav.querySelectorAll(".ql-nav-links a").forEach(function (a) {
       a.addEventListener("click", function () { set(false); });
+    });
+    // Escape closes the menu and returns focus to the menu button
+    nav.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("is-open")) { set(false); toggle.focus(); }
     });
   }
 
@@ -130,7 +138,11 @@
     var unpinned = false;
     var ticking = false;
 
-    if (reduced) section.classList.add("ql-static");
+    // The pinned animation runs only on wider screens with motion allowed. Otherwise (and without
+    // JavaScript) the CSS shows a swipeable row of cards with the issue link visible.
+    var wide = window.matchMedia ? window.matchMedia("(min-width: 761px)") : null;
+    var animOn = false;
+    function wantAnim() { return !reduced && (!wide || wide.matches); }
 
     // Fixed pseudo-random numbers so the scatter looks the same on every visit
     function rand(i, k) {
@@ -172,7 +184,7 @@
       });
     }
 
-    var L = layouts();
+    var L = [];
     var stops = [["scatter", 0], ["line", 0.25], ["circle", 0.5], ["arc", 0.75]];
 
     function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
@@ -180,7 +192,6 @@
     function mix(a, b, t) { return a + (b - a) * t; }
 
     function progress() {
-      if (reduced) return 1;
       var r = section.getBoundingClientRect();
       var vh = window.innerHeight;
 
@@ -203,6 +214,7 @@
 
     function render() {
       ticking = false;
+      if (!animOn) return;
       var p = progress();
       var k = 0;
       while (k < stops.length - 1 && p > stops[k + 1][1]) k++;
@@ -232,24 +244,48 @@
     }
 
     function onScroll() {
-      if (!ticking) {
-        ticking = true;
-        window.requestAnimationFrame(render);
+      if (!animOn || ticking) return;
+      // No work while the section is well off screen
+      var r = section.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
+      ticking = true;
+      window.requestAnimationFrame(render);
+    }
+
+    function setMode() {
+      var on = wantAnim();
+      if (on === animOn) return;
+      animOn = on;
+      section.classList.toggle("ql-anim", on);
+      if (on) {
+        L = layouts();
+        render();
+      } else {
+        unpinned = false;
+        section.classList.remove("is-arc", "ql-unpinned");
+        cards.forEach(function (c) { c.style.transform = ""; c.style.zIndex = ""; c.classList.remove("is-flipped"); });
+        intro.style.opacity = "";
+        hint.style.opacity = "";
+        outro.style.opacity = "";
+        outro.classList.remove("is-visible");
       }
     }
 
     // Tap to flip on touch screens (hover does it on desktop)
     cards.forEach(function (card) {
       card.addEventListener("click", function (e) {
-        if (!section.classList.contains("is-arc")) return;
+        if (animOn && !section.classList.contains("is-arc")) return;
         if (e.target.closest("a")) return;
         card.classList.toggle("is-flipped");
       });
     });
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", function () { L = layouts(); onScroll(); });
-    render();
+    window.addEventListener("resize", function () {
+      setMode();
+      if (animOn) { L = layouts(); onScroll(); }
+    });
+    setMode();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

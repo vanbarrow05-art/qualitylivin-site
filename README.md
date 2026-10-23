@@ -76,7 +76,9 @@ These are reference only. GHL can't re-import them, and they're not used by the 
 ## Notes
 
 - All CSS is scoped under `.ql`, so it won't affect GHL's own elements on the page.
-- Page order follows the Oct 21, 2026 website brief: hero search → service categories → directory (map + list) → how it works → estimate form → magazine → standards → for providers → closing call to action → footer.
+- Page order: hero search → three service cards → directory (map + list) → how it works (3 steps) → in-person estimate form → magazine (gallery + issue feature) → standards → customer FAQ → for providers → closing call to action → footer. The top menu is Services · How It Works · Magazine · For Providers; Standards, FAQ and Contact are in the footer.
+- Magazine gallery: on screens wider than 760px with motion allowed, script.js adds .ql-anim for the pinned scroll animation (280vh). Phones, reduced motion and no-JavaScript get a swipeable row with the issue link visible.
+- `dist/preview.html` carries the page metadata plus `noindex` (draft only). On the live site, set the title, description, canonical and share image in GHL (snippets/SEO.md).
 - The estimate section embeds the live GHL form "House Cleaning Lead Generation" (`2CZsk7kdEPJcdbYk33Tf`), so submissions become GHL contacts. Its look (header image, field colors) is set in GHL's form builder, not here.
 - Commercial walkthrough intake: the local estimate copy asks for the service location, in-house cleaning setup, legal business name, manager details and preferred visit windows through the existing comments field. The owner confirmed that this form routes to the existing Quality Living janitorial pipeline in GHL. Callers submit the form; the janitorial team follows up to confirm the visit. No separate caller booking calendar or new pipeline is needed. See `partners/07-cleaning-walkthrough-intake.md` for the form handoff and optional dedicated fields.
 - The directory (`src/directory.html`) has two layers:

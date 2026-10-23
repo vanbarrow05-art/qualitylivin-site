@@ -1,0 +1,46 @@
+<style>
+.hospitality-hero-title {
+  font-family: var(--headlinefont);
+  font-weight: 600;
+  font-size: clamp(48px, 6.2vw, 96px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  box-sizing: border-box;
+}
+.hospitality-hero-title .accent {
+  position: relative;
+  display: inline-block;
+  color: var(--white);
+  padding-bottom: 0.15em;
+}
+.hospitality-hero-title .accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.08em;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand-accent) 0%, rgba(212, 175, 55, 0.4) 100%);
+}
+@media (max-width: 768px) {
+  .hospitality-hero-title {
+    font-size: clamp(38px, 9.5vw, 54px);
+    line-height: 1.15;
+    padding: 0 4px;
+  }
+  .hospitality-hero-title .accent::after {
+    height: 3px;
+  }
+}
+</style><div style="width:100%;max-width:100%;overflow:hidden;box-sizing:border-box;">
+  <h1 class="hospitality-hero-title animate__animated animate__fadeInUp">
+    Better spaces start with<br>the right <span class="accent">people</span>
+  </h1>
+</div>

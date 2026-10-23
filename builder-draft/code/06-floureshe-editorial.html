@@ -1,0 +1,220 @@
+<style>
+.floureshe-editorial-ticker-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  contain: content;
+  position: relative;
+  padding: 16px 0;
+  background: var(--brand-surface);
+  border-top: 1px solid rgba(197, 160, 89, 0.3);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: 6px;
+}
+.floureshe-editorial-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: flouresheMarquee 48s linear infinite;
+}
+.floureshe-editorial-ticker-track:hover {
+  animation-play-state: paused;
+}
+@keyframes flouresheMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.floureshe-editorial-card {
+  display: inline-flex;
+  flex-direction: column;
+  justifyContent: space-between;
+  width: 380px;
+  min-width: 380px;
+  margin: 0 16px;
+  padding: 24px 28px;
+  background: #FCF9F2;
+  border: 1px solid rgba(30, 58, 52, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(30, 58, 52, 0.04);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+.floureshe-editorial-card:hover {
+  border-color: var(--brand-accent);
+  box-shadow: 0 10px 26px -8px rgba(30, 58, 52, 0.12);
+  transform: translateY(-2px);
+}
+.floureshe-editorial-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.floureshe-editorial-tag {
+  font-family: var(--headlinefont), Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--brand-accent);
+  letter-spacing: 0.04em;
+}
+.floureshe-editorial-category {
+  font-family: var(--contentfont), sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand-text-muted);
+}
+.floureshe-editorial-title {
+  font-family: var(--headlinefont), Georgia, serif;
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--brand-primary);
+  margin: 0 0 16px 0;
+}
+.floureshe-editorial-link-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(30, 58, 52, 0.08);
+  padding-top: 12px;
+}
+.floureshe-editorial-author {
+  font-family: var(--contentfont), sans-serif;
+  font-size: 12px;
+  color: var(--brand-text-muted);
+}
+.floureshe-editorial-btn {
+  font-family: var(--contentfont), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-primary);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+.floureshe-editorial-btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--brand-accent);
+  transform: scaleX(0.7);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.floureshe-editorial-card:hover .floureshe-editorial-btn::after {
+  transform: scaleX(1);
+}
+@media (max-width: 768px) {
+  .floureshe-editorial-card {
+    width: 290px;
+    min-width: 290px;
+    margin: 0 10px;
+    padding: 18px 20px;
+  }
+  .floureshe-editorial-title {
+    font-size: 17px;
+  }
+  .floureshe-editorial-ticker-track {
+    animation-duration: 32s;
+  }
+}
+</style><div class="floureshe-editorial-ticker-wrapper">
+  <div class="floureshe-editorial-ticker-track">
+    <!-- SET 1 -->
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Architecture</span>
+      </div>
+      <div class="floureshe-editorial-title">Restoring the Palladian Manor: Precision Lime Plaster & Antique Bronze</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Oxfordshire Estate</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Master Provider</span>
+      </div>
+      <div class="floureshe-editorial-title">The Guild of English Cabinetmakers on Bespoke Kitchen Joinery</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Provider Feature</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Equestrian Living</span>
+      </div>
+      <div class="floureshe-editorial-title">Acreage Stewards: Natural Stone Landscaping & Native Meadow Design</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Surrey Downs</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Fine Mechanicals</span>
+      </div>
+      <div class="floureshe-editorial-title">Geothermal Integration in 18th Century Solid Masonry Residences</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Technical Monograph</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+    <!-- DUPLICATE FOR SEAMLESS LOOP -->
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Architecture</span>
+      </div>
+      <div class="floureshe-editorial-title">Restoring the Palladian Manor: Precision Lime Plaster & Antique Bronze</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Oxfordshire Estate</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Master Provider</span>
+      </div>
+      <div class="floureshe-editorial-title">The Guild of English Cabinetmakers on Bespoke Kitchen Joinery</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Provider Feature</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Equestrian Living</span>
+      </div>
+      <div class="floureshe-editorial-title">Acreage Stewards: Natural Stone Landscaping & Native Meadow Design</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Surrey Downs</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+    <div class="floureshe-editorial-card">
+      <div class="floureshe-editorial-card-top">
+        <span class="floureshe-editorial-tag">Floureshé No. 04</span>
+        <span class="floureshe-editorial-category">Fine Mechanicals</span>
+      </div>
+      <div class="floureshe-editorial-title">Geothermal Integration in 18th Century Solid Masonry Residences</div>
+      <div class="floureshe-editorial-link-wrap">
+        <span class="floureshe-editorial-author">Technical Monograph</span>
+        <a href="#floureshe-editorial" class="floureshe-editorial-btn">Read Article</a>
+      </div>
+    </div>
+  </div>
+</div>

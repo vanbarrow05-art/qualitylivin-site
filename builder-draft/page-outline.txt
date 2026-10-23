@@ -1,0 +1,133 @@
+==================== section-main-navigation (main-navigation) ====================
+[NAV MENU] Home | Find a Service | Request an Estimate | For Service Providers | FLOURESHÉ Magazine | Our Standards | Contact
+[BUTTON] Find a Service  (url {'url': '#section-service-discovery-engine', 'newTab': False})
+
+==================== section-hospitality-hero (hospitality-hero) ====================
+PREMIUM LOCAL SERVICES
+[CUSTOM CODE → code/01-hospitality-hero.html, 1,174 chars]
+Explore local service options, share your project, and request an estimate for your home, rental, or business.
+[CUSTOM CODE → code/02-hospitality-hero.html, 6,814 chars]
+Local service discovery • Project-based requests • Provider-reviewed estimates
+
+==================== section-iaUaahOIvg (Section) ====================
+[CUSTOM CODE: EMPTY — nothing saved in this element]
+
+==================== section-service-discovery-engine (service-discovery-engine) ====================
+GEOGRAPHIC DISPATCH & NETWORK DIRECTORY
+## Discover Verified Professionals
+Explore real-time hospitality-grade trade partners across prime residential estates and commercial facilities. Each provider holds rigorous background credentials, comprehensive indemnity, and verified performance logs.
+SPONSORED PARTNER  •  ★ VERIFIED GOLD SEAL
+## Belgravia Housekeeping & Estate Sanitization
+Residential Cleaning & Turnover  |  ★ 4.98 (164 verified reviews on Guild & Trustmark)
+White-glove turn services, biocidal fabric sanitization, and bespoke linen management curated for diplomatic residences and high-yield STR properties.
+• 28-point background vetting & biometric security cleared
+• £10M comprehensive public and property indemnity bond
+• Guaranteed 3-hour dispatch window with live status tracker
+[BUTTON] Request Direct Dispatch  (url {'url': '#section-virtual-estimate-flow', 'newTab': False})
+★ VERIFIED GOLD SEAL  •  PRIORITY FACILITY FLEET
+## Apex Mechanical & Commercial HVAC
+Commercial Facilities & HVAC  |  ★ 4.95 (92 verified reviews on VerifiedPro)
+Certified mechanical plant maintenance, airflow balance certification, and chilled-water diagnostics for luxury boutique hotels and multi-unit residences.
+• Gas Safe, REFCOM, and CIBSE accredited mechanical engineers
+• Guaranteed 60-minute triage for mission-critical chiller outages
+• Immutable digital service logging with sensor telemetry
+[BUTTON] View Profile & Dispatch  (url {'url': '#section-virtual-estimate-flow', 'newTab': False})
+ZONE CONCIERGE & UNLISTED POSTCODES
+## No Approved Provider in Your Exact Perimeter?
+We intentionally maintain an uncompromising vetting bar, approving fewer than 4% of applicants. If your estate sits outside current designated corridors, our partner desk will expedite dedicated onboarding within 48 hours.
+[BUTTON] Help Me Find a Provider  (url {'url': '#section-service-provider-portal', 'newTab': False})
+[CUSTOM CODE → code/04-service-discovery-engine.html, 14,175 chars]
+
+==================== section-virtual-estimate-flow (virtual-estimate-flow) ====================
+PRIVACY-PRESERVED PROPERTY INTAKE
+## Request a Virtual Estimate
+Skip intrusive contractor walk-throughs and unsolicited sales calls. Share your property specifications and high-resolution video walkthrough through our secure 4-step concierge workflow.
+• Zero sensitive financial, SSN, or banking credentials requested
+• Direct matching with vetted, licensed and insured specialists only
+• Media encrypted under 256-bit AES protocols and watermarked
+• Full control to pause, revoke, or award preliminary proposals
+Preliminary Estimate Disclaimer: Virtual quotes are computed using calibrated scope data and media telemetry. Binding on-site contracts remain subject to municipal compliance, structural verification, and final owner sign-off.
+[CUSTOM CODE → code/05-virtual-estimate-flow.html, 19,133 chars]
+
+==================== section-floureshe-editorial (floureshe-editorial) ====================
+ISSUE NO. IV : THE ARCHITECTURAL COMPENDIUM
+## Stories From FLOURESHÉ
+A quarterly publication documenting the master craftspeople, heritage estates, and architectural preservationists setting new standards for residential luxury.
+[IMAGE] Floureshé Magazine Cover Feature - Heritage Limestone Restoration and Estate Joinery https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/b30f38b5-a38f-4000-b0a8-581d2791b649.png
+CURATED COVER MONOGRAPH
+## The Silent Art of Estate Stonemasonry in the Cotswolds
+"True luxury in structural preservation does not announce itself with novelty; it is felt in the invisible seamlessness of hand-dressed oolitic limestone and timber joinery that outlasts generations."
+By Alistair Vance, Senior Architectural Editor · 12 min read
+[BUTTON] Read Feature Monograph  (url {'url': '#section-floureshe-editorial', 'newTab': False})
+[CUSTOM CODE → code/06-floureshe-editorial.html, 8,086 chars]
+
+==================== section-trust-and-verification (trust-and-verification) ====================
+VERIFICATION PROTOCOL
+## Our Standard Of Excellence
+Every contractor, cleaner, and specialist in our network must undergo a comprehensive audit before receiving verified placement. We inspect active statutory licenses, mandate proof of commercial liability policies with current effective dates, and authenticate past client track records directly through verified invoices.
+Marketplace integrity requires total independence: quality endorsement cannot be bought. Paid tier listings and sponsored placement indicate distribution priority only. They grant zero exemptions from our technical benchmarks, client satisfaction index, or background clearances.
+Compliance is continuous. Credentials carry rolling expiry dates, and insurance policies are re-verified every six months. If a provider falls below our 98% resolution threshold, their verified badge is automatically frozen and marketplace access is suspended pending formal re-audit.
+• Bi-annual license validation and insurer policy confirmation
+• Separation of quality certification from paid promotion tiers
+• Immediate status revocation upon unresolved customer dispute
+[IMAGE] Quality Living official gold and forest-green Verified Excellence seal emblem with ribbon banner https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/c048e54b-2cdc-4fa0-8b5a-d4a7c849ab2d.png
+## Certified Marketplace Warranty
+Every transaction with a verified provider is backed by our $10,000 resolution escrow guarantee and dedicated dispute mediation.
+
+==================== section-service-provider-portal (service-provider-portal) ====================
+FOR SERVICE PROVIDERS
+## Grow With Us
+Connect with discerning residential and boutique hospitality estates seeking vetted, elite trade professionals. Choose your engagement tier below to begin onboarding.
+[SVG]
+## Approved
+$400 / month
+Core certification tier for established professionals establishing trust and direct routing with high-value property owners.
+• Verified Quality Living directory visibility
+• Direct client inquiry intake portal
+• Official digital verification seal
+• Standard service category listing
+• Quarterly performance report
+[BUTTON] Apply for Membership  (url {'url': '#section-brand-footer', 'newTab': False})
+[SVG]
+## Client Growth
+$800 / month
+Accelerated positioning for expanding operations seeking priority placement across regional searches and luxury editorial reach.
+• Priority search directory visibility
+• Quarterly Floureshé magazine feature
+• Targeted client estimate dispatching
+• Dedicated concierge support specialist
+• Expanded portfolio photo showcase
+[BUTTON] Apply for Membership  (url {'url': '#section-brand-footer', 'newTab': False})
+[SVG]
+## Market Leader
+$1,600 / month
+Exclusive category supremacy, high-touch relationship management, and bespoke editorial integration for premier contractors.
+• Exclusive top-of-category placement
+• Full-page Floureshé editorial feature
+• Guaranteed luxury estimate opportunities
+• Executive partner account advisor
+• Regional syndication across all markets
+[BUTTON] Discuss a Plan  (url {'url': '#section-brand-footer', 'newTab': False})
+Introductory Program Notice: All applicants undergo credential verification, license checks, and insurance underwriting. Approved professionals receive onboarding support and introductory placement during their initial 90-day review.
+
+==================== section-brand-footer (brand-footer) ====================
+[IMAGE] Quality Living Logo https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/328fec49-8a6a-4bed-8d05-8d0703a44445.png
+## Quality Living
+Curating high-integrity property care, master craftsmanship, and vetted estate management with boutique hospitality standards.
+CLIENT SERVICES
+Home
+Find a Service
+Request an Estimate
+Floureshé Magazine
+PARTNERS
+Apply as a Pro
+Provider Portal
+Verification Standards
+CONNECT & LEGAL
+concierge@qualityliving.com
++1 (800) 482-9110
+Privacy Policy
+Terms of Service
+[DIVIDER]
+[SOCIAL-ICONS]
+© 2026 Quality Living. All rights reserved. Elevated property operations & hospitality-standard services.

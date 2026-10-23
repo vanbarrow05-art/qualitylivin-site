@@ -1,0 +1,358 @@
+<div class='service-discovery-engine-wrapper'>
+  <style>
+    .service-discovery-engine-wrapper {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .service-discovery-engine-sticky-box {
+      position: sticky;
+      top: 90px;
+      background: var(--brand-surface);
+      border: 1px solid var(--brand-primary);
+      border-radius: 6px;
+      box-shadow: 0 16px 40px -12px rgba(30, 58, 52, 0.14);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-discovery-engine-map-header {
+      padding: 12px 16px;
+      background: var(--brand-primary);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .service-discovery-engine-map-title {
+      font-family: var(--headlinefont);
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.02em;
+    }
+    .service-discovery-engine-live-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #27AE60;
+      box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.3);
+      display: inline-block;
+    }
+    .service-discovery-engine-search-btn {
+      background: var(--brand-accent);
+      color: var(--brand-primary);
+      font-family: var(--contentfont);
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: opacity 0.2s ease;
+    }
+    .service-discovery-engine-search-btn:hover {
+      opacity: 0.9;
+    }
+    .service-discovery-engine-canvas-wrap {
+      position: relative;
+      height: 480px;
+      background: #EAE7DE;
+      overflow: hidden;
+    }
+    .service-discovery-engine-svg-map {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .service-discovery-engine-legend {
+      padding: 12px 14px;
+      background: var(--brand-surface-1);
+      border-top: 1px solid rgba(30, 58, 52, 0.15);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
+      font-family: var(--contentfont);
+      font-size: 12px;
+      color: var(--brand-text-main);
+    }
+    .service-discovery-engine-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .service-discovery-engine-legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .service-discovery-engine-pin {
+      position: absolute;
+      cursor: pointer;
+      transform: translate(-50%, -100%);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 5;
+    }
+    .service-discovery-engine-pin:hover, .service-discovery-engine-pin.active {
+      transform: translate(-50%, -115%) scale(1.15);
+      z-index: 10;
+    }
+    .service-discovery-engine-popup {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      background: var(--white);
+      border: 1px solid var(--brand-primary);
+      border-radius: 6px;
+      padding: 14px 16px;
+      box-shadow: 0 10px 25px rgba(30, 58, 52, 0.18);
+      font-family: var(--contentfont);
+      z-index: 20;
+      display: block;
+      animation: sdeFadeIn 0.25s ease;
+    }
+    @keyframes sdeFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .service-discovery-engine-popup-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--brand-accent);
+      margin-bottom: 2px;
+    }
+    .service-discovery-engine-popup-name {
+      font-family: var(--headlinefont);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--brand-primary);
+      margin: 0 0 4px 0;
+    }
+    .service-discovery-engine-popup-meta {
+      font-size: 12px;
+      color: var(--brand-text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .service-discovery-engine-popup-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand-primary);
+      text-decoration: underline;
+    }
+    .service-discovery-engine-mobile-toggle {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .service-discovery-engine-sticky-box {
+        position: static;
+      }
+      .service-discovery-engine-canvas-wrap {
+        height: 380px;
+      }
+      .service-discovery-engine-mobile-toggle {
+        display: flex;
+        background: var(--brand-surface-1);
+        border: 1px solid var(--brand-primary);
+        border-radius: 30px;
+        padding: 4px;
+        margin-bottom: 14px;
+        gap: 4px;
+      }
+      .service-discovery-engine-toggle-opt {
+        flex: 1;
+        text-align: center;
+        padding: 8px 12px;
+        font-family: var(--contentfont);
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 24px;
+        border: none;
+        background: transparent;
+        color: var(--brand-text-main);
+        cursor: pointer;
+      }
+      .service-discovery-engine-toggle-opt.active {
+        background: var(--brand-primary);
+        color: var(--white);
+      }
+    }
+  </style><div class='service-discovery-engine-mobile-toggle' id='sdeMobileToggleBar'>
+    <button class='service-discovery-engine-toggle-opt' onclick="sdeSwitchMode('list')">☰ List View (8)</button>
+    <button class='service-discovery-engine-toggle-opt active' onclick="sdeSwitchMode('map')">🗺 Map View (Active)</button>
+  </div>
+
+  <div class='service-discovery-engine-sticky-box' id='sdeMapBox'>
+    <div class='service-discovery-engine-map-header'>
+      <div class='service-discovery-engine-map-title'>
+        <span class='service-discovery-engine-live-pulse'></span>
+        Metropolitan Coverage Radar
+      </div>
+      <button class='service-discovery-engine-search-btn' onclick="sdeSimulateSearch()">
+        ⟳ Search this area
+      </button>
+    </div>
+
+    <div class='service-discovery-engine-canvas-wrap'>
+      <svg class='service-discovery-engine-svg-map' viewBox='0 0 600 500' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <rect width='600' height='500' fill='#EAE7DE'/>
+        <path d='M0 180 Q150 140 320 230 T600 210 L600 280 Q450 310 280 290 T0 240 Z' fill='#D2DFD8' opacity='0.85'/>
+        <path d='M-10 60 C120 70 200 130 250 200 C300 270 380 340 610 320' stroke='#FAF7F0' stroke-width='14' fill='none'/>
+        <path d='M-10 60 C120 70 200 130 250 200 C300 270 380 340 610 320' stroke='#E2DDCF' stroke-width='8' fill='none'/>
+        <path d='M180 -10 C190 120 220 240 180 510' stroke='#FAF7F0' stroke-width='10' fill='none'/>
+        <path d='M420 -10 C410 160 360 280 430 510' stroke='#FAF7F0' stroke-width='10' fill='none'/>
+        <path d='M80 380 Q300 390 520 460' stroke='#FAF7F0' stroke-width='8' fill='none'/>
+        <rect x='40' y='60' width='110' height='75' rx='8' fill='#DFDACB' opacity='0.7'/>
+        <text x='52' y='105' fill='#7A7465' font-family='Work Sans, sans-serif' font-size='11' font-weight='600' letter-spacing='0.05em'>MAYFAIR ZONE</text>
+        <rect x='340' y='60' width='120' height='75' rx='8' fill='#DFDACB' opacity='0.7'/>
+        <text x='352' y='105' fill='#7A7465' font-family='Work Sans, sans-serif' font-size='11' font-weight='600' letter-spacing='0.05em'>SOHO FACILITY</text>
+        <rect x='100' y='320' width='130' height='80' rx='8' fill='#DFDACB' opacity='0.7'/>
+        <text x='112' y='365' fill='#7A7465' font-family='Work Sans, sans-serif' font-size='11' font-weight='600' letter-spacing='0.05em'>BELGRAVIA HUB</text>
+        <rect x='360' y='340' width='120' height='75' rx='8' fill='#DFDACB' opacity='0.7'/>
+        <text x='372' y='385' fill='#7A7465' font-family='Work Sans, sans-serif' font-size='11' font-weight='600' letter-spacing='0.05em'>SOUTH WATERFRONT</text>
+      </svg>
+
+      <div class='service-discovery-engine-pin active' id='pin1' style='top: 26%; left: 24%;' onclick="sdeSelectPin(1)">
+        <svg width='38' height='46' viewBox='0 0 38 46' fill='none'>
+          <path d='M19 0C8.5 0 0 8.5 0 19C0 32 19 46 19 46C19 46 38 32 38 19C38 8.5 29.5 0 19 0Z' fill='#2D9CDB' filter='drop-shadow(0 4px 6px rgba(0,0,0,0.25))'/>
+          <circle cx='19' cy='18' r='8' fill='#FFFFFF'/>
+          <path d='M15 18L18 21L23 15' stroke='#1E3A34' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
+        </svg>
+      </div>
+
+      <div class='service-discovery-engine-pin' id='pin2' style='top: 24%; left: 70%;' onclick="sdeSelectPin(2)">
+        <svg width='38' height='46' viewBox='0 0 38 46' fill='none'>
+          <path d='M19 0C8.5 0 0 8.5 0 19C0 32 19 46 19 46C19 46 38 32 38 19C38 8.5 29.5 0 19 0Z' fill='#2F80ED' filter='drop-shadow(0 4px 6px rgba(0,0,0,0.25))'/>
+          <circle cx='19' cy='18' r='8' fill='#FFFFFF'/>
+          <rect x='15' y='14' width='8' height='8' rx='2' stroke='#1E3A34' stroke-width='2'/>
+        </svg>
+      </div>
+
+      <div class='service-discovery-engine-pin' id='pin3' style='top: 74%; left: 32%;' onclick="sdeSelectPin(3)">
+        <svg width='38' height='46' viewBox='0 0 38 46' fill='none'>
+          <path d='M19 0C8.5 0 0 8.5 0 19C0 32 19 46 19 46C19 46 38 32 38 19C38 8.5 29.5 0 19 0Z' fill='#56CCF2' filter='drop-shadow(0 4px 6px rgba(0,0,0,0.25))'/>
+          <circle cx='19' cy='18' r='8' fill='#FFFFFF'/>
+          <path d='M19 14V22M15 18H23' stroke='#1E3A34' stroke-width='2' stroke-linecap='round'/>
+        </svg>
+      </div>
+
+      <div class='service-discovery-engine-pin' id='pin4' style='top: 72%; left: 72%;' onclick="sdeSelectPin(4)">
+        <svg width='38' height='46' viewBox='0 0 38 46' fill='none'>
+          <path d='M19 0C8.5 0 0 8.5 0 19C0 32 19 46 19 46C19 46 38 32 38 19C38 8.5 29.5 0 19 0Z' fill='#F2994A' filter='drop-shadow(0 4px 6px rgba(0,0,0,0.25))'/>
+          <circle cx='19' cy='18' r='8' fill='#FFFFFF'/>
+          <path d='M19 13L16 19H22L19 23' stroke='#1E3A34' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/>
+        </svg>
+      </div>
+
+      <div class='service-discovery-engine-popup' id='sdePopup'>
+        <div class='service-discovery-engine-popup-tag' id='sdePopupTag'>RESIDENTIAL CLEANING & ESTATE CARE</div>
+        <div class='service-discovery-engine-popup-name' id='sdePopupName'>Belgravia Housekeeping & Estate Sanitization</div>
+        <div class='service-discovery-engine-popup-meta'>
+          <span>★ 4.98 • 164 Guild Reviews</span>
+          <span style='color:#27AE60; font-weight:600;'>● 3-Hour Dispatch</span>
+        </div>
+        <a href='#section-virtual-estimate-flow' class='service-discovery-engine-popup-link'>Direct Booking Intake →</a>
+      </div>
+    </div>
+
+    <div class='service-discovery-engine-legend'>
+      <div class='service-discovery-engine-legend-item'>
+        <span class='service-discovery-engine-legend-swatch' style='background: #2D9CDB;'></span>
+        <span>Teal • Residential Care</span>
+      </div>
+      <div class='service-discovery-engine-legend-item'>
+        <span class='service-discovery-engine-legend-swatch' style='background: #2F80ED;'></span>
+        <span>Blue • Commercial Plant</span>
+      </div>
+      <div class='service-discovery-engine-legend-item'>
+        <span class='service-discovery-engine-legend-swatch' style='background: #56CCF2;'></span>
+        <span>Cyan • Hydronics & Flow</span>
+      </div>
+      <div class='service-discovery-engine-legend-item'>
+        <span class='service-discovery-engine-legend-swatch' style='background: #F2994A;'></span>
+        <span>Amber • Electrical & Grid</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sdeData = {
+      1: {
+        tag: 'RESIDENTIAL CLEANING & ESTATE CARE',
+        name: 'Belgravia Housekeeping & Estate Sanitization',
+        meta: '★ 4.98 • 164 Guild Reviews',
+        status: '● 3-Hour Dispatch'
+      },
+      2: {
+        tag: 'COMMERCIAL FACILITIES & HVAC',
+        name: 'Apex Mechanical & Commercial HVAC',
+        meta: '★ 4.95 • 92 VerifiedPro Reviews',
+        status: '● 60-Min Triage'
+      },
+      3: {
+        tag: 'HYDRONIC & PRESSURE PLUMBING',
+        name: 'Kensington Hydronics & Pipeworks',
+        meta: '★ 4.99 • 81 CIBSE Reviews',
+        status: '● Priority Fleet Ready'
+      },
+      4: {
+        tag: 'ELECTRICAL & LIGHTING AUTOMATION',
+        name: 'Lumina Architectural Electrical',
+        meta: '★ 4.94 • 118 NICEIC Reviews',
+        status: '● Scheduled Slots'
+      }
+    };
+
+    function sdeSelectPin(id) {
+      for (let i = 1; i <= 4; i++) {
+        const p = document.getElementById('pin' + i);
+        if (p) p.classList.remove('active');
+      }
+      const currentPin = document.getElementById('pin' + id);
+      if (currentPin) currentPin.classList.add('active');
+
+      const item = sdeData[id];
+      if (item) {
+        document.getElementById('sdePopupTag').innerText = item.tag;
+        document.getElementById('sdePopupName').innerText = item.name;
+        document.getElementById('sdePopup').style.display = 'block';
+      }
+    }
+
+    function sdeSimulateSearch() {
+      const btn = document.querySelector('.service-discovery-engine-search-btn');
+      if (!btn) return;
+      btn.innerText = 'Searching 8 verified...';
+      setTimeout(() => {
+        btn.innerText = '✓ Zone Updated (8)';
+        setTimeout(() => { btn.innerText = '⟳ Search this area'; }, 2000);
+      }, 600);
+    }
+
+    function sdeSwitchMode(mode) {
+      const buttons = document.querySelectorAll('.service-discovery-engine-toggle-opt');
+      buttons.forEach(b => b.classList.remove('active'));
+      const mapBox = document.getElementById('sdeMapBox');
+      if (mode === 'list') {
+        if (buttons[0]) buttons[0].classList.add('active');
+        if (mapBox) mapBox.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      } else {
+        if (buttons[1]) buttons[1].classList.add('active');
+        if (mapBox) mapBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  </script>
+</div>

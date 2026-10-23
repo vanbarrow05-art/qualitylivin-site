@@ -1,0 +1,491 @@
+<style>
+.virtual-estimate-flow-wrapper {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid var(--brand-surface-1);
+  box-shadow: 0 10px 30px -10px rgba(30, 58, 52, 0.12), 0 4px 6px -2px rgba(30, 58, 52, 0.05);
+  padding: 32px 36px 36px 36px;
+  font-family: var(--contentfont), -apple-system, sans-serif;
+  color: var(--brand-text-main);
+  overflow: hidden;
+}
+.virtual-estimate-flow-progress-header {
+  margin-bottom: 28px;
+}
+.virtual-estimate-flow-stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 14px;
+}
+.virtual-estimate-flow-progress-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--brand-surface);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.virtual-estimate-flow-progress-fill {
+  height: 100%;
+  width: 25%;
+  background: var(--brand-accent);
+  transition: width 0.35s ease;
+}
+.virtual-estimate-flow-step-node {
+  position: relative;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--brand-surface-1);
+  color: var(--brand-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.virtual-estimate-flow-step-node.active {
+  border-color: var(--brand-accent);
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.25);
+}
+.virtual-estimate-flow-step-node.completed {
+  border-color: var(--brand-accent);
+  background: var(--brand-accent);
+  color: #FFFFFF;
+}
+.virtual-estimate-flow-step-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--brand-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.virtual-estimate-flow-step-labels span.active {
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+.virtual-estimate-flow-pane {
+  display: none;
+  animation: virtual-estimate-flow-fadeIn 0.3s ease;
+}
+.virtual-estimate-flow-pane.active {
+  display: block;
+}
+@keyframes virtual-estimate-flow-fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.virtual-estimate-flow-pane-title {
+  font-family: var(--headlinefont), serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--brand-primary);
+  margin: 0 0 6px 0;
+}
+.virtual-estimate-flow-pane-desc {
+  font-size: 14px;
+  color: var(--brand-text-muted);
+  margin: 0 0 22px 0;
+  line-height: 1.5;
+}
+.virtual-estimate-flow-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.virtual-estimate-flow-card-choice {
+  border: 1px solid var(--brand-surface-1);
+  background: var(--brand-surface);
+  border-radius: 6px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.virtual-estimate-flow-card-choice:hover {
+  border-color: var(--brand-accent);
+  background: #FFFFFF;
+}
+.virtual-estimate-flow-card-choice.selected {
+  border-color: var(--brand-accent);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px var(--brand-accent);
+}
+.virtual-estimate-flow-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand-primary);
+}
+.virtual-estimate-flow-card-sub {
+  font-size: 12px;
+  color: var(--brand-text-muted);
+  line-height: 1.4;
+}
+.virtual-estimate-flow-field-group {
+  margin-bottom: 18px;
+}
+.virtual-estimate-flow-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brand-primary);
+  margin-bottom: 8px;
+}
+.virtual-estimate-flow-input,
+.virtual-estimate-flow-select {
+  width: 100%;
+  box-sizing: border-box;
+  height: 46px;
+  border: 1px solid var(--brand-surface-1);
+  border-radius: 6px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-family: var(--contentfont), sans-serif;
+  color: var(--brand-text-main);
+  background: #FFFFFF;
+  transition: border-color 0.2s ease;
+}
+.virtual-estimate-flow-input:focus,
+.virtual-estimate-flow-select:focus {
+  outline: none;
+  border-color: var(--brand-accent);
+}
+.virtual-estimate-flow-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.virtual-estimate-flow-chip {
+  padding: 8px 16px;
+  background: var(--brand-surface);
+  border: 1px solid var(--brand-surface-1);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--brand-text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.virtual-estimate-flow-chip.selected {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border-color: var(--brand-primary);
+}
+.virtual-estimate-flow-media-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.virtual-estimate-flow-media-pill {
+  border: 1.5px dashed var(--brand-accent);
+  background: rgba(197, 160, 89, 0.08);
+  border-radius: 6px;
+  padding: 20px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.virtual-estimate-flow-media-pill:hover {
+  background: rgba(197, 160, 89, 0.16);
+}
+.virtual-estimate-flow-media-pill.active {
+  background: #FFFFFF;
+  border-style: solid;
+  box-shadow: 0 0 0 2px var(--brand-accent);
+}
+.virtual-estimate-flow-ring-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--brand-surface);
+  border: 1px solid var(--brand-surface-1);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin-top: 14px;
+}
+.virtual-estimate-flow-ring-graphic {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.virtual-estimate-flow-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--brand-surface-1);
+}
+.virtual-estimate-flow-btn-secondary {
+  background: transparent;
+  border: 1px solid var(--brand-surface-1);
+  color: var(--brand-text-muted);
+  padding: 11px 22px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.virtual-estimate-flow-btn-secondary:hover {
+  border-color: var(--brand-text-muted);
+  color: var(--brand-text-main);
+}
+.virtual-estimate-flow-btn-primary {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+.virtual-estimate-flow-btn-primary:hover {
+  background: #152925;
+}
+.virtual-estimate-flow-success {
+  text-align: center;
+  padding: 24px 12px;
+}
+@media (max-width: 768px) {
+  .virtual-estimate-flow-wrapper {
+    padding: 22px 18px 24px 18px;
+  }
+  .virtual-estimate-flow-grid-cards,
+  .virtual-estimate-flow-media-options {
+    grid-template-columns: 1fr;
+  }
+  .virtual-estimate-flow-step-labels span {
+    font-size: 10px;
+  }
+}
+</style><div class="virtual-estimate-flow-wrapper">
+  <div class="virtual-estimate-flow-progress-header">
+    <div class="virtual-estimate-flow-stepper">
+      <div class="virtual-estimate-flow-progress-track">
+        <div class="virtual-estimate-flow-progress-fill" id="virtual-estimate-flow-fill"></div>
+      </div>
+      <div class="virtual-estimate-flow-step-node active" id="node-1">1</div>
+      <div class="virtual-estimate-flow-step-node" id="node-2">2</div>
+      <div class="virtual-estimate-flow-step-node" id="node-3">3</div>
+      <div class="virtual-estimate-flow-step-node" id="node-4">4</div>
+    </div>
+    <div class="virtual-estimate-flow-step-labels">
+      <span class="active" id="lbl-1">Property</span>
+      <span id="lbl-2">Scope</span>
+      <span id="lbl-3">Media</span>
+      <span id="lbl-4">Verify</span>
+    </div>
+  </div>
+
+  <form id="virtual-estimate-flow-form" onsubmit="return false;">
+    <!-- STEP 1 -->
+    <div class="virtual-estimate-flow-pane active" id="step-pane-1">
+      <h3 class="virtual-estimate-flow-pane-title">Step 1: Property Category</h3>
+      <p class="virtual-estimate-flow-pane-desc">Choose the architectural classification and primary location for calibration.</p>
+      <div class="virtual-estimate-flow-grid-cards">
+        <div class="virtual-estimate-flow-card-choice selected" onclick="selectCategory(this)">
+          <span class="virtual-estimate-flow-card-title">Residential Estate</span>
+          <span class="virtual-estimate-flow-card-sub">Private homes, luxury condos, historic restorations.</span>
+        </div>
+        <div class="virtual-estimate-flow-card-choice" onclick="selectCategory(this)">
+          <span class="virtual-estimate-flow-card-title">Short-Term Rental</span>
+          <span class="virtual-estimate-flow-card-sub">STR turnovers, automated lockbox access protocols.</span>
+        </div>
+        <div class="virtual-estimate-flow-card-choice" onclick="selectCategory(this)">
+          <span class="virtual-estimate-flow-card-title">Commercial Boutique</span>
+          <span class="virtual-estimate-flow-card-sub">High-finish retail, design studios, culinary venues.</span>
+        </div>
+        <div class="virtual-estimate-flow-card-choice" onclick="selectCategory(this)">
+          <span class="virtual-estimate-flow-card-title">Specialized Grounds</span>
+          <span class="virtual-estimate-flow-card-sub">Courtyards, pool enclosures, architectural masonry.</span>
+        </div>
+      </div>
+      <div class="virtual-estimate-flow-field-group">
+        <label class="virtual-estimate-flow-label">Property ZIP Code or Municipal District</label>
+        <input type="text" class="virtual-estimate-flow-input" placeholder="e.g. 78701 or West Austin Metro" value="">
+      </div>
+      <div class="virtual-estimate-flow-actions">
+        <span style="font-size: 13px; color: var(--brand-text-muted);">Step 1 of 4</span>
+        <button type="button" class="virtual-estimate-flow-btn-primary" onclick="goToStep(2)">Continue to Scope &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="virtual-estimate-flow-pane" id="step-pane-2">
+      <h3 class="virtual-estimate-flow-pane-title">Step 2: Project Scope Details</h3>
+      <p class="virtual-estimate-flow-pane-desc">Calibrate approximate floor area and required turnaround urgency.</p>
+      <div class="virtual-estimate-flow-field-group">
+        <label class="virtual-estimate-flow-label">Approximate Square Footage</label>
+        <div class="virtual-estimate-flow-chip-group">
+          <span class="virtual-estimate-flow-chip selected" onclick="selectChip(this)">Under 1,500 sq ft</span>
+          <span class="virtual-estimate-flow-chip" onclick="selectChip(this)">1,500 - 3,500 sq ft</span>
+          <span class="virtual-estimate-flow-chip" onclick="selectChip(this)">3,500 - 6,000 sq ft</span>
+          <span class="virtual-estimate-flow-chip" onclick="selectChip(this)">6,000+ sq ft</span>
+        </div>
+      </div>
+      <div class="virtual-estimate-flow-field-group" style="margin-top: 18px;">
+        <label class="virtual-estimate-flow-label">Target Delivery Window</label>
+        <select class="virtual-estimate-flow-select">
+          <option>Immediate / Within 48 Hours</option>
+          <option selected>Flexible / Scheduled Next Week</option>
+          <option>Comprehensive Seasonal Overhaul</option>
+          <option>Emergency Service Dispatch</option>
+        </select>
+      </div>
+      <div class="virtual-estimate-flow-field-group">
+        <label class="virtual-estimate-flow-label">Special Access Protocols (Optional)</label>
+        <input type="text" class="virtual-estimate-flow-input" placeholder="e.g. Concierge desk check-in, keyless gate code, pet on premises">
+      </div>
+      <div class="virtual-estimate-flow-actions">
+        <button type="button" class="virtual-estimate-flow-btn-secondary" onclick="goToStep(1)">&larr; Back</button>
+        <button type="button" class="virtual-estimate-flow-btn-primary" onclick="goToStep(3)">Proceed to Media &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="virtual-estimate-flow-pane" id="step-pane-3">
+      <h3 class="virtual-estimate-flow-pane-title">Step 3: Walkthrough Media Zone</h3>
+      <p class="virtual-estimate-flow-pane-desc">Upload photographs or capture live video walkthrough for optical assessment.</p>
+      <div class="virtual-estimate-flow-media-options">
+        <div class="virtual-estimate-flow-media-pill active" onclick="selectMediaOption(this, 'live')">
+          <strong style="display: block; font-size: 14px; color: var(--brand-primary); margin-bottom: 4px;">Record Live Walkthrough</strong>
+          <span style="font-size: 12px; color: var(--brand-text-muted);">Use device camera for guided 60-second video tour</span>
+        </div>
+        <div class="virtual-estimate-flow-media-pill" onclick="selectMediaOption(this, 'upload')">
+          <strong style="display: block; font-size: 14px; color: var(--brand-primary); margin-bottom: 4px;">Upload Media Files</strong>
+          <span style="font-size: 12px; color: var(--brand-text-muted);">Drag up to 10 JPG, PNG, or MP4 attachments</span>
+        </div>
+      </div>
+      <div class="virtual-estimate-flow-ring-box">
+        <div class="virtual-estimate-flow-ring-graphic">
+          <svg width="44" height="44" viewBox="0 0 44 44">
+            <circle cx="22" cy="22" r="18" fill="none" stroke="var(--brand-surface-1)" stroke-width="4"/>
+            <circle cx="22" cy="22" r="18" fill="none" stroke="var(--brand-accent)" stroke-width="4" stroke-dasharray="113" stroke-dashoffset="28" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: var(--brand-primary);">AES-256 Cloud Vault Ready</div>
+          <div style="font-size: 12px; color: var(--brand-text-muted);">Media metadata and GPS tags are automatically stripped prior to partner review.</div>
+        </div>
+      </div>
+      <div class="virtual-estimate-flow-actions">
+        <button type="button" class="virtual-estimate-flow-btn-secondary" onclick="goToStep(2)">&larr; Back</button>
+        <button type="button" class="virtual-estimate-flow-btn-primary" onclick="goToStep(4)">Review Contact &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="virtual-estimate-flow-pane" id="step-pane-4">
+      <h3 class="virtual-estimate-flow-pane-title">Step 4: Contact & Verification</h3>
+      <p class="virtual-estimate-flow-pane-desc">Your contact credentials are only shared with matching licensed pros after you approve.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 14px;">
+        <div class="virtual-estimate-flow-field-group" style="margin-bottom: 0;">
+          <label class="virtual-estimate-flow-label">Full Legal Name</label>
+          <input type="text" class="virtual-estimate-flow-input" placeholder="e.g. Eleanor Vance" required>
+        </div>
+        <div class="virtual-estimate-flow-field-group" style="margin-bottom: 0;">
+          <label class="virtual-estimate-flow-label">Direct Mobile Number</label>
+          <input type="tel" class="virtual-estimate-flow-input" placeholder="(555) 000-0000" required>
+        </div>
+      </div>
+      <div class="virtual-estimate-flow-field-group">
+        <label class="virtual-estimate-flow-label">Secure Email Address</label>
+        <input type="email" class="virtual-estimate-flow-input" placeholder="client@domain.com" required>
+      </div>
+      <div style="font-size: 12px; color: var(--brand-text-muted); background: var(--brand-surface); padding: 12px; border-radius: 6px; margin-bottom: 18px;">
+        &bull; <strong>Strict Privacy:</strong> No SSN, bank accounts, or upfront billing required.<br>
+        &bull; Receive 2 to 3 tailored virtual line-item estimates within 24 hours.
+      </div>
+      <div class="virtual-estimate-flow-actions">
+        <button type="button" class="virtual-estimate-flow-btn-secondary" onclick="goToStep(3)">&larr; Back</button>
+        <button type="button" class="virtual-estimate-flow-btn-primary" onclick="completeEstimate()">Submit Estimate Request</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="virtual-estimate-flow-pane" id="step-pane-5">
+      <div class="virtual-estimate-flow-success">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--brand-primary); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3 class="virtual-estimate-flow-pane-title" style="margin-bottom: 8px;">Estimate Request Encrypted & Dispatched</h3>
+        <p class="virtual-estimate-flow-pane-desc" style="max-width: 480px; margin: 0 auto 20px auto;">
+          Reference token <strong>#QL-8942-EST</strong> has been issued. Up to three verified and insured specialists are calibrating your virtual scope now. You will receive an encrypted portal link via SMS and email.
+        </p>
+        <button type="button" class="virtual-estimate-flow-btn-secondary" onclick="goToStep(1)">Start Another Request</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+function goToStep(step) {
+  for (let i = 1; i <= 5; i++) {
+    const pane = document.getElementById('step-pane-' + i);
+    if (pane) pane.classList.remove('active');
+    const node = document.getElementById('node-' + i);
+    if (node) {
+      node.classList.remove('active');
+      if (i < step) node.classList.add('completed');
+      else node.classList.remove('completed');
+    }
+    const lbl = document.getElementById('lbl-' + i);
+    if (lbl) lbl.classList.remove('active');
+  }
+  const activePane = document.getElementById('step-pane-' + step);
+  if (activePane) activePane.classList.add('active');
+  const activeNode = document.getElementById('node-' + step);
+  if (activeNode) activeNode.classList.add('active');
+  const activeLbl = document.getElementById('lbl-' + step);
+  if (activeLbl) activeLbl.classList.add('active');
+  const fill = document.getElementById('virtual-estimate-flow-fill');
+  if (fill) {
+    const pct = step === 5 ? 100 : ((step - 1) * 33.33);
+    fill.style.width = Math.min(100, Math.max(15, pct)) + '%';
+  }
+}
+function selectCategory(el) {
+  const cards = el.parentNode.querySelectorAll('.virtual-estimate-flow-card-choice');
+  cards.forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function selectChip(el) {
+  const chips = el.parentNode.querySelectorAll('.virtual-estimate-flow-chip');
+  chips.forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function selectMediaOption(el, mode) {
+  const pills = el.parentNode.querySelectorAll('.virtual-estimate-flow-media-pill');
+  pills.forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+function completeEstimate() {
+  goToStep(5);
+}
+</script>

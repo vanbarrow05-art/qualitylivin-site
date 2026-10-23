@@ -1,12 +1,131 @@
-/* Quality Living: scroll-animated magazine card gallery.
-   Plain JS (no libraries) so it runs inside a GoHighLevel Custom JS/HTML element.
-   Scroll progress through the section drives 4 layouts:
-   scatter -> line -> circle -> arc. In the arc, cards flip on hover / tap. */
+/* Quality Living page behavior. Plain JS (no libraries) so it runs inside a GoHighLevel
+   Custom JS/HTML element. Everything is optional: without JS the page is fully readable. */
 (function () {
-  function init(section) {
-    if (section.dataset.qlReady) return;
-    section.dataset.qlReady = "1";
+  function boot() {
+    document.querySelectorAll(".ql").forEach(function (root) {
+      if (root.dataset.qlReady) return;
+      root.dataset.qlReady = "1";
+      initNav(root);
+      initReveal(root);
+      initDirectory(root);
+      initAnchors(root);
+      root.querySelectorAll("[data-ql-gallery]").forEach(initGallery);
+    });
+  }
 
+  /* ---------- Mobile menu ---------- */
+  function initNav(root) {
+    var nav = root.querySelector(".ql-nav");
+    var toggle = root.querySelector(".ql-nav-toggle");
+    if (!nav || !toggle) return;
+    function set(open) {
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
+    toggle.addEventListener("click", function () { set(!nav.classList.contains("is-open")); });
+    nav.querySelectorAll(".ql-nav-links a").forEach(function (a) {
+      a.addEventListener("click", function () { set(false); });
+    });
+  }
+
+  /* ---------- Fade sections in as they scroll into view ---------- */
+  function initReveal(root) {
+    var items = root.querySelectorAll(".ql-reveal");
+    if (!("IntersectionObserver" in window)) return;
+    root.classList.add("ql-js");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-in");
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    items.forEach(function (el, i) {
+      // Stagger siblings in grids slightly
+      el.style.transitionDelay = (el.parentElement.children.length > 1 ? (Array.prototype.indexOf.call(el.parentElement.children, el) % 4) * 90 : 0) + "ms";
+      io.observe(el);
+    });
+    // Safety net: never leave content hidden if the observer misbehaves inside a builder
+    setTimeout(function () { items.forEach(function (el) { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-in"); }); }, 1500);
+  }
+
+  /* ---------- Hero search + category cards feed the directory ---------- */
+  function initDirectory(root) {
+    var dir = root.querySelector("#ql-directory");
+    if (!dir) return;
+    var area = dir.querySelector("[data-ql-dir-area]");
+    var cat = dir.querySelector("[data-ql-dir-category]");
+    var status = dir.querySelector("[data-ql-dir-status]");
+    var label = dir.querySelector("[data-ql-map-label]");
+    var body = dir.querySelector("[data-ql-dir]");
+
+    function update() {
+      var where = (area.value || "").trim();
+      status.textContent = "Showing: " + (where || "all areas") + " · " + cat.value;
+      label.textContent = where || "Your area";
+    }
+    function go() { scrollToEl(dir); }
+
+    var heroForm = root.querySelector("[data-ql-search]");
+    if (heroForm) {
+      heroForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        area.value = heroForm.elements.area.value;
+        cat.value = heroForm.elements.category.value;
+        update();
+        go();
+      });
+    }
+
+    root.querySelectorAll("[data-ql-category]").forEach(function (card) {
+      card.addEventListener("click", function (e) {
+        e.preventDefault();
+        cat.value = card.getAttribute("data-ql-category");
+        update();
+        go();
+      });
+    });
+
+    dir.querySelector("[data-ql-dir-search]").addEventListener("click", update);
+    area.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); update(); } });
+    cat.addEventListener("change", update);
+
+    // Map / List switch (phones)
+    var tabs = dir.querySelectorAll("[data-ql-view]");
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        body.setAttribute("data-view", tab.getAttribute("data-ql-view"));
+        tabs.forEach(function (t) { t.setAttribute("aria-selected", String(t === tab)); });
+      });
+    });
+  }
+
+  /* ---------- Smooth in-page links that clear the sticky header ---------- */
+  function scrollToEl(el) {
+    var nav = document.querySelector(".ql .ql-nav");
+    var offset = nav ? nav.offsetHeight + 12 : 0;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: y, behavior: reduced ? "auto" : "smooth" });
+  }
+
+  function initAnchors(root) {
+    root.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      if (a.hasAttribute("data-ql-category")) return;
+      a.addEventListener("click", function (e) {
+        var id = a.getAttribute("href").slice(1);
+        var target = id && document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        scrollToEl(target);
+      });
+    });
+  }
+
+  /* ---------- Magazine gallery: scroll drives scatter -> line -> circle -> arc ---------- */
+  function initGallery(section) {
     var stage = section.querySelector(".ql-gallery-stage");
     var cards = Array.prototype.slice.call(section.querySelectorAll(".ql-card"));
     var intro = section.querySelector(".ql-gallery-intro");
@@ -139,10 +258,6 @@
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", function () { L = layouts(); onScroll(); });
     render();
-  }
-
-  function boot() {
-    document.querySelectorAll("[data-ql-gallery]").forEach(init);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

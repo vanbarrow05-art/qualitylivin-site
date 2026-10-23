@@ -1,54 +1,65 @@
-<!-- Quality Living — qualitylivin.com
-     Everything lives inside .ql so our CSS never clashes with GoHighLevel's own styles. -->
+<!-- Quality Living: qualitylivin.com homepage
+     Everything lives inside .ql so our CSS never clashes with GoHighLevel's own styles.
+     Section IDs (section-...) match the original GHL anchors, so old links keep working. -->
 <div class="ql">
 
   <!-- ===== Header ===== -->
-  <nav class="ql-nav">
+  <nav class="ql-nav" aria-label="Main">
     <div class="ql-container ql-nav-inner">
-      <a class="ql-logo" href="#section-hospitality-hero">
-        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/328fec49-8a6a-4bed-8d05-8d0703a44445.png" alt="Quality Living logo">
-        <span>Quality<br>Living.</span>
+      <a class="ql-logo" href="#section-hospitality-hero" aria-label="Quality Living home">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/328fec49-8a6a-4bed-8d05-8d0703a44445.png" alt="" width="36" height="36">
+        <span>Quality<br>Living</span>
       </a>
-      <ul class="ql-nav-links">
+      <ul class="ql-nav-links" id="ql-nav-links">
         <li><a href="#section-hospitality-hero">Home</a></li>
         <li><a href="#section-service-discovery-engine">Find a Service</a></li>
-        <li><a href="#section-virtual-estimate-flow">Request an Estimate</a></li>
-        <li><a href="#section-service-provider-portal">For Service Providers</a></li>
+        <li><a href="#section-service-provider-portal">For Providers</a></li>
         <li><a class="ql-nav-mag" href="#section-magazine-issue">Magazine</a></li>
         <li><a href="#section-trust-and-verification">Our Standards</a></li>
         <li><a href="#section-brand-footer">Contact</a></li>
+        <li class="ql-nav-links-cta"><a class="ql-btn ql-btn-primary" href="#section-virtual-estimate-flow">Request an Estimate</a></li>
       </ul>
-      <a class="ql-btn ql-btn-primary ql-nav-cta" href="#section-service-discovery-engine">Find a Service</a>
+      <a class="ql-btn ql-btn-primary ql-nav-cta" href="#section-virtual-estimate-flow">Request an Estimate</a>
+      <button class="ql-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="ql-nav-links">
+        <svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
   </nav>
 
   <!-- ===== Hero ===== -->
   <header class="ql-hero" id="section-hospitality-hero">
     <div class="ql-container ql-hero-inner">
-      <span class="ql-pill">Premium Local Services</span>
-      <h1>Better spaces start with<br>the right <span class="ql-underline">people</span></h1>
+      <span class="ql-pill">Premium local services</span>
+      <h1>Better spaces start with <br class="ql-br-wide">the right <em>people</em></h1>
       <p class="ql-hero-lead">Explore local service options, share your project, and request an estimate for your home, rental, or business.</p>
 
-      <form class="ql-search" action="#section-service-discovery-engine" onsubmit="return false;">
-        <label>
+      <form class="ql-search" data-ql-search>
+        <label class="ql-field">
           <span>City or ZIP code</span>
-          <input type="text" placeholder="City or ZIP">
+          <input type="text" name="area" placeholder="City or ZIP" autocomplete="postal-code">
         </label>
-        <label>
-          <span>Service category</span>
-          <select>
+        <label class="ql-field">
+          <span>Service</span>
+          <select name="category">
             <option>Residential house cleaning</option>
-            <option>Commercial janitorial services</option>
-            <option>Airbnb / STR turnovers</option>
+            <option>Commercial janitorial</option>
+            <option>Short-term rental turnovers</option>
             <option>Move-in / move-out cleaning</option>
             <option>Deep cleaning</option>
           </select>
         </label>
-        <a class="ql-btn ql-btn-primary" href="#section-service-discovery-engine">Find a Service</a>
-        <a class="ql-btn ql-btn-outline" href="https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf" target="_blank" rel="noopener">Request a Virtual Estimate</a>
+        <button class="ql-btn ql-btn-gold" type="submit">
+          <svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          Find a Service
+        </button>
       </form>
+      <a class="ql-hero-link" href="#section-virtual-estimate-flow">or request a virtual estimate <span aria-hidden="true">→</span></a>
 
-      <p class="ql-hero-note">Local service discovery • Project-based requests • Provider-reviewed estimates</p>
+      <ul class="ql-hero-trust">
+        <li><svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Reviewed local providers</li>
+        <li><svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg>Estimates from photos &amp; video</li>
+        <li><svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No obligation to book</li>
+      </ul>
 
       <a class="ql-issue-pill" href="#section-magazine-issue">
         <span class="ql-issue-pill-new">New issue</span>
@@ -57,63 +68,172 @@
     </div>
   </header>
 
-  <!-- ===== Directory ===== -->
+  <!-- ===== Find a Service: categories + directory ===== -->
   <section class="ql-section" id="section-service-discovery-engine">
     <div class="ql-container">
-      <p class="ql-eyebrow ql-center">Directory</p>
-      <h2 class="ql-center">Find a service provider in your area</h2>
-      <p class="ql-lead ql-center">Search by city or ZIP code and service category. Published profiles will identify the provider’s services, coverage, and documented review information. Availability is confirmed after your request is reviewed.</p>
+      <div class="ql-head ql-reveal">
+        <p class="ql-eyebrow">Find a service</p>
+        <h2>Care for every kind of <em>space</em></h2>
+        <p class="ql-lead">We're starting with cleaning, and adding trades as approved local coverage becomes available.</p>
+      </div>
 
-      <div class="ql-directory">
-        <div class="ql-notice">
-          <p class="ql-eyebrow">No coverage</p>
-          <p class="ql-notice-text">No approved provider is listed for this search yet. Tell us what you need and our team will check local options.</p>
-          <a class="ql-btn ql-btn-outline-dark" href="#section-virtual-estimate-flow">Help Me Find a Provider</a>
+      <div class="ql-cats">
+        <a class="ql-cat ql-cat-lg ql-reveal" href="#ql-directory" data-ql-category="Residential house cleaning">
+          <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=900&q=70" alt="Bright, freshly cleaned living room" loading="lazy">
+          <span class="ql-cat-text"><strong>Residential cleaning</strong><small>Homes, condos and apartments</small></span>
+        </a>
+        <a class="ql-cat ql-reveal" href="#ql-directory" data-ql-category="Commercial janitorial">
+          <img src="https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=700&q=70" alt="Hotel lobby lounge" loading="lazy">
+          <span class="ql-cat-text"><strong>Commercial janitorial</strong><small>Offices, studios and venues</small></span>
+        </a>
+        <a class="ql-cat ql-reveal" href="#ql-directory" data-ql-category="Short-term rental turnovers">
+          <img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?auto=format&fit=crop&w=700&q=70" alt="Guest-ready bedroom" loading="lazy">
+          <span class="ql-cat-text"><strong>Short-term rental turnovers</strong><small>Guest-ready between stays</small></span>
+        </a>
+        <a class="ql-cat ql-reveal" href="#ql-directory" data-ql-category="Move-in / move-out cleaning">
+          <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=700&q=70" alt="Empty, bright open-plan home" loading="lazy">
+          <span class="ql-cat-text"><strong>Move-in / move-out</strong><small>Start fresh, leave it right</small></span>
+        </a>
+        <a class="ql-cat ql-reveal" href="#ql-directory" data-ql-category="Deep cleaning">
+          <img src="https://images.unsplash.com/photo-1518733057094-95b53143d2a7?auto=format&fit=crop&w=700&q=70" alt="Sunlit staircase and lounge" loading="lazy">
+          <span class="ql-cat-text"><strong>Deep cleaning</strong><small>Top to bottom, corner to corner</small></span>
+        </a>
+      </div>
+      <div class="ql-soon ql-reveal">
+        <svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>
+        <p><strong>More trades on the way.</strong> Plumbing, electrical, HVAC, landscaping and handyman services will be added as approved local coverage opens.</p>
+      </div>
+
+      <!-- Directory: map + results. No providers are published yet, so it shows the honest empty state. -->
+      <div class="ql-directory ql-reveal" id="ql-directory">
+        <div class="ql-dir-bar">
+          <label class="ql-field">
+            <span>City or ZIP code</span>
+            <input type="text" name="area" placeholder="City or ZIP" data-ql-dir-area>
+          </label>
+          <label class="ql-field">
+            <span>Service</span>
+            <select name="category" data-ql-dir-category>
+              <option>Residential house cleaning</option>
+              <option>Commercial janitorial</option>
+              <option>Short-term rental turnovers</option>
+              <option>Move-in / move-out cleaning</option>
+              <option>Deep cleaning</option>
+            </select>
+          </label>
+          <button class="ql-btn ql-btn-primary" type="button" data-ql-dir-search>Search</button>
         </div>
 
-        <div class="ql-map">
-          <div class="ql-map-head">
-            <span class="ql-serif">Map + results (demo preview)</span>
-            <small>Not connected — no live provider data</small>
-          </div>
-          <div class="ql-map-body">
-            <div class="ql-map-empty">
-              <h4>No approved providers to display yet</h4>
-              <p>No approved provider is listed for this search yet. Tell us what you need and our team will check local options.</p>
-              <a class="ql-btn ql-btn-primary ql-btn-sm" href="#section-virtual-estimate-flow">Help Me Find a Provider</a>
+        <div class="ql-dir-tabs" role="tablist" aria-label="Directory view">
+          <button type="button" role="tab" aria-selected="true" data-ql-view="list">List</button>
+          <button type="button" role="tab" aria-selected="false" data-ql-view="map">Map</button>
+        </div>
+
+        <div class="ql-dir-body" data-ql-dir data-view="list">
+          <div class="ql-dir-list">
+            <p class="ql-dir-status" data-ql-dir-status>Showing: all areas · Residential house cleaning</p>
+            <div class="ql-empty">
+              <span class="ql-empty-icon"><svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <h3>No approved provider is listed here yet</h3>
+              <p>Tell us what you need and our team will check local options for you.</p>
+              <a class="ql-btn ql-btn-primary" href="#section-virtual-estimate-flow">Request an Estimate</a>
             </div>
+            <p class="ql-dir-note">Each published profile shows the provider's services, confirmed service areas and review sources. Sponsored placements are always labeled.</p>
           </div>
-          <ul class="ql-legend">
-            <li><i style="background:#14b8a6"></i>🧼 Teal — Residential / STR cleaning</li>
-            <li><i style="background:#3b82f6"></i>🏢 Blue — Commercial janitorial</li>
-            <li><i style="background:#38bdf8"></i>🚰 Cyan — Plumbing (planned)</li>
-            <li><i style="background:#f5c542"></i>⚡ Amber — Electrical (planned)</li>
-            <li><i style="background:#e07a4f"></i>🧱 Terracotta — Construction / remodeling (planned)</li>
-            <li><i style="background:#a855f7"></i>❄️ Violet — HVAC (planned)</li>
-            <li><i style="background:#22a559"></i>🌿 Green — Landscaping (planned)</li>
-            <li><i style="background:#64748b"></i>🛠 Slate — Handyman / maintenance (planned)</li>
-          </ul>
+
+          <div class="ql-dir-map" aria-hidden="true">
+            <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="320" fill="#e8ece4"/>
+              <path d="M-10 230 C 80 200, 120 260, 210 235 S 330 170, 410 200 L410 330 L-10 330Z" fill="#dfe6dc"/>
+              <path d="M-10 92 C 60 120, 120 70, 190 98 S 300 150, 410 110" fill="none" stroke="#c9d8de" stroke-width="16" stroke-linecap="round"/>
+              <g fill="none" stroke="#fff" stroke-linecap="round">
+                <path d="M0 170 H400" stroke-width="7"/><path d="M150 0 V320" stroke-width="7"/>
+                <path d="M0 40 L400 280" stroke-width="4"/><path d="M290 0 L330 320" stroke-width="4"/>
+                <path d="M40 0 L70 320" stroke-width="3"/><path d="M0 260 H400" stroke-width="3"/>
+              </g>
+              <circle cx="200" cy="160" r="70" fill="#1e3a34" opacity="0.06"/>
+              <circle cx="200" cy="160" r="38" fill="#1e3a34" opacity="0.08"/>
+            </svg>
+            <span class="ql-map-pin"><i></i></span>
+            <span class="ql-map-label" data-ql-map-label>Your area</span>
+            <span class="ql-map-badge">Coverage opening soon</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Estimates ===== -->
-  <section class="ql-section" id="section-virtual-estimate-flow">
-    <div class="ql-container ql-narrow">
-      <p class="ql-eyebrow">Estimates</p>
-      <h2>Janitorial &amp; Cleaning Estimate Request</h2>
-      <p class="ql-lead">Tell us what you need, where the project is located, and your preferred timing. Add clear photos and a short walkthrough video to help the provider review the scope.</p>
-      <ul class="ql-checks">
-        <li><strong>Demo only—nothing sent.</strong></li>
-        <li>Photos <strong>and</strong> a short walkthrough video are normally needed before estimate readiness.</li>
-        <li>If you can’t provide media due to accessibility, technical problems, unsafe conditions, or an on-site assessment need, you can submit without it (marked “Awaiting project media”).</li>
-        <li>Upload guidance (when enabled): avoid people, personal documents, valuables, keys, entry codes, and unrelated private areas.</li>
-      </ul>
-      <div class="ql-disclaimer">
-        <strong>Estimate Disclaimer:</strong> The selected provider reviews your request and may provide a preliminary estimate, ask follow-up questions, or recommend an on-site assessment. The provider quotes and performs the work under its agreement with you. Submitting a request does not confirm a booking or final price.
+  <!-- ===== How it works ===== -->
+  <section class="ql-section ql-alt" id="section-how-it-works">
+    <div class="ql-container">
+      <div class="ql-head ql-reveal">
+        <p class="ql-eyebrow">How it works</p>
+        <h2>From request to estimate in <em>four steps</em></h2>
       </div>
-      <!-- Tip: put your native GHL estimate form element right below this code block. -->
+      <ol class="ql-steps">
+        <li class="ql-step ql-reveal">
+          <span class="ql-step-num">I</span>
+          <svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8"/></svg>
+          <h3>Describe your project</h3>
+          <p>The service, property type, location and the timing you have in mind.</p>
+        </li>
+        <li class="ql-step ql-reveal">
+          <span class="ql-step-num">II</span>
+          <svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+          <h3>Add photos &amp; video</h3>
+          <p>For cleaning, three photos and a short walkthrough video help the provider see the scope.</p>
+        </li>
+        <li class="ql-step ql-reveal">
+          <span class="ql-step-num">III</span>
+          <svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <h3>Connect with a provider</h3>
+          <p>We match your request with a suitable reviewed provider who covers your area.</p>
+        </li>
+        <li class="ql-step ql-reveal">
+          <span class="ql-step-num">IV</span>
+          <svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <h3>Discuss the estimate</h3>
+          <p>The provider reviews your request, quotes the work and confirms availability with you.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Request a Virtual Estimate (live GHL form) ===== -->
+  <section class="ql-section" id="section-virtual-estimate-flow">
+    <div class="ql-container ql-estimate">
+      <div class="ql-estimate-copy ql-reveal">
+        <p class="ql-eyebrow">Request an estimate</p>
+        <h2>Request a virtual <em>estimate</em></h2>
+        <p class="ql-lead">Skip the walk-through to start. Tell us about your space, and a suitable local provider will review it.</p>
+        <ul class="ql-checks">
+          <li><strong>What helps most:</strong> three clear photos and one short walkthrough video.</li>
+          <li><strong>No media yet?</strong> Send your request anyway and we'll arrange the next step with you.</li>
+          <li><strong>Private by default:</strong> your photos, address and contact details are shared only with the provider reviewing your request.</li>
+        </ul>
+        <p class="ql-fine">The provider reviews your request and may give a preliminary estimate, ask follow-up questions or suggest an on-site visit. The provider quotes and performs the work under its own agreement with you. Sending a request doesn't confirm a booking or a final price.</p>
+      </div>
+
+      <div class="ql-form-card ql-reveal">
+        <p class="ql-form-card-kicker">Tell us about your project</p>
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/2CZsk7kdEPJcdbYk33Tf"
+          id="inline-2CZsk7kdEPJcdbYk33Tf"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="House Cleaning Lead Generation"
+          data-height="undefined"
+          data-layout-iframe-id="inline-2CZsk7kdEPJcdbYk33Tf"
+          data-form-id="2CZsk7kdEPJcdbYk33Tf"
+          data-cookie-consent="true"
+          data-cookie-consent-provider="auto"
+          title="Request a virtual estimate"></iframe>
+      </div>
     </div>
   </section>
 
@@ -123,39 +243,39 @@
   <section class="ql-gallery" id="section-floureshe-editorial" data-ql-gallery>
     <div class="ql-gallery-stage">
       <div class="ql-gallery-intro">
-        <p class="ql-eyebrow">Magazine</p>
-        <h2>Live well. Feel good. Be you.</h2>
+        <p class="ql-eyebrow">The magazine</p>
+        <h2>Live well. Feel good. <em>Be you.</em></h2>
         <p class="ql-gallery-hint">Scroll to explore</p>
       </div>
 
       <div class="ql-cards">
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&w=600&q=70" alt="Living room at dusk" loading="lazy"></div>
           <div class="ql-card-back"><strong>Live well</strong><span>Spaces that feel good to come home to.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=600&q=70" alt="Bright open-plan home" loading="lazy"></div>
           <div class="ql-card-back"><strong>Feel good</strong><span>Calm, clean, and cared for.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=600&q=70" alt="Living room with timber beams" loading="lazy"></div>
           <div class="ql-card-back"><strong>Be you</strong><span>Homes that reflect how you live.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
-          <div class="ql-card-back"><strong>Better choices</strong><span>Vetted pros, honest estimates.</span></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=70" alt="Bedroom with a view" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Better choices</strong><span>Reviewed pros, honest estimates.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1630587148265-761cbd139043?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1630587148265-761cbd139043?auto=format&fit=crop&w=600&q=70" alt="Hallway with chandeliers" loading="lazy"></div>
           <div class="ql-card-back"><strong>Hospitality standards</strong><span>Every room, guest-ready.</span></div>
         </div>
       </div>
@@ -172,115 +292,169 @@
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1599696848652-f0ff23bc911f?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1599696848652-f0ff23bc911f?auto=format&fit=crop&w=600&q=70" alt="Lounge with tall windows" loading="lazy"></div>
           <div class="ql-card-back"><strong>Mindful living</strong><span>Slower days, brighter spaces.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=600&q=70" alt="Hotel lobby lounge" loading="lazy"></div>
           <div class="ql-card-back"><strong>Quiet luxury</strong><span>Detail in every corner.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?auto=format&fit=crop&w=600&q=70" alt="Calm grey bedroom" loading="lazy"></div>
           <div class="ql-card-back"><strong>Cared for</strong><span>Property care with integrity.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1518733057094-95b53143d2a7?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1518733057094-95b53143d2a7?auto=format&fit=crop&w=600&q=70" alt="Sunlit staircase" loading="lazy"></div>
           <div class="ql-card-back"><strong>A beautiful life</strong><span>Better choices, every day.</span></div>
         </div>
       </div>
       <div class="ql-card">
         <div class="ql-card-inner">
-          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1581784878214-8d5596b98a01?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1581784878214-8d5596b98a01?auto=format&fit=crop&w=600&q=70" alt="Fireplace with pendant lights" loading="lazy"></div>
           <div class="ql-card-back"><strong>Welcome home</strong><span>Rest, reflect, recharge.</span></div>
         </div>
       </div>
       </div>
 
       <div class="ql-gallery-outro">
-        <p class="ql-gallery-text">Inside the April 2025 issue of Quality Living: mindful living, soulful getaways, and spaces that feel good to come home to.</p>
+        <p class="ql-gallery-text">Inside the April 2025 issue: mindful living, soulful getaways, and spaces that feel good to come home to.</p>
         <a class="ql-btn ql-btn-gold" href="#section-magazine-issue">Explore the April Issue</a>
-        <p class="ql-gallery-note">Provider features and advertising opportunities will be added when the edition, scope, and placement are approved.</p>
       </div>
     </div>
   </section>
 
   <!-- @include magazine-feature.html -->
 
-  <!-- ===== Standards ===== -->
+  <!-- ===== Our Standards ===== -->
   <section class="ql-section" id="section-trust-and-verification">
-    <div class="ql-container">
-      <p class="ql-eyebrow">Standards</p>
-      <h2>Our Standards</h2>
-      <p class="ql-body">Our planned approval process considers provider identity, relevant services, coverage, references, and applicable supporting documents. A published profile must accurately state what was reviewed and when. Paid advertising does not purchase a passing quality review.</p>
-      <ul class="ql-checks ql-checks-sm">
-        <li>Provider identity, services, and service-area coverage are reviewed before publication.</li>
-        <li>Profiles should show the review source (when provided) and the date evidence was checked.</li>
-        <li>Sponsored placement (when used) is labeled separately from approval status.</li>
-      </ul>
+    <div class="ql-container ql-standards">
+      <div class="ql-standards-copy">
+        <div class="ql-reveal">
+          <p class="ql-eyebrow">Our standards</p>
+          <h2>Approval is earned, <em>never bought</em></h2>
+          <p class="ql-lead">Before a provider is published, our team reviews who they are and what they do. Every profile states what was checked, where the information came from, and when.</p>
+        </div>
+        <div class="ql-std-grid">
+          <div class="ql-std ql-reveal">
+            <h3>What we review</h3>
+            <p>Business identity, the services offered, the areas actually covered, references, and any licenses or insurance documents that apply to the work.</p>
+          </div>
+          <div class="ql-std ql-reveal">
+            <h3>Where it comes from</h3>
+            <p>Ratings and reviews are shown with their source and the date we checked them. We don't publish ratings we can't trace.</p>
+          </div>
+          <div class="ql-std ql-reveal">
+            <h3>What approval means</h3>
+            <p>Approval means the review was completed. Sponsored placement is labeled separately, and a paid membership never changes an approval decision.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ql-standards-seal ql-reveal" aria-hidden="true">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_640/u_https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/c048e54b-2cdc-4fa0-8b5a-d4a7c849ab2d.png" alt="" width="340" height="340">
+        <p class="ql-serif">Reviewed before published</p>
+      </div>
     </div>
   </section>
 
-  <!-- ===== For Service Providers ===== -->
-  <section class="ql-section ql-alt" id="section-service-provider-portal">
+  <!-- ===== For Providers =====
+       Plans follow the Oct 21, 2026 package brief. Prices are set; detailed delivery limits and
+       the $800 client guarantee are still being finalized, so they're not listed here. -->
+  <section class="ql-section ql-dark" id="section-service-provider-portal">
     <div class="ql-container">
-      <p class="ql-eyebrow ql-center">For Service Providers</p>
-      <h2 class="ql-center">Grow With Us</h2>
-      <p class="ql-lead ql-center">Connect with discerning residential and boutique hospitality estates seeking vetted, elite trade professionals. Choose your engagement tier below to begin onboarding.</p>
-
-      <div class="ql-plans">
-        <div class="ql-plan">
-          <div class="ql-plan-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          </div>
-          <h3>Approved Presence</h3>
-          <p class="ql-price"><strong>$400</strong> / month</p>
-          <p class="ql-plan-desc">Directory visibility, an approved scheduled publication placement, and the defined basic marketing scope.</p>
-          <ul class="ql-ticks">
-            <li>Directory visibility</li>
-            <li>Approved scheduled publication placement (when available)</li>
-            <li>Basic marketing scope (defined by agreement)</li>
-          </ul>
-          <a class="ql-btn ql-btn-primary" href="#section-brand-footer">Apply for Membership</a>
-        </div>
-
-        <div class="ql-plan ql-plan-featured">
-          <div class="ql-plan-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
-          </div>
-          <h3>Client Growth</h3>
-          <p class="ql-price"><strong>$800</strong> / month</p>
-          <p class="ql-plan-desc">Enhanced listing, defined advertising and social-media work, customer-acquisition calling, qualification, follow-up, and reporting.</p>
-          <ul class="ql-ticks">
-            <li>Enhanced directory visibility</li>
-            <li>Defined advertising + social-media work (scope agreed)</li>
-            <li>Acquisition calling, qualification, follow-up, and reporting</li>
-          </ul>
-          <a class="ql-btn ql-btn-gold" href="#section-brand-footer">Apply for Membership</a>
-        </div>
-
-        <div class="ql-plan">
-          <div class="ql-plan-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18"/><path d="m3 19 2-12 5 5 2-6 2 6 5-5 2 12"/></svg>
-          </div>
-          <h3>Market Leader</h3>
-          <p class="ql-price"><strong>$1,600</strong> / month</p>
-          <p class="ql-plan-desc">Proposed expanded campaign, content, and coordination scope.</p>
-          <ul class="ql-ticks">
-            <li>Proposed expanded campaign planning</li>
-            <li>Proposed content + coordination scope (to be agreed)</li>
-            <li>Final scope, territory, and placements require owner approval</li>
-          </ul>
-          <a class="ql-btn ql-btn-primary" href="#section-brand-footer">Discuss a Plan</a>
-        </div>
+      <div class="ql-head ql-reveal">
+        <p class="ql-eyebrow">For service providers</p>
+        <h2>More customers. <em>Less admin.</em></h2>
+        <p class="ql-lead">Grow your business with Quality Living. Start with three free leads, then continue with referral-based growth or let us manage your directory presence, website, AI front desk, follow-up and marketing.</p>
       </div>
 
-      <div class="ql-intro-banner">Ask About the Introductory Program.</div>
+      <div class="ql-offer ql-reveal">
+        <div class="ql-offer-icon"><svg class="ql-i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C9 3 12 8 12 8s3-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></div>
+        <div class="ql-offer-text">
+          <h3>Start with 3 free leads</h3>
+          <p>Three genuine service inquiries matched to your approved services and territory. No card, no monthly commitment, and no referral fee on those three. Invalid or duplicate leads don't count toward the three.</p>
+        </div>
+        <a class="ql-btn ql-btn-gold" href="#section-brand-footer" data-ql-provider-apply>Start With 3 Free Leads</a>
+      </div>
+
+      <div class="ql-plans">
+        <article class="ql-plan ql-reveal">
+          <p class="ql-plan-tag">Directory</p>
+          <h3>Directory Presence</h3>
+          <p class="ql-price"><strong>$400</strong> / month</p>
+          <p class="ql-plan-desc">A professional profile and a clear route from discovery to inquiry.</p>
+          <ul class="ql-ticks">
+            <li>Approved Quality Living business profile</li>
+            <li>Services, categories and service areas</li>
+            <li>Portfolio images and review-source links</li>
+            <li>Inquiry routing and booking link</li>
+            <li>Monthly listing updates and activity summary</li>
+            <li>An assigned Partnerships Manager</li>
+          </ul>
+          <a class="ql-btn ql-btn-outline-light" href="#section-brand-footer" data-ql-provider-apply>Apply</a>
+        </article>
+
+        <article class="ql-plan ql-plan-featured ql-reveal">
+          <p class="ql-plan-tag">Website + AI + Growth</p>
+          <h3>AI Autopilot &amp; Growth</h3>
+          <p class="ql-price"><strong>$800</strong> / month</p>
+          <p class="ql-plan-desc">Your website, front desk, booking and follow-up, managed together.</p>
+          <ul class="ql-ticks">
+            <li>Everything in Directory Presence</li>
+            <li>A managed small-business website</li>
+            <li>AI phone receptionist and email handling</li>
+            <li>Estimate booking, reminders and rescheduling</li>
+            <li>Missed-inquiry follow-up and local SEO</li>
+            <li>Scheduled social content and monthly reporting</li>
+          </ul>
+          <a class="ql-btn ql-btn-gold" href="#section-brand-footer" data-ql-provider-apply>Apply</a>
+        </article>
+
+        <article class="ql-plan ql-reveal">
+          <p class="ql-plan-tag">Scale + Media</p>
+          <h3>Scale &amp; Media Partner</h3>
+          <p class="ql-price"><strong>$1,600</strong> / month</p>
+          <p class="ql-plan-desc">More content, broader automation and closer campaign attention.</p>
+          <ul class="ql-ticks">
+            <li>Everything in AI Autopilot &amp; Growth</li>
+            <li>Up to two locations or territories</li>
+            <li>Short videos and more original content</li>
+            <li>Review requests and repeat-booking workflows</li>
+            <li>Performance dashboard and reviews every two weeks</li>
+            <li>Priority business-hours support</li>
+          </ul>
+          <a class="ql-btn ql-btn-outline-light" href="#section-brand-footer" data-ql-provider-apply>Discuss a Plan</a>
+        </article>
+      </div>
+
+      <div class="ql-plan-extras">
+        <div class="ql-extra ql-reveal">
+          <h3>Referral Partner <span>$0 / month + 10%</span></h3>
+          <p>Prefer no subscription? Pay 10% of eligible collected revenue from additional Quality Living referrals. On $1,000 collected, the fee is $100.</p>
+        </div>
+        <div class="ql-extra ql-reveal">
+          <h3>Meta advertising <span>from $75 / day</span></h3>
+          <p>Optional paid campaigns, funded separately, each with an approved budget, spending cap, schedule and territory.</p>
+        </div>
+      </div>
+      <p class="ql-plan-note">Every application starts with a review of your services, coverage and capacity. Final scope and delivery limits are set out in your agreement before you enroll.</p>
+    </div>
+  </section>
+
+  <!-- ===== Closing call to action ===== -->
+  <section class="ql-cta">
+    <div class="ql-container ql-cta-inner ql-reveal">
+      <h2>Ready for a better <em>space</em>?</h2>
+      <p>Tell us what you need. We'll check local options and connect you with a suitable provider.</p>
+      <div class="ql-cta-actions">
+        <a class="ql-btn ql-btn-primary" href="#section-virtual-estimate-flow">Request an Estimate</a>
+        <a class="ql-btn ql-btn-outline" href="#section-service-discovery-engine">Find a Service</a>
+      </div>
     </div>
   </section>
 
@@ -288,40 +462,41 @@
   <footer class="ql-footer" id="section-brand-footer">
     <div class="ql-container">
       <div class="ql-footer-grid">
-        <div>
-          <img class="ql-footer-logo" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/328fec49-8a6a-4bed-8d05-8d0703a44445.png" alt="Quality Living logo">
-          <h3>Quality Living</h3>
-          <p>Curating high-integrity property care, master craftsmanship, and vetted estate management with boutique hospitality standards.</p>
+        <div class="ql-footer-brand">
+          <img class="ql-footer-logo" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://storage.googleapis.com/funnel-ai-production/image-generation/wVyBbToZpkqhRQ0pkRSu/328fec49-8a6a-4bed-8d05-8d0703a44445.png" alt="Quality Living logo" width="44" height="44" loading="lazy">
+          <p class="ql-footer-name">Quality Living</p>
+          <p>Reviewed local providers, honest estimates, and property care held to hospitality standards.</p>
         </div>
-        <div>
-          <h4>Client Services</h4>
-          <a href="#section-hospitality-hero">Home</a>
+        <nav aria-label="For customers">
+          <h4>For customers</h4>
           <a href="#section-service-discovery-engine">Find a Service</a>
+          <a href="#section-how-it-works">How It Works</a>
           <a href="#section-virtual-estimate-flow">Request an Estimate</a>
           <a href="#section-magazine-issue">Quality Living Magazine</a>
-        </div>
+        </nav>
+        <nav aria-label="For providers">
+          <h4>For providers</h4>
+          <a href="#section-service-provider-portal">Start With 3 Free Leads</a>
+          <a href="#section-service-provider-portal">Growth Plans</a>
+          <a href="#section-trust-and-verification">Our Standards</a>
+        </nav>
         <div>
-          <h4>Partners</h4>
-          <a href="#section-service-provider-portal">Apply as a Pro</a>
-          <a href="#section-service-provider-portal">Provider Portal</a>
-          <a href="#section-trust-and-verification">Verification Standards</a>
-        </div>
-        <div>
-          <h4>Connect &amp; Legal</h4>
-          <p>Contact details, privacy policy, and terms will be added after owner approval.</p>
+          <h4>Contact</h4>
+          <!-- Add your real email and phone here once they're set up. -->
+          <p>Questions about a project? Send a request and our coordinator will follow up with you.</p>
+          <a class="ql-btn ql-btn-gold ql-btn-sm" href="#section-virtual-estimate-flow">Contact Us</a>
         </div>
       </div>
 
-      <!-- Swap these hrefs for your real social profile links. -->
+      <!-- Social icons: uncomment and add your real profile URLs.
       <div class="ql-social">
-        <a href="https://instagram.com/" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/instagram-square.svg" alt="Instagram"></a>
-        <a href="https://linkedin.com/" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/linkedin-square.svg" alt="LinkedIn"></a>
-        <a href="https://facebook.com/" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/facebook-square.svg" alt="Facebook"></a>
-        <a href="https://twitter.com/" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/x-square.svg" alt="X"></a>
-      </div>
+        <a href="https://instagram.com/YOUR-PROFILE" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/instagram-square.svg" alt="Instagram"></a>
+        <a href="https://facebook.com/YOUR-PAGE" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/facebook-square.svg" alt="Facebook"></a>
+      </div> -->
 
-      <p class="ql-copy">© 2026 Quality Living. All rights reserved. Elevated property operations &amp; hospitality-standard services.</p>
+      <p class="ql-copy">© 2026 Quality Living. All rights reserved.</p>
     </div>
   </footer>
 
 </div>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>

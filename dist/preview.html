@@ -535,6 +535,178 @@
 
 .ql .ql-copy { text-align: center; font-size: 13px; opacity: 0.85; }
 
+/* ---------- Magazine gallery (scroll-animated cards, see src/script.js) ---------- */
+.ql .ql-gallery {
+  position: relative;
+  height: 420vh; /* scroll distance the animation plays over */
+  background: var(--ql-green);
+}
+
+.ql .ql-gallery-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(197, 160, 89, 0.16), transparent 60%),
+    var(--ql-green);
+}
+
+.ql .ql-gallery-intro,
+.ql .ql-gallery-outro {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  text-align: center;
+  padding: 0 24px;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+
+.ql .ql-gallery-intro { top: 9vh; }
+.ql .ql-gallery-intro .ql-eyebrow { color: var(--ql-gold); }
+
+.ql .ql-gallery-intro h2 {
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+.ql .ql-gallery-hint {
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.ql .ql-gallery-outro {
+  bottom: 6vh;
+  opacity: 0;
+}
+
+.ql .ql-gallery-outro.is-visible { pointer-events: auto; }
+
+.ql .ql-gallery-text {
+  max-width: 640px;
+  margin: 0 auto 18px;
+  font-size: 17px;
+  opacity: 0.9;
+}
+
+.ql .ql-gallery-note {
+  margin-top: 14px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.ql .ql-cards {
+  position: absolute;
+  inset: 0;
+}
+
+.ql .ql-card {
+  --ql-card-w: clamp(84px, 10.5vw, 158px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--ql-card-w);
+  aspect-ratio: 720 / 1019;
+  margin-left: calc(var(--ql-card-w) / -2);
+  margin-top: calc(var(--ql-card-w) * -0.7076);
+  perspective: 1000px;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.ql .ql-gallery.is-arc .ql-card { pointer-events: auto; cursor: pointer; }
+
+.ql .ql-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ql .ql-gallery.is-arc .ql-card:hover .ql-card-inner,
+.ql .ql-card.is-flipped .ql-card-inner {
+  transform: rotateY(180deg);
+}
+
+.ql .ql-card-front,
+.ql .ql-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+.ql .ql-card-front { background: #2b2b28; }
+
+.ql .ql-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ql .ql-card-back {
+  transform: rotateY(180deg);
+  background: var(--ql-cream);
+  color: var(--ql-green);
+  border: 1px solid var(--ql-gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  text-align: center;
+}
+
+.ql .ql-card-back strong {
+  font-family: var(--ql-serif);
+  font-weight: 600;
+  font-size: clamp(14px, 1.5vw, 20px);
+  line-height: 1.1;
+}
+
+.ql .ql-card-back span {
+  font-size: clamp(10px, 0.85vw, 12px);
+  line-height: 1.35;
+  color: var(--ql-muted);
+}
+
+.ql .ql-card-back small {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ql-gold);
+}
+
+.ql .ql-card-back a {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ql-green);
+  border-bottom: 1px solid var(--ql-gold);
+}
+
+.ql .ql-card-cover .ql-card-front { outline: 2px solid var(--ql-gold); outline-offset: -2px; }
+
+/* If GHL's wrappers break position: sticky, script.js switches to this un-pinned mode */
+.ql .ql-gallery.ql-unpinned { height: auto; }
+.ql .ql-gallery.ql-unpinned .ql-gallery-stage { position: relative; height: 100vh; min-height: 640px; }
+
+/* Visitors who prefer reduced motion get the finished arc, no scroll animation */
+.ql .ql-gallery.ql-static { height: auto; }
+.ql .ql-gallery.ql-static .ql-gallery-stage { position: relative; height: 100vh; min-height: 640px; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1240px) {
   .ql .ql-nav-links { display: none; }
@@ -672,12 +844,96 @@
     </div>
   </section>
 
-  <!-- ===== Magazine ===== -->
-  <section class="ql-section" id="section-floureshe-editorial">
-    <div class="ql-container ql-center">
-      <p class="ql-eyebrow">Magazine</p>
-      <h2 class="ql-h2-dark">FLOURESHÉ — publication details coming soon.</h2>
-      <p class="ql-lead">Provider features and advertising opportunities will be added when the edition, scope, and placement are approved.</p>
+  <!-- ===== Magazine (scroll-animated card gallery) =====
+       Cards scatter -> line up -> form a circle -> spread into an arc as you scroll.
+       In the arc, hover (or tap on phones) flips a card. Logic lives in src/script.js. -->
+  <section class="ql-gallery" id="section-floureshe-editorial" data-ql-gallery>
+    <div class="ql-gallery-stage">
+      <div class="ql-gallery-intro">
+        <p class="ql-eyebrow">Magazine</p>
+        <h2>Live well. Feel good. Be you.</h2>
+        <p class="ql-gallery-hint">Scroll to explore</p>
+      </div>
+
+      <div class="ql-cards">
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Live well</strong><span>Spaces that feel good to come home to.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Feel good</strong><span>Calm, clean, and cared for.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Be you</strong><span>Homes that reflect how you live.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Better choices</strong><span>Vetted pros, honest estimates.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1630587148265-761cbd139043?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Hospitality standards</strong><span>Every room, guest-ready.</span></div>
+        </div>
+      </div>
+      <div class="ql-card ql-card-cover">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/magazine-cover-apr-2025.jpg" alt="Quality Living magazine, April 2025 cover"></div>
+          <div class="ql-card-back">
+            <small>April 2025 Issue</small>
+            <strong>Quality Living</strong>
+            <span>Live well. Feel good. Be you.</span>
+            <a href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf" target="_blank" rel="noopener">Read the issue</a>
+          </div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1599696848652-f0ff23bc911f?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Mindful living</strong><span>Slower days, brighter spaces.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Quiet luxury</strong><span>Detail in every corner.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Cared for</strong><span>Property care with integrity.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1518733057094-95b53143d2a7?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>A beautiful life</strong><span>Better choices, every day.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1581784878214-8d5596b98a01?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Welcome home</strong><span>Rest, reflect, recharge.</span></div>
+        </div>
+      </div>
+      </div>
+
+      <div class="ql-gallery-outro">
+        <p class="ql-gallery-text">Inside the April 2025 issue of Quality Living: mindful living, soulful getaways, and spaces that feel good to come home to.</p>
+        <a class="ql-btn ql-btn-gold" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf" target="_blank" rel="noopener">Read the April Issue</a>
+        <p class="ql-gallery-note">Provider features and advertising opportunities will be added when the edition, scope, and placement are approved.</p>
+      </div>
     </div>
   </section>
 
@@ -794,6 +1050,159 @@
   </footer>
 
 </div>
+
+<script>
+/* Quality Living: scroll-animated magazine card gallery.
+   Plain JS (no libraries) so it runs inside a GoHighLevel Custom JS/HTML element.
+   Scroll progress through the section drives 4 layouts:
+   scatter -> line -> circle -> arc. In the arc, cards flip on hover / tap. */
+(function () {
+  function init(section) {
+    if (section.dataset.qlReady) return;
+    section.dataset.qlReady = "1";
+
+    var stage = section.querySelector(".ql-gallery-stage");
+    var cards = Array.prototype.slice.call(section.querySelectorAll(".ql-card"));
+    var intro = section.querySelector(".ql-gallery-intro");
+    var outro = section.querySelector(".ql-gallery-outro");
+    var hint = section.querySelector(".ql-gallery-hint");
+    var n = cards.length;
+    var mid = (n - 1) / 2;
+    var coverIndex = cards.findIndex(function (c) { return c.classList.contains("ql-card-cover"); });
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var unpinned = false;
+    var ticking = false;
+
+    if (reduced) section.classList.add("ql-static");
+
+    // Fixed pseudo-random numbers so the scatter looks the same on every visit
+    function rand(i, k) {
+      var x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    function layouts() {
+      var W = stage.clientWidth;
+      var H = stage.clientHeight;
+      var cw = cards[0].offsetWidth;
+      var lineW = Math.min(W * 0.9 - cw, n * cw * 1.05);
+      var R = Math.min(W * 0.4, H * 0.28);
+      var arcR = Math.max(W * 1.4, 800);
+      var arcW = Math.min(W * 0.92 - cw, n * cw * 0.72);
+      var span = arcW / arcR;
+
+      return cards.map(function (_, i) {
+        var a = (i / n) * Math.PI * 2 - Math.PI / 2;
+        var t = n > 1 ? (i - mid) / (n - 1) : 0;
+        var arcA = t * span;
+        var isCover = i === coverIndex;
+        return {
+          scatter: {
+            x: (rand(i, 1) - 0.5) * W * 0.9,
+            y: (rand(i, 2) * 0.5 - 0.12) * H, // keep clear of the heading at the top
+            r: (rand(i, 3) - 0.5) * 60,
+            s: 0.85
+          },
+          line: { x: t * lineW, y: 0, r: 0, s: 1 },
+          circle: { x: R * Math.cos(a), y: R * Math.sin(a), r: (a * 180) / Math.PI + 90, s: 0.9 },
+          arc: {
+            x: arcR * Math.sin(arcA),
+            y: -H * 0.04 + arcR * (1 - Math.cos(arcA)) + (isCover ? -cw * 0.12 : 0),
+            r: (arcA * 180) / Math.PI,
+            s: isCover ? 1.25 : 1
+          }
+        };
+      });
+    }
+
+    var L = layouts();
+    var stops = [["scatter", 0], ["line", 0.25], ["circle", 0.5], ["arc", 0.75]];
+
+    function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function clamp(v) { return Math.max(0, Math.min(1, v)); }
+    function mix(a, b, t) { return a + (b - a) * t; }
+
+    function progress() {
+      if (reduced) return 1;
+      var r = section.getBoundingClientRect();
+      var vh = window.innerHeight;
+
+      // Detect a GHL wrapper breaking position: sticky, and fall back to un-pinned mode
+      if (!unpinned && r.top < -60 && r.bottom > vh + 60) {
+        if (Math.abs(stage.getBoundingClientRect().top) > 8) {
+          unpinned = true;
+          section.classList.add("ql-unpinned");
+          L = layouts();
+          r = section.getBoundingClientRect();
+        }
+      }
+
+      if (unpinned) {
+        // Animate while the stage travels through the viewport
+        return clamp((vh - r.top) / (vh + r.height) * 1.6 - 0.3);
+      }
+      return clamp(-r.top / (r.height - vh));
+    }
+
+    function render() {
+      ticking = false;
+      var p = progress();
+      var k = 0;
+      while (k < stops.length - 1 && p > stops[k + 1][1]) k++;
+      var from = stops[k];
+      var to = stops[Math.min(k + 1, stops.length - 1)];
+      var t = to === from ? 1 : ease(clamp((p - from[1]) / (to[1] - from[1])));
+
+      cards.forEach(function (card, i) {
+        var A = L[i][from[0]];
+        var B = L[i][to[0]];
+        var x = mix(A.x, B.x, t);
+        var y = mix(A.y, B.y, t);
+        var r = mix(A.r, B.r, t);
+        var s = mix(A.s, B.s, t);
+        card.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + r.toFixed(2) + "deg) scale(" + s.toFixed(3) + ")";
+        card.style.zIndex = i === coverIndex && p > 0.6 ? 20 : 10 - Math.round(Math.abs(i - mid));
+      });
+
+      var arc = p >= 0.75;
+      section.classList.toggle("is-arc", arc);
+      if (!arc) cards.forEach(function (c) { c.classList.remove("is-flipped"); });
+      // Heading shows at the start and comes back above the finished arc
+      intro.style.opacity = String(Math.max(clamp(1 - p / 0.12), clamp((p - 0.8) / 0.1)));
+      hint.style.opacity = p > 0.05 ? "0" : "";
+      outro.style.opacity = String(clamp((p - 0.78) / 0.12));
+      outro.classList.toggle("is-visible", p > 0.85);
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(render);
+      }
+    }
+
+    // Tap to flip on touch screens (hover does it on desktop)
+    cards.forEach(function (card) {
+      card.addEventListener("click", function (e) {
+        if (!section.classList.contains("is-arc")) return;
+        if (e.target.closest("a")) return;
+        card.classList.toggle("is-flipped");
+      });
+    });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { L = layouts(); onScroll(); });
+    render();
+  }
+
+  function boot() {
+    document.querySelectorAll("[data-ql-gallery]").forEach(init);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script>
 
 </body>
 </html>

@@ -112,12 +112,96 @@
     </div>
   </section>
 
-  <!-- ===== Magazine ===== -->
-  <section class="ql-section" id="section-floureshe-editorial">
-    <div class="ql-container ql-center">
-      <p class="ql-eyebrow">Magazine</p>
-      <h2 class="ql-h2-dark">FLOURESHÉ — publication details coming soon.</h2>
-      <p class="ql-lead">Provider features and advertising opportunities will be added when the edition, scope, and placement are approved.</p>
+  <!-- ===== Magazine (scroll-animated card gallery) =====
+       Cards scatter -> line up -> form a circle -> spread into an arc as you scroll.
+       In the arc, hover (or tap on phones) flips a card. Logic lives in src/script.js. -->
+  <section class="ql-gallery" id="section-floureshe-editorial" data-ql-gallery>
+    <div class="ql-gallery-stage">
+      <div class="ql-gallery-intro">
+        <p class="ql-eyebrow">Magazine</p>
+        <h2>Live well. Feel good. Be you.</h2>
+        <p class="ql-gallery-hint">Scroll to explore</p>
+      </div>
+
+      <div class="ql-cards">
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Live well</strong><span>Spaces that feel good to come home to.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Feel good</strong><span>Calm, clean, and cared for.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Be you</strong><span>Homes that reflect how you live.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Better choices</strong><span>Vetted pros, honest estimates.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1630587148265-761cbd139043?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Hospitality standards</strong><span>Every room, guest-ready.</span></div>
+        </div>
+      </div>
+      <div class="ql-card ql-card-cover">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/magazine-cover-apr-2025.jpg" alt="Quality Living magazine, April 2025 cover"></div>
+          <div class="ql-card-back">
+            <small>April 2025 Issue</small>
+            <strong>Quality Living</strong>
+            <span>Live well. Feel good. Be you.</span>
+            <a href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf" target="_blank" rel="noopener">Read the issue</a>
+          </div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1599696848652-f0ff23bc911f?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Mindful living</strong><span>Slower days, brighter spaces.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Quiet luxury</strong><span>Detail in every corner.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Cared for</strong><span>Property care with integrity.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1518733057094-95b53143d2a7?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>A beautiful life</strong><span>Better choices, every day.</span></div>
+        </div>
+      </div>
+      <div class="ql-card">
+        <div class="ql-card-inner">
+          <div class="ql-card-front"><img src="https://images.unsplash.com/photo-1581784878214-8d5596b98a01?auto=format&fit=crop&w=600&q=70" alt="Luxury interior" loading="lazy"></div>
+          <div class="ql-card-back"><strong>Welcome home</strong><span>Rest, reflect, recharge.</span></div>
+        </div>
+      </div>
+      </div>
+
+      <div class="ql-gallery-outro">
+        <p class="ql-gallery-text">Inside the April 2025 issue of Quality Living: mindful living, soulful getaways, and spaces that feel good to come home to.</p>
+        <a class="ql-btn ql-btn-gold" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf" target="_blank" rel="noopener">Read the April Issue</a>
+        <p class="ql-gallery-note">Provider features and advertising opportunities will be added when the edition, scope, and placement are approved.</p>
+      </div>
     </div>
   </section>
 

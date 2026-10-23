@@ -6,6 +6,8 @@ The qualitylivin.com homepage as clean HTML/CSS, kept in git and pasted into GoH
 
 - `src/page.html`: page content (edit this)
 - `src/styles.css`: styles (edit this; brand colors + hero image are at the top)
+- `src/script.js`: the scroll animation for the magazine card gallery
+- `assets/`: magazine cover image + the April 2025 magazine PDF
 - `dist/ghl-paste.html`: **the file you paste into GHL** (generated)
 - `dist/preview.html`: open in a browser to preview (generated)
 - `original/`: snapshot of the original GHL site (reference only)
@@ -35,6 +37,16 @@ Tip: duplicate the page in GHL first and test there before replacing the live ho
 ## Hero background photo
 
 Set at the top of `src/styles.css` (`--ql-hero-img`). It's the same photo the original GHL site uses. To change it, upload a new image to GHL Media Library and paste its URL there.
+
+## Magazine card gallery (scroll animation)
+
+The magazine section (`#section-floureshe-editorial`) is a scroll-driven card gallery. As visitors scroll, the cards scatter, line up, form a circle, then spread into an arc with the magazine cover in the center. In the arc, hovering (or tapping on a phone) flips a card. It uses normal page scrolling, so it never traps the mouse wheel.
+
+- **Photos:** free Unsplash images (free for commercial use, no attribution required). Swap any `images.unsplash.com` URL in `src/page.html` for your own job photos from GHL Media Library.
+- **Card backs:** each card's back text is in `src/page.html` (the `ql-card-back` blocks).
+- **Cover + PDF:** both load from this repo via `cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/...`. That only works while the repo is public, and changes can take up to a day to show. For production, upload both to GHL Media Library and replace those URLs.
+- **Pinned scrolling:** the section stays pinned on screen while it animates. If a GHL wrapper blocks that, the script automatically switches to an un-pinned version.
+- **Reduced motion:** visitors with "reduce motion" turned on see the finished arc with no animation.
 
 ## `original/` folder
 

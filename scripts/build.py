@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Combine src/styles.css + src/page.html into files ready for GoHighLevel.
+"""Combine src/styles.css + src/page.html + src/script.js into files ready for GoHighLevel.
 
 dist/ghl-paste.html  -> paste this into a GHL "Custom JS/HTML" (Code) element
 dist/preview.html    -> open in a browser to preview locally
@@ -9,8 +9,9 @@ from pathlib import Path
 root = Path(__file__).resolve().parent.parent
 css = (root / "src" / "styles.css").read_text()
 html = (root / "src" / "page.html").read_text()
+js = (root / "src" / "script.js").read_text()
 
-snippet = f"<style>\n{css}</style>\n\n{html}"
+snippet = f"<style>\n{css}</style>\n\n{html}\n<script>\n{js}</script>\n"
 
 preview = f"""<!doctype html>
 <html lang="en">

@@ -237,7 +237,7 @@
 <script>
 /* Quality Living provider directory. Plain JS + Leaflet (OpenStreetMap), no API key.
    CSV columns: status,name,categories,city,state,lat,lng,service_areas,phone,website,
-   booking_url,rating,review_count,rating_source,rating_url,rating_checked,featured,blurb
+   booking_url,rating,review_count,rating_source,rating_url,rating_checked,featured,blurb,founding
    - status: joined (shown as partner) | example (shown, labeled "Example listing",
      no contact buttons) | invited | pending | declined (hidden)
    - categories / service_areas: separate multiple values with ;  (service areas can be
@@ -368,6 +368,7 @@
       }
       var tags = '<span class="qld-tag qld-tag-partner">Network partner</span>';
       if (p.featured) tags += '<span class="qld-tag qld-tag-featured">Featured in Quality Living Magazine</span>';
+      if (p.founding) tags += '<span class="qld-tag qld-tag-featured">Founding Partner</span>';
       p.cats.forEach(function (c) { if (CAT[c]) tags += '<span class="qld-tag"><i style="background:' + CAT[c].color + '"></i>' + esc(CAT[c].label) + "</span>"; });
       var actions = '<a class="qld-btn qld-btn-sm" data-qld-request href="' + esc(estimateLink) + '">Request estimate</a>';
       var book = safeUrl(p.booking_url);
@@ -474,6 +475,7 @@
               p.lng = parseFloat(p.lng);
               p.example = /^example$/i.test(p.status);
               p.featured = !p.example && /^(yes|true|1)$/i.test(p.featured || "");
+              p.founding = !p.example && /^(yes|true|1)$/i.test(p.founding || "");
               if (p.example) { p.rating = ""; p.phone = ""; p.website = ""; p.booking_url = ""; }
               return p;
             })

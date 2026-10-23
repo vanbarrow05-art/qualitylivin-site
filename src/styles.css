@@ -1340,3 +1340,62 @@
   .ql .ql-plan { padding: 32px 24px 28px; }
   .ql .ql-footer-grid { grid-template-columns: 1fr; gap: 36px; }
 }
+
+/* ---------- Founding Partner launch promo (remove after Jan 31, 2027) ---------- */
+.ql .ql-founding {
+  margin: 0 0 40px;
+  padding: 28px 32px;
+  border: 1px solid var(--ql-gold);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.16), rgba(197, 160, 89, 0.04));
+  color: #fff;
+}
+
+.ql .ql-founding-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--ql-gold);
+  color: var(--ql-green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ql .ql-founding h3 {
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.ql .ql-founding ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 24px;
+  margin-bottom: 12px;
+}
+
+.ql .ql-founding li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 15px;
+  opacity: 0.92;
+}
+
+.ql .ql-founding li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--ql-gold);
+  font-weight: 700;
+}
+
+.ql .ql-founding-note { font-size: 13px; opacity: 0.7; }
+
+@media (max-width: 900px) {
+  .ql .ql-founding { padding: 22px 20px; }
+  .ql .ql-founding ul { grid-template-columns: 1fr; }
+}

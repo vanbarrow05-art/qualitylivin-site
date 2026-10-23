@@ -82,3 +82,10 @@ These are reference only. GHL can't re-import them, and they're not used by the 
 - Provider plans use the Oct 21 package names and prices. Delivery limits and the $800 guarantee aren't shown until their terms are final. The provider buttons point to Contact until a provider application form exists. Search `data-ql-provider-apply` in `src/page.html` to repoint them.
 - No email, phone or social links are shown until real ones exist. The footer has a commented-out social block ready to fill in.
 - On Windows, the build works with plain `python scripts/build.py` (it reads and writes UTF-8 explicitly).
+
+## Business docs
+
+- `partners/`: partner program (offer, call scripts, prospecting, CRM pipeline, training, agreement outline, launch promo, researched prospect list). Start with `partners/README.md`.
+- `data/providers.csv`: the providers shown on the website map (only `joined` rows show as partners).
+- `magazine/PRINT-LAUNCH-PLAN.md`: plan for the first print issue by Jan 1, 2027.
+- `prompts/CLAUDE-WEBSITE-PROMPTS.md`: copy-paste prompts for updating the site with Claude.

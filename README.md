@@ -7,7 +7,8 @@ The qualitylivin.com homepage as clean HTML/CSS, kept in git and pasted into GoH
 - `src/page.html`: page content (edit this)
 - `src/styles.css`: styles (edit this; brand colors + hero image are at the top)
 - `src/script.js`: the scroll animation for the magazine card gallery
-- `assets/`: magazine cover image + the April 2025 magazine PDF
+- `src/magazine-feature.html`: the magazine / eBook section (3D cover, contents, look-inside pages, partner feature, subscription). The build includes it in the page and also outputs it alone as `dist/magazine-feature-paste.html`
+- `assets/`: magazine cover image, the April 2025 magazine PDF, and page previews (`assets/pages/`)
 - `dist/ghl-paste.html`: **the file you paste into GHL** (generated)
 - `dist/preview.html`: open in a browser to preview (generated)
 - `original/`: snapshot of the original GHL site (reference only)

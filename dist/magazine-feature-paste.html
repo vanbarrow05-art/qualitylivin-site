@@ -1,0 +1,567 @@
+<!-- ===== Magazine feature: Quality Living Magazine, April 2025 (digital edition) =====
+     Self-contained: its own styles (scoped under .qlm), no scripts.
+     Included in src/page.html by scripts/build.py, and also written to
+     dist/magazine-feature-paste.html so it can be pasted into any GHL page on its own. -->
+<style>
+.qlm {
+  --qlm-green: #1e3a34;
+  --qlm-gold: #c5a059;
+  --qlm-cream: #faf8f2;
+  --qlm-sand: #f2efe8;
+  --qlm-text: #1a1a1a;
+  --qlm-muted: #5f5f5f;
+  --qlm-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --qlm-sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--qlm-cream);
+  color: var(--qlm-text);
+  font-family: var(--qlm-sans);
+  line-height: 1.6;
+  padding: 110px 0 120px;
+  overflow: hidden;
+}
+.qlm *, .qlm *::before, .qlm *::after { box-sizing: border-box; }
+.qlm h2, .qlm h3, .qlm h4, .qlm p, .qlm ul, .qlm ol { margin: 0; padding: 0; }
+.qlm ul, .qlm ol { list-style: none; }
+.qlm a { text-decoration: none; color: inherit; }
+.qlm img { display: block; max-width: 100%; }
+
+.qlm .qlm-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.qlm .qlm-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--qlm-gold);
+  margin-bottom: 14px;
+}
+
+/* ---------- Issue hero: 3D book + details ---------- */
+.qlm .qlm-issue {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.qlm .qlm-book-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 40px;
+  perspective: 1800px;
+}
+
+.qlm .qlm-book-stage::before {
+  content: "";
+  position: absolute;
+  inset: 8% 4% 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(197, 160, 89, 0.28), transparent 65%);
+  z-index: 0;
+}
+
+.qlm .qlm-book {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(380px, 78vw);
+  aspect-ratio: 720 / 1019;
+  transform-style: preserve-3d;
+  transform: rotateY(-22deg) rotateX(4deg);
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.qlm .qlm-book:hover,
+.qlm .qlm-book:focus-visible { transform: rotateY(-6deg) rotateX(2deg) translateY(-6px); }
+
+/* Page edges on the right side of the book */
+.qlm .qlm-book::before {
+  content: "";
+  position: absolute;
+  top: 1.5%;
+  bottom: 1.5%;
+  right: -14px;
+  width: 16px;
+  background: repeating-linear-gradient(90deg, #f4f1ea 0 2px, #ddd6c8 2px 3px);
+  transform: rotateY(60deg);
+  transform-origin: left center;
+  border-radius: 0 3px 3px 0;
+}
+
+.qlm .qlm-book img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px 6px 6px 2px;
+  box-shadow:
+    inset 4px 0 10px rgba(0, 0, 0, 0.25),
+    30px 40px 60px -20px rgba(16, 32, 28, 0.55),
+    10px 14px 24px rgba(16, 32, 28, 0.25);
+}
+
+/* Spine highlight */
+.qlm .qlm-book::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 18px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), rgba(255, 255, 255, 0.18) 45%, rgba(0, 0, 0, 0));
+  border-radius: 2px 0 0 2px;
+  pointer-events: none;
+}
+
+.qlm .qlm-badge {
+  position: absolute;
+  z-index: 2;
+  bottom: 9%;
+  right: 3%;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: var(--qlm-green);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  box-shadow: 0 0 0 4px var(--qlm-cream), 0 0 0 5px var(--qlm-gold), 0 12px 30px rgba(0, 0, 0, 0.25);
+  transform: rotate(10deg);
+}
+
+.qlm .qlm-badge strong {
+  font-family: var(--qlm-serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--qlm-gold);
+}
+
+.qlm .qlm-title {
+  font-family: var(--qlm-serif);
+  font-weight: 500;
+  font-size: clamp(40px, 5.2vw, 68px);
+  line-height: 1.02;
+  color: var(--qlm-green);
+  margin-bottom: 10px;
+}
+
+.qlm .qlm-tagline {
+  font-family: var(--qlm-serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.2vw, 26px);
+  color: var(--qlm-gold);
+  margin-bottom: 18px;
+}
+
+.qlm .qlm-intro {
+  font-size: 17px;
+  color: var(--qlm-muted);
+  max-width: 560px;
+  margin-bottom: 26px;
+}
+
+.qlm .qlm-contents-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.qlm .qlm-contents {
+  border-top: 1px solid #e3ddcf;
+  margin-bottom: 30px;
+  max-width: 560px;
+}
+
+.qlm .qlm-contents li { border-bottom: 1px solid #e3ddcf; }
+
+.qlm .qlm-contents a {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 10px 2px;
+  transition: color 0.2s, padding 0.2s;
+}
+
+.qlm .qlm-contents a:hover { color: var(--qlm-green); padding-left: 8px; }
+
+.qlm .qlm-contents .qlm-num {
+  font-family: var(--qlm-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--qlm-gold);
+  min-width: 26px;
+}
+
+.qlm .qlm-contents .qlm-item {
+  flex: 1;
+  font-family: var(--qlm-serif);
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.qlm .qlm-contents .qlm-cat {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--qlm-muted);
+  white-space: nowrap;
+}
+
+.qlm .qlm-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+
+.qlm .qlm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 30px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.qlm .qlm-btn:hover { transform: translateY(-1px); }
+.qlm .qlm-btn svg { width: 18px; height: 18px; }
+
+.qlm .qlm-btn-gold {
+  background: var(--qlm-gold);
+  color: var(--qlm-green);
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.35);
+}
+
+.qlm .qlm-btn-gold:hover { background: #b8914a; }
+
+.qlm .qlm-btn-outline { border-color: var(--qlm-green); color: var(--qlm-green); }
+.qlm .qlm-btn-outline:hover { background: var(--qlm-green); color: #fff; }
+
+.qlm .qlm-meta { font-size: 13px; color: var(--qlm-muted); }
+
+/* ---------- Look inside ---------- */
+.qlm .qlm-inside { margin-top: 110px; }
+
+.qlm .qlm-inside-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.qlm .qlm-h3 {
+  font-family: var(--qlm-serif);
+  font-weight: 500;
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.1;
+  color: var(--qlm-green);
+}
+
+.qlm .qlm-inside-hint { font-size: 13px; color: var(--qlm-muted); }
+
+.qlm .qlm-pages {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(200px, 1fr);
+  gap: 20px;
+  overflow-x: auto;
+  padding: 6px 4px 22px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.qlm .qlm-page { scroll-snap-align: start; }
+
+.qlm .qlm-page-img {
+  position: relative;
+  aspect-ratio: 560 / 792;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #eee;
+  box-shadow: 0 10px 26px rgba(16, 32, 28, 0.14);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.qlm .qlm-page-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+.qlm .qlm-page:hover .qlm-page-img {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(16, 32, 28, 0.22);
+}
+
+.qlm .qlm-page-img span {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(30, 58, 52, 0.9);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.qlm .qlm-page h4 {
+  margin-top: 12px;
+  font-family: var(--qlm-serif);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+/* ---------- Partner spotlight + subscribe ---------- */
+.qlm .qlm-extras {
+  margin-top: 90px;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 26px;
+}
+
+.qlm .qlm-partner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 28px;
+  align-items: center;
+  background: var(--qlm-green);
+  color: #eef1ee;
+  border-radius: 10px;
+  padding: 32px;
+}
+
+.qlm .qlm-partner img {
+  border-radius: 4px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
+  transform: rotate(-3deg);
+}
+
+.qlm .qlm-partner h3 {
+  font-family: var(--qlm-serif);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.15;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.qlm .qlm-partner blockquote {
+  margin: 0 0 18px;
+  font-family: var(--qlm-serif);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.4;
+  color: #f4ead6;
+}
+
+.qlm .qlm-partner cite {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--qlm-sans);
+  font-style: normal;
+  font-size: 13px;
+  color: var(--qlm-gold);
+}
+
+.qlm .qlm-partner .qlm-btn-outline { border-color: var(--qlm-gold); color: var(--qlm-gold); }
+.qlm .qlm-partner .qlm-btn-outline:hover { background: var(--qlm-gold); color: var(--qlm-green); }
+
+.qlm .qlm-subscribe {
+  background: #fff;
+  border: 1px solid var(--qlm-gold);
+  border-radius: 10px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.qlm .qlm-subscribe h3 {
+  font-family: var(--qlm-serif);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.15;
+  color: var(--qlm-green);
+  margin-bottom: 6px;
+}
+
+.qlm .qlm-price {
+  font-family: var(--qlm-serif);
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--qlm-green);
+  line-height: 1;
+  margin: 10px 0 4px;
+}
+
+.qlm .qlm-price small { font-family: var(--qlm-sans); font-size: 14px; font-weight: 500; color: var(--qlm-muted); }
+
+.qlm .qlm-perks { margin: 16px 0 22px; font-size: 15px; }
+.qlm .qlm-perks li { position: relative; padding-left: 26px; margin-bottom: 8px; }
+
+.qlm .qlm-perks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--qlm-gold);
+  font-weight: 700;
+}
+
+.qlm .qlm-soon {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--qlm-sand);
+  color: var(--qlm-green);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .qlm .qlm-issue { grid-template-columns: 1fr; gap: 40px; }
+  .qlm .qlm-book-stage { padding-bottom: 10px; }
+  .qlm .qlm-extras { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .qlm { padding: 72px 0 80px; }
+  .qlm .qlm-book { width: min(280px, 72vw); }
+  .qlm .qlm-badge { width: 84px; height: 84px; font-size: 9px; right: 2%; }
+  .qlm .qlm-badge strong { font-size: 18px; }
+  .qlm .qlm-contents .qlm-cat { display: none; }
+  .qlm .qlm-actions .qlm-btn { width: 100%; }
+  .qlm .qlm-inside { margin-top: 72px; }
+  .qlm .qlm-inside-head { flex-direction: column; align-items: flex-start; }
+  .qlm .qlm-pages { grid-auto-columns: 62%; }
+  .qlm .qlm-partner { grid-template-columns: 1fr; padding: 26px 22px; }
+  .qlm .qlm-partner img { max-width: 180px; }
+  .qlm .qlm-subscribe { padding: 26px 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qlm .qlm-book, .qlm .qlm-page-img, .qlm .qlm-btn, .qlm .qlm-contents a { transition: none; }
+}
+</style>
+
+<section class="qlm" id="section-magazine-issue">
+  <div class="qlm-wrap">
+
+    <div class="qlm-issue">
+      <div class="qlm-book-stage">
+        <a class="qlm-book" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf" target="_blank" rel="noopener" aria-label="Read the Quality Living April 2025 eBook">
+          <img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/magazine-cover-apr-2025.jpg" alt="Quality Living magazine, April 2025 cover: The Power of Mindful Living">
+        </a>
+        <div class="qlm-badge"><strong>eBook</strong>Digital<br>edition</div>
+      </div>
+
+      <div class="qlm-details">
+        <p class="qlm-eyebrow">The Magazine · April 2025 Issue</p>
+        <h2 class="qlm-title">Quality Living Magazine</h2>
+        <p class="qlm-tagline">Live well. Feel good. Be you.</p>
+        <p class="qlm-intro">Our April issue is all about the power of mindful living: calmer homes, nourishing food, soulful getaways, and the local pros who keep it all running beautifully. Now available as a digital eBook you can read on any device.</p>
+
+        <p class="qlm-contents-label">In this issue</p>
+        <ol class="qlm-contents">
+          <li><a href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=2" target="_blank" rel="noopener"><span class="qlm-num">01</span><span class="qlm-item">The Art of Nourishment</span><span class="qlm-cat">Food</span></a></li>
+          <li><a href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=3" target="_blank" rel="noopener"><span class="qlm-num">02</span><span class="qlm-item">The Art of Indoor Wellness</span><span class="qlm-cat">Home</span></a></li>
+          <li><a href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=6" target="_blank" rel="noopener"><span class="qlm-num">03</span><span class="qlm-item">Work Less, Live More</span><span class="qlm-cat">Modern life</span></a></li>
+          <li><a href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=9" target="_blank" rel="noopener"><span class="qlm-num">04</span><span class="qlm-item">Soulful Getaways</span><span class="qlm-cat">Travel</span></a></li>
+          <li><a href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=10" target="_blank" rel="noopener"><span class="qlm-num">05</span><span class="qlm-item">Partners in Health: TLG Janitorial Services</span><span class="qlm-cat">Partner feature</span></a></li>
+        </ol>
+
+        <div class="qlm-actions">
+          <a class="qlm-btn qlm-btn-gold" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>
+            Read the eBook
+          </a>
+          <a class="qlm-btn qlm-btn-outline" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf" download="Quality-Living-Magazine-April-2025.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download PDF
+          </a>
+        </div>
+        <p class="qlm-meta">14 pages · PDF · Read on phone, tablet, or desktop</p>
+      </div>
+    </div>
+
+    <div class="qlm-inside">
+      <div class="qlm-inside-head">
+        <div>
+          <p class="qlm-eyebrow">Look inside</p>
+          <h3 class="qlm-h3">A preview of the April issue</h3>
+        </div>
+        <p class="qlm-inside-hint">Tap a page to open it in the eBook →</p>
+      </div>
+      <div class="qlm-pages">
+        <a class="qlm-page" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=2" target="_blank" rel="noopener">
+          <div class="qlm-page-img"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-02.jpg" alt="Magazine page: The Art of Nourishment" loading="lazy"><span>p. 2</span></div>
+          <h4>The Art of Nourishment</h4>
+        </a>
+        <a class="qlm-page" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=3" target="_blank" rel="noopener">
+          <div class="qlm-page-img"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-03.jpg" alt="Magazine page: The Art of Indoor Wellness" loading="lazy"><span>p. 3</span></div>
+          <h4>The Art of Indoor Wellness</h4>
+        </a>
+        <a class="qlm-page" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=5" target="_blank" rel="noopener">
+          <div class="qlm-page-img"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-05.jpg" alt="Magazine page: Mindful Movement and Natural Beauty" loading="lazy"><span>p. 5</span></div>
+          <h4>Mindful Movement &amp; Natural Beauty</h4>
+        </a>
+        <a class="qlm-page" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=6" target="_blank" rel="noopener">
+          <div class="qlm-page-img"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-06.jpg" alt="Magazine page: Work Less, Live More" loading="lazy"><span>p. 6</span></div>
+          <h4>Work Less, Live More</h4>
+        </a>
+        <a class="qlm-page" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=8" target="_blank" rel="noopener">
+          <div class="qlm-page-img"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-08.jpg" alt="Magazine page: Spirituality in Everyday Life" loading="lazy"><span>p. 8</span></div>
+          <h4>Spirituality in Everyday Life</h4>
+        </a>
+        <a class="qlm-page" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=9" target="_blank" rel="noopener">
+          <div class="qlm-page-img"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-09.jpg" alt="Magazine page: Soulful Getaways" loading="lazy"><span>p. 9</span></div>
+          <h4>Soulful Getaways</h4>
+        </a>
+        <a class="qlm-page" href="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/quality-living-magazine-apr-2025.pdf#page=12" target="_blank" rel="noopener">
+          <div class="qlm-page-img"><img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-12.jpg" alt="Magazine page: Modern Life and Home Inspiration" loading="lazy"><span>p. 12</span></div>
+          <h4>Modern Life &amp; Home Inspiration</h4>
+        </a>
+      </div>
+    </div>
+
+    <div class="qlm-extras">
+      <div class="qlm-partner">
+        <img src="https://cdn.jsdelivr.net/gh/vanbarrow05-art/qualitylivin-site@main/assets/pages/page-11.jpg" alt="Magazine page: TLG Janitorial Services partner feature" loading="lazy">
+        <div>
+          <p class="qlm-eyebrow">Partner feature in this issue</p>
+          <h3>TLG Janitorial Services</h3>
+          <blockquote>“Our business isn't just about cleaning; it's about creating environments where your business, employees, and clients can truly thrive.”<cite>Troy &amp; Lillie Graves, Founders</cite></blockquote>
+          <a class="qlm-btn qlm-btn-outline" href="#section-service-provider-portal">Get your business featured</a>
+        </div>
+      </div>
+
+      <div class="qlm-subscribe">
+        <p class="qlm-eyebrow">Annual subscription</p>
+        <h3>Subscribe to a Mindful Life</h3>
+        <p class="qlm-price">$39.95 <small>/ year · 12 issues</small></p>
+        <ul class="qlm-perks">
+          <li>Twelve issues of inspiration, natural design, and mindful living</li>
+          <li>Free delivery to your door</li>
+          <li>Exclusive subscriber content</li>
+        </ul>
+        <!-- When you have a GHL payment link or order form for subscriptions, replace the
+             "Subscriptions opening soon" pill with:
+             <a class="qlm-btn qlm-btn-gold" href="YOUR-PAYMENT-LINK">Subscribe now</a> -->
+        <span class="qlm-soon">Subscriptions opening soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
